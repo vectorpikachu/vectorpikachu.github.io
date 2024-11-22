@@ -30,4 +30,21 @@
         <tag>hello</tag>
       </tags>
   </entry>
+  <entry>
+    <title>指针分析</title>
+    <url>/2024/11/22/%E6%8C%87%E9%92%88%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h1 id="Fast-and-Accurate-Flow-Insensitive-Points-To-Analysis"><a href="#Fast-and-Accurate-Flow-Insensitive-Points-To-Analysis" class="headerlink" title="Fast and Accurate Flow-Insensitive Points-To Analysis"></a>Fast and Accurate Flow-Insensitive Points-To Analysis</h1><ul>
+<li>[1](Marc Shapiro and Susan Horwitz. 1997. Fast and accurate flow-insensitive points-to analysis. In Proceedings of the 24th ACM SIGPLAN-SIGACT symposium on Principles of programming languages (POPL ‘97). Association for Computing Machinery, New York, NY, USA, 1–14. <a href="https://doi.org/10.1145/263699.263703">https://doi.org/10.1145/263699.263703</a><br>)</li>
+</ul>
+<p>原先的Steensgaard算法要求当一个节点的出度$&gt; 2$的时候就合并. [1]中的方法则是:</p>
+<ol>
+<li>当节点的出度$&gt; k$的时候, 再合并.</li>
+<li>把所有的节点分为$k$类.</li>
+<li>可以多运行几次, 改变划分的方法, 合并最精确的.</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Software Analysis</tag>
+      </tags>
+  </entry>
 </search>
