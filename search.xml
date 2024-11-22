@@ -30,4 +30,41 @@
         <tag>hello</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Irwin-Hall Distribution</title>
+    <url>/2024/11/22/Irwin-Hall-Distribution/</url>
+    <content><![CDATA[<h1 id="Irwin-Hall-Distribution"><a href="#Irwin-Hall-Distribution" class="headerlink" title="Irwin-Hall Distribution"></a>Irwin-Hall Distribution</h1><p>$n$个随机变量$X_i\sim U[0,1]$, 它们的和$Y&#x3D;\sum_{i&#x3D;1}^n X_i$的累积分布函数为:</p>
+<p>$$<br>F(y;n)&#x3D;\frac{1}{n!}\sum_{k&#x3D;0}^{\lfloor y\rfloor} (-1)^{k}\binom{n}{k}(y-k)^n\quad (0\leqslant y\leqslant n)<br>$$</p>
+<p>我们设$\rho(x)&#x3D;1,x\in[0,1]; \rho^{(1)}(x) &#x3D; 1, x\in [0,+\infty];\rho^{(2)}(x) &#x3D; 1, x\in[1,+\infty]$.不在定义域中的函数值为$0$, 那么有:</p>
+<p>$$<br>\rho(x)&#x3D;\rho^{(1)}(x) - \rho^{(2)}(x)<br>$$</p>
+<p>现在计算:</p>
+<p>$$<br>\begin{aligned}<br>P\left( \sum_{i&#x3D;1}^n X_i\leqslant y \right) &amp;&#x3D; \int_{x_i\in[0,1],\sum_{i&#x3D;1}^n x_i \leqslant y} \prod_{i&#x3D;1}^n \rho(x_i) \mathrm{d}x_1\mathrm{d}x_2\cdots\mathrm{d}x_n \<br>&amp;&#x3D; \int_{x_i\in[0,1],\sum_{i&#x3D;1}^n x_i \leqslant y} \prod_{i&#x3D;1}^n (\rho^{(1)}(x_i) - \rho^{(2)}(x_i))\mathrm{d}x_1\mathrm{d}x_2\cdots\mathrm{d}x_n<br>\end{aligned}<br>$$</p>
+<p>如果我们设$S_k &#x3D; {(x_1,x_2,\cdots,x_n)|x_k \in [0,1],\sum_{i&#x3D;1}^nx_i\leqslant y}$, 全集$U&#x3D;{(x_1,x_2,\cdots,x_n)|\forall i,x_i\geqslant 0,\sum_{i&#x3D;1}^nx_i \leqslant y}$. 同时我们设$A&#x3D;{(x_1,x_2,\cdots,x_n)|\forall i,x_i\in[0,1],\sum_{i&#x3D;1}^n x_i \leqslant y}$. 这里我们就要求:</p>
+<p>$$<br>f(A) &#x3D; \int_A \prod_{i&#x3D;1}^n (\rho^{(1)}(x_i) - \rho^{(2)}(x_i))\mathrm{d}x_1\mathrm{d}x_2\cdots\mathrm{d}x_n<br>$$</p>
+<p>我们可以发现$f(A+B)&#x3D;f(A)+f(B)$, 也就是$f(\cdot)$具有线性性.</p>
+<p>那么:</p>
+<p>$$<br>A &#x3D; \bigcap_{k&#x3D;1}^nS_k &#x3D; U-\bigcup_{k&#x3D;1}^n\bar{S_k}&#x3D;U-\sum_{k&#x3D;1}^n(-1)^{k-1}\sum_{t_{1}&lt;t_{2}&lt;\cdots&lt;t_{k}}\bigcap_{j&#x3D;1}^{k}\bar{S_{t_{j}}}<br>$$</p>
+<p>同时我们注意到: $\bar{S_k} &#x3D; {(x_1,x_2,\cdots,x_n)|x_k &gt; 1, \sum_{i&#x3D;1}^nx_i\leqslant y}$.</p>
+<p>接着我们枚举其中有$k$个变量大于$1$.</p>
+<p>也有$k+\sum_{\text{not selceted}} x_i + \sum_{\text{selected}} (x_i-1)&lt;\sum_{i&#x3D;1}^nx_i \leqslant y$, 我们令$\begin{cases} x_i’ &#x3D; x_i &amp; \text{if not selected} \ x_i’ &#x3D; x_i - 1 &amp; \text{if selected} \end{cases}$, 那么:</p>
+<p>$$<br>f\left(\sum_{t_{1}&lt;t_{2}&lt;\cdots&lt;t_{k}}\bigcap_{j&#x3D;1}^{k}\bar{S_{t_{j}}}\right) &#x3D; \binom{n}{k} f\left(\left{(x_1’,x_2’,\cdots,x_n’)|\forall i, x_i’\geqslant 0, \sum_{i&#x3D;1}^nx_i’ \leqslant y-k\right}\right), y\leqslant k<br>$$</p>
+<p>一旦$y&gt;k$, 这些集合的交集就会变为空集, 从而:</p>
+<p>$$<br>f\left(\sum_{t_{1}&lt;t_{2}&lt;\cdots&lt;t_{k}}\bigcap_{j&#x3D;1}^{k}\bar{S_{t_{j}}}\right) &#x3D; 0, y&gt;k<br>$$</p>
+<p>又注意到:</p>
+<p>$$<br>f(U) &#x3D; \binom{n}{0}f\left(\left{(x_1’,x_2’,\cdots,x_n’)|\forall i, x_i’\geqslant 0, \sum_{i&#x3D;1}^nx_i’ \leqslant y\right}\right)<br>$$</p>
+<p>大于$1$的时候, 有$\rho^{(2)}(x) &#x3D; 0$, 此时$\rho^{(1)}(x)-\rho^{(2)}&#x3D;\rho^{(1)}(x)$.</p>
+<p>从而我们有$\prod_{i&#x3D;1}^n (\rho^{(1)}(x_i) - \rho^{(2)}(x_i))  &#x3D; \prod_{i&#x3D;1}^k \rho^{(1)}(x_i’)\prod_{i&#x3D;k+1}^{n}\rho^{(2)}(x_i’)  &#x3D; 1$. 那么:</p>
+<p>$$<br>f(A) &#x3D; \sum_{k&#x3D;0}^{\lfloor y \rfloor} (-1)^k \binom{n}{k} \int_{\forall i, x_i’\geqslant 0, \sum_{i&#x3D;1}^nx_i’ \leqslant y-k} \mathrm{d}x_1’\mathrm{d}x_2’\cdots\mathrm{d}x_n’<br>$$</p>
+<p>我们接着考虑积分的下标. 对于要求满足$\sum_{i&#x3D;1}^n x_i’ \leqslant y-k$, 我们可以变为在$[0,y-k]$中选取$n$个点使得$t_1 \leqslant t_2  \leqslant \cdots \leqslant t_n \leqslant y-k$, 然后作$x_i’ &#x3D; t_{i}-t_{i-1}$即可, 其中$t_0&#x3D;0$. 那么这样我们就知道可以是先在$[0,y-k]$中任选$n$个点然后排序即可.</p>
+<p>$$<br>f(A) &#x3D; \sum_{k&#x3D;0}^{\lfloor y \rfloor} (-1)^k \binom{n}{k} \frac{1}{n!} \int_{0}^{y-k}\int_{0}^{y-k}\cdots\int_{0}^{y-k} \mathrm{d}x_1’\mathrm{d}x_2’\cdots\mathrm{d}x_n’ &#x3D;\sum_{k&#x3D;0}^{\lfloor y \rfloor} (-1)^k \binom{n}{k} \frac{(y-k)^n}{n!}<br>$$</p>
+<p>这也就是:</p>
+<p>$$<br>F(y;n)&#x3D;\frac{1}{n!}\sum_{k&#x3D;0}^{\lfloor y\rfloor} (-1)^{k}\binom{n}{k}(y-k)^n\quad (0\leqslant y\leqslant n)<br>$$</p>
+<p>You select a PE class this term, so you need to complete a total of 85km of extracurricular exercise. There are only $n$ days before the deadline, but you still have $m$ kilometers remaining. To simplify your work, you can run at most 10km every day, but there is no lower bound. You are mindless when running, so the distance you run every day is uniformly random. In other words, the number of kilometers you run every day is a real number uniformly selected from range $[0,10]$. Prove that, the probability that you can complete $m$ kilometers in $n$ days, i.e., the probability that your total distance in $n$ days is greater than or equal to $m$ kilometers is</p>
+<p>$$<br>1-\sum_{i&#x3D;0}^{\min(\lfloor m&#x2F;10\rfloor,n)}\frac{(-1)^i}{i!(n-i)!}\left(\frac{m}{10}-i\right)^n.<br>$$</p>
+<p>‍</p>
+]]></content>
+      <tags>
+        <tag>math</tag>
+      </tags>
+  </entry>
 </search>
