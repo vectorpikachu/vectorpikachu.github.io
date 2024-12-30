@@ -138,6 +138,9 @@
 </tbody></table>
 <h2 id="策略（Strategies）"><a href="#策略（Strategies）" class="headerlink" title="策略（Strategies）"></a>策略（Strategies）</h2><p>这个其实和 Coq证明器有点像，请参看<a href="https://softwarefoundations.cis.upenn.edu/">Software Foundations</a>。</p>
 ]]></content>
+      <categories>
+        <category>软件分析技术</category>
+      </categories>
       <tags>
         <tag>SMT</tag>
       </tags>
@@ -174,6 +177,9 @@
 </li>
 </ol>
 <h2 id="枚举-（enumerate）"><a href="#枚举-（enumerate）" class="headerlink" title="枚举 （enumerate）"></a>枚举 （enumerate）</h2>]]></content>
+      <categories>
+        <category>软件分析技术</category>
+      </categories>
       <tags>
         <tag>synthesis</tag>
       </tags>
@@ -191,6 +197,9 @@
 <li>可以多运行几次, 改变划分的方法, 合并最精确的.</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>软件分析技术</category>
+      </categories>
       <tags>
         <tag>Software Analysis</tag>
       </tags>
