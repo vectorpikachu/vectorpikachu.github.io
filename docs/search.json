@@ -2,9 +2,16 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Hangzhou Lyu",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Hangzhou Lyu",
+    "section": "Education",
+    "text": "Education\nPeking University | Beijing, China B.A. in Software Engineering | Sept 2022 - June 2026"
   },
   {
     "objectID": "index.html",

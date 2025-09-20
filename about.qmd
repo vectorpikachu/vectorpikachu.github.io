@@ -1,5 +1,19 @@
 ---
-title: "About"
+title: "Hangzhou Lyu"
+image: profile.jpg
+about:
+    template: trestles
+    links:
+        - icon: github
+          text: GitHub
+          href: https://github.com/vectorpikachu
 ---
 
 About this site
+
+## Education
+
+Peking University | Beijing, China
+B.A. in Software Engineering | Sept 2022 - June 2026
+
+
