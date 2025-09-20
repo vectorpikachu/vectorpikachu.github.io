@@ -8,10 +8,4 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Ysabeau", sans-serif !important;
   font-weight: 700;
 }
-
-p {
-  line-height: 1.8;
-  letter-spacing: 0.02em;
-}
-
 /* End of css styles */

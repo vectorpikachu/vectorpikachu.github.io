@@ -4,14 +4,14 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Peking University | Beijing, China\nB.A. in Software Engineering | Sept 2022 - June 2026"
+    "text": "Peking University | Beijing, ChinaB.A. in Software Engineering {.text-muted} | Sept 2022 - June 2026 {.text-muted}"
   },
   {
     "objectID": "about.html#education",
     "href": "about.html#education",
     "title": "About",
     "section": "",
-    "text": "Peking University | Beijing, China\nB.A. in Software Engineering | Sept 2022 - June 2026"
+    "text": "Peking University | Beijing, ChinaB.A. in Software Engineering {.text-muted} | Sept 2022 - June 2026 {.text-muted}"
   },
   {
     "objectID": "about.html#awards",

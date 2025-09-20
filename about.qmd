@@ -7,16 +7,18 @@ about:
       - icon: github
         text: GitHub
         href: https://github.com/vectorpikachu
-    image-width: 8em
+    image-width: 10em
 ---
 
 
 
 ## Education
 
+::: {.columns}
 **Peking University** | Beijing, China
 
-B.A. in Software Engineering | Sept 2022 - June 2026
+    B.A. in Software Engineering {.text-muted} | Sept 2022 - June 2026 {.text-muted}
+:::
 
 ## Awards
 
