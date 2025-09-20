@@ -1,11 +1,11 @@
 /* css styles */
 body {
-  font-family: "Ysabeau", sans-serif !important;
+  font-family: "Ysabeau", "Noto Sans SC", sans-serif !important;
   font-optical-sizing: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Ysabeau", sans-serif !important;
+  font-family: "Ysabeau", "Noto Sans SC", sans-serif !important;
   font-weight: 700;
 }
 /* End of css styles */
