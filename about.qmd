@@ -7,7 +7,7 @@ about:
         - icon: github
           text: GitHub
           href: https://github.com/vectorpikachu
-    image-width: 10em
+    image-width: 5em
 ---
 
 
