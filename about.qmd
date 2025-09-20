@@ -1,5 +1,5 @@
 ---
-title: "Hangzhou Lyu"
+title: "About"
 image: profile.jpg
 about:
     template: trestles
@@ -7,9 +7,10 @@ about:
         - icon: github
           text: GitHub
           href: https://github.com/vectorpikachu
+    image-width: 10em
 ---
 
-About this site
+
 
 ## Education
 
