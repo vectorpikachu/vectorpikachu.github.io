@@ -2,6 +2,7 @@
 title: "VectorPikachu's Website"
 ---
 
-This is a Quarto website.
+Here is the homepage of VectorPikachu.
+You can navigate to the About page to learn more about me.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+- [About Me](about.qmd)

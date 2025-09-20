@@ -14,10 +14,17 @@
     "text": "Peking University | Beijing, China\nB.A. in Software Engineering | Sept 2022 - June 2026"
   },
   {
+    "objectID": "about.html#awards",
+    "href": "about.html#awards",
+    "title": "About",
+    "section": "Awards",
+    "text": "Awards"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "VectorPikachu’s Website",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Here is the homepage of VectorPikachu. You can navigate to the About page to learn more about me.\n\nAbout Me"
   }
 ]

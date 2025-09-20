@@ -4,9 +4,9 @@ image: profile.jpg
 about:
     template: marquee
     links:
-        - icon: github
-          text: GitHub
-          href: https://github.com/vectorpikachu
+      - icon: github
+        text: GitHub
+        href: https://github.com/vectorpikachu
     image-width: 8em
 ---
 
@@ -17,5 +17,8 @@ about:
 **Peking University** | Beijing, China
 
 B.A. in Software Engineering | Sept 2022 - June 2026
+
+## Awards
+
 
 
