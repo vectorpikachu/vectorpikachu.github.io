@@ -15,7 +15,7 @@ format:
     theme:
       - cosmo
       - brand
-    fontsize: 1.1em
+    fontsize: 0.9em
     css: styles.css
     toc: true
     include-in-header:
