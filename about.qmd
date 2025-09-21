@@ -10,15 +10,25 @@ about:
     image-width: 10em
 ---
 
+Hello, this is VectorPikachu, or Hangzhou Lyu (吕杭州, lǚ háng zhōu). Currently I'm a student majored in Software Engineering.
+And my research interest lies on *Program Verification*, including Dafny, Coq, Verus, et.al.
+
 
 
 ## Education
 
 - **Peking University** | *Beijing, China* <br>
-  B.A. in Software Engineering | Sept 2022 - June 2026
-  中文支持
+  B.A. in Software Engineering | Sept 2022 - June 2026 <br>
+  北京大学 | 中国北京 <br>
+  软件工程 | 2022 年 9 月 - 2026 年 6 月
 
 ## Awards
 
+## Certificates
+
+- College English Test Band4, CET4 | 671 <br>
+  大学英语四级考试 | 671
+- College English Test Band6, CET6 | 650 <br>
+  大学英语六级考试  650
 
 
