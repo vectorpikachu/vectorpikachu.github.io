@@ -15,9 +15,10 @@ format:
     theme:
       - cosmo
       - brand
+    fontsize: 1.5em
     css: styles.css
     toc: true
-    include-in-header: 
+    include-in-header:
       text: |
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
