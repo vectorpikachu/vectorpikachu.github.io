@@ -4,12 +4,12 @@ title: "Course Notes"
 
 Here are the course notes written by myself.
 
-= 24-25-3
+# 24-25-3
 
 - Topics in Quantitative Finance | [Click here to view the website.](https://vectorpikachu.github.io/qf-slides/) <br>
   量化金融专题 | [点击此处访问网站.](https://vectorpikachu.github.io/qf-slides/)
 
-= 24-25-2
+# 24-25-2
 
 - Introduction to Database Systems | [Click here to view the PDF.](./PDF/Database.pdf) <br>
   数据库概论 | [点击此处查看PDF.](./PDF/Database.pdf)
