@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "notes.html",
+    "href": "notes.html",
+    "title": "Course Notes",
+    "section": "",
+    "text": "Here are the course notes written by myself.\n= 24-25-3\n\nTopics in Quantitative Finance | Click here to view the website.  量化金融专题 | 点击此处访问网站.\n\n= 24-25-2\n\nIntroduction to Database Systems | Click here to view the PDF.  数据库概论 | 点击此处查看PDF.\n\nTO BE CONTINUED …"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "VectorPikachu’s Website",
+    "section": "",
+    "text": "Here is the homepage of VectorPikachu. You can navigate to the About page to learn more about me.\n\nAbout Me"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -19,12 +33,5 @@
     "title": "About",
     "section": "Certificates",
     "text": "Certificates\n\nCollege English Test Band4, CET4 | 671  大学英语四级考试 | 671\nCollege English Test Band6, CET6 | 650  大学英语六级考试 | 650"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "VectorPikachu’s Website",
-    "section": "",
-    "text": "Here is the homepage of VectorPikachu. You can navigate to the About page to learn more about me.\n\nAbout Me"
   }
 ]
