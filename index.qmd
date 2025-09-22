@@ -3,6 +3,7 @@ title: "VectorPikachu's Website"
 ---
 
 Here is the homepage of VectorPikachu.
-You can navigate to the [About](about.qmd) page to learn more about me.
+You can navigate to the [About](about.qmd) page to learn more about me. You can also check out my [Course Notes](notes.qmd) for various courses I've taken in PKU.
 
 - [About Me](about.qmd)
+- [Course Notes](notes.qmd)

@@ -13,5 +13,17 @@ Here are the course notes written by myself.
 
 - Introduction to Database Systems | [Click here to view the PDF.](./PDF/Database.pdf) <br>
   数据库概论 | [点击此处查看PDF.](./PDF/Database.pdf)
+- Public Intermediate German <br>
+  公共中级德语
+  - [The notes. 课程笔记.](./PDF/25春季公共中级德语笔记.pdf)
+  - [The tests. 课程小测.](./PDF/公共中级德语小测.pdf)
+  - [The words. 课程单词.](./PDF/Einheit 6-10 单词笔记.pdf)
+- Special Topics in China Economic Research | [Click here to view the PDF.](./PDF/25春季中国经济专题笔记.pdf) <br>
+  中国经济专题 | [点击此处查看PDF.](./PDF/25春季中国经济专题笔记.pdf)
+
+# 24-25-1
+
+- Public Junior German | [Click here to view the PDF.](./PDF/德语notes.pdf) <br>
+  公共初级德语 | [点击此处查看PDF.](./PDF/德语notes.pdf)
 
 TO BE CONTINUED ...
