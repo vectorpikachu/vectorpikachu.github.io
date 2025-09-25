@@ -40,7 +40,34 @@ Here are the course notes written by myself.
 
 # 24-25-1
 
+6 courses, 21 points in total.
+
 - Public Junior German | [Click here to view the PDF.](./PDF/德语notes.pdf) <br>
   公共初级德语 | [点击此处查看PDF.](./PDF/德语notes.pdf)
+- Econometrics | [Click here to view the PDF.](./PDF/计量经济学notes.pdf) <br>
+  计量经济学 | [点击此处查看PDF.](./PDF/计量经济学notes.pdf)
+- Software Engineering <br>
+  软件工程
+  - [The notes. 课程笔记.](./PDF/SE.pdf)
+  - The Assignments. 课程作业.
+    - [Homework 1](./PDF/SE-HW/SE-HW1.pdf)
+    - [Homework 2](./PDF/SE-HW/SE-HW2.pdf)
+    - [Homework 3](./PDF/SE-HW/SE-HW3.pdf)
+- A Survey of Mao Tsetung Thoughts and Theory of Socialism with Chinese Charateristics <br>
+  毛概
+- Software Analysis <br>
+  软件分析技术
+- Compiler Principles <br>
+  编译原理
+- ...
+
+# 23-24-3
+
+2 courses, 3 points in total.
+
+- Physical and Aesthetic course <br>
+  体美
+- Aural Culture and World Civilization <br>
+  听觉文化与世界文明
 
 TO BE CONTINUED ...
