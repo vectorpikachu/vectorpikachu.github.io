@@ -6,10 +6,16 @@ Here are the course notes written by myself.
 
 # 24-25-3
 
+2 courses, 4 points in total.
+
 - Topics in Quantitative Finance | [Click here to view the website.](https://vectorpikachu.github.io/qf-slides/) <br>
   量化金融专题 | [点击此处访问网站.](https://vectorpikachu.github.io/qf-slides/)
+- Inter-cultural Communication <br>
+  跨文化交流学
 
 # 24-25-2
+
+8 courses, 25 points in total.
 
 - Introduction to Database Systems | [Click here to view the PDF.](./PDF/Database.pdf) <br>
   数据库概论 | [点击此处查看PDF.](./PDF/Database.pdf)
@@ -18,8 +24,19 @@ Here are the course notes written by myself.
   - [The notes. 课程笔记.](./PDF/25春季公共中级德语笔记.pdf)
   - [The tests. 课程小测.](./PDF/公共中级德语小测.pdf)
   - [The words. 课程单词.](./PDF/Einheit 6-10 单词笔记.pdf)
+  - Here are two passages full of grammer mistakes: [Ein Programmierer](./PDF/职业描述.pdf) and [Meine Ferien](./PDF/假期描述.pdf).
 - Special Topics in China Economic Research | [Click here to view the PDF.](./PDF/25春季中国经济专题笔记.pdf) <br>
   中国经济专题 | [点击此处查看PDF.](./PDF/25春季中国经济专题笔记.pdf)
+- Intermediate Microeconomics <br>
+  中级微观经济学
+- Programming in Rust <br>
+  Rust程序设计
+- Orienteering and Hiking <br>
+  定向与徒步运动
+- Operating Systems (Honor Track) <br>
+  操作系统 (实验班)
+- Modern Astronomy <br>
+  现代天文学
 
 # 24-25-1
 
