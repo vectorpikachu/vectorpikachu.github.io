@@ -70,4 +70,25 @@ Here are the course notes written by myself.
 - Aural Culture and World Civilization <br>
   听觉文化与世界文明
 
+# 23-24-2
+
+9 courses, 24 points in total.
+
+- Introduction to Object Oriented Technology <br>
+  面向对象技术引论
+- Comparative Constitutional Law <br>
+  外国宪法
+- Academic English Listening and Speaking <br>
+  学术英语听说
+- Algorithm Design and Anslysis <br>
+  算法设计与分析
+- Information Theory <br>
+  信息论
+- Software Foundations <br>
+  软件科学基础
+- Probability theory and statistics in Information science <br>
+  信息学中的概率统计
+- Intermediate Macroeconomics <br>
+  中级宏观经济学
+
 TO BE CONTINUED ...
