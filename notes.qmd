@@ -2,7 +2,7 @@
 title: "Course Notes"
 ---
 
-Here are the course notes written by myself.
+Here are the course notes written by myself. I've taken 58 courses (147 points) in PKU.
 
 # 24-25-3
 
@@ -90,5 +90,66 @@ Here are the course notes written by myself.
   信息学中的概率统计
 - Intermediate Macroeconomics <br>
   中级宏观经济学
+
+# 23-24-1
+
+8 courses, 24 points in total.
+
+- Human Sex, Reproduction and Health <br>
+  人类的性、生育与健康
+- Music and Mathematics <br>
+  音乐与数学
+- Data Structure and Algorithm (A) <br>
+  数据结构与算法 (A)
+- An Introduction to Marxist Basic Theory <br>
+  马原
+- Introduction to Discrete Mathmatics <br>
+  离散数学基础
+- Principles of Economics <br>
+  经济学原理
+- Introduction to Computer Systems <br>
+  计算机系统导论
+- ...
+
+# 22-23-2
+
+8 courses, 24 points in total.
+
+- Text and Meaning: British and American Short Stories <br>
+  英美短篇小说文本分析与鉴赏
+- Introduction to Artificial Intelligence <br>
+  人工智能引论
+- Practice of Programming in C&C++ <br>
+  程序设计实习
+- Outline of Chinese Modern History <br>
+  中国近现代史纲要
+- 习概
+- Linear Algebra A (II) <br>
+  线性代数A (II)
+- Advanced Mathematics A (no.2) <br>
+  高等数学A (二)
+- ...
+
+# 22-23-1
+
+11 courses, 27 points in total.
+
+- Introduction to Seismology <br>
+  地震概论
+- Introduction to Computation (A) <br>
+  计算概论A
+- Advanced Mathematics A (no.1) <br>
+  高等数学A (一)
+- Football <br>
+  足球
+- Physics for Information Sciences (1) <br>
+  信息科学中的物理学 (上)
+- Linear Algebra A (I) <br>
+  线性代数A (I)
+- Introduction to Information Science and Technique <br>
+  信息科学技术概论
+- ...
+
+
 
 TO BE CONTINUED ...
