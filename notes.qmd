@@ -84,6 +84,8 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
   算法设计与分析
 - Information Theory <br>
   信息论
+- History of Rome <br>
+  罗马史
 - Software Foundations <br>
   软件科学基础
 - Probability theory and statistics in Information science <br>
