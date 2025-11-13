@@ -9,8 +9,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - href: notes.qmd
-        text: Notes
+      - href: course_notes.qmd
+        text: Course Notes
 
 format:
   html:
