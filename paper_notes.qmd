@@ -7,5 +7,18 @@ Here are the notes of the papers I've read.
 
 ## Formal Methods in AI
 
-*Static Analysis for DL Architecture*:
+**Static Analysis for DL Architectures**:
+
 - [Detecting numerical bugs in neural network architectures](./Paper_Notes/FSE20.qmd) [@FSE20Zhang]
+
+
+**Static Analysis for DL Models**:
+
+- Use SMT solvers to verify properties of DL models.
+- Use integer programming to verify robustness of DL models.
+- Abstract interpretation for DL models. (e.g., $\text{AI}^2$, DeepPoly, etc.)
+  - Zonotope abstract domain.
+
+SOTA tools:
+
+- $\alpha,\beta$-CROWN

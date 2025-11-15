@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -74,6 +109,35 @@ ul.task-list li input[type="checkbox"] {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&amp;family=Ysabeau:ital,wght@0,1..1000;1,1..1000&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -124,8 +188,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#basics-of-abstract-interpretation" id="toc-basics-of-abstract-interpretation" class="nav-link" data-scroll-target="#basics-of-abstract-interpretation">Basics of Abstract Interpretation</a></li>
+  <li><a href="#abstract-domain-of-intervals" id="toc-abstract-domain-of-intervals" class="nav-link" data-scroll-target="#abstract-domain-of-intervals">Abstract Domain of Intervals</a></li>
+  <li><a href="#abstract-domain-of-affine-relations" id="toc-abstract-domain-of-affine-relations" class="nav-link" data-scroll-target="#abstract-domain-of-affine-relations">Abstract Domain of Affine Relations</a></li>
+  <li><a href="#abstract-domain-for-neural-architectures" id="toc-abstract-domain-for-neural-architectures" class="nav-link" data-scroll-target="#abstract-domain-for-neural-architectures">Abstract Domain for Neural Architectures</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -149,8 +225,96 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>This paper makes the first attempt to conduct static analysis for detecting numerical bugs at the architecture level.</p>
+<ul>
+<li>Method: Abstract interretation.
+<ul>
+<li>Tensor: tensor partitioning</li>
+<li>Numerical values: intervals + affine relation</li>
+</ul></li>
+<li>And the scheme is called DEBAR.</li>
+</ul>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>A neural architecture can contain numerical bugs that cause serious consequences. Numerical bugs in a neural architecture manifest themselves as numerical errors in the form of “NaN”, “INF”, or crashes during training or inference.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Input:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># center: 2*100 - shape tensor whose elements in [-1, 1]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># offset : 2*100 - shape tensor whose elements in [0, 2]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 100 rectangles .</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>bottomLeft <span class="op">=</span> center <span class="op">-</span> offset</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>topRight <span class="op">=</span> center <span class="op">+</span> offset</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>rectangle <span class="op">=</span> tf.concat([bottomLeft, topRight], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the reciprocal of their areas.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>bottom, left, top, right <span class="op">=</span> tf.split(rectangle,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>num_or_size_splits<span class="op">=</span><span class="dv">4</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> right <span class="op">-</span> left</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> top <span class="op">-</span> bottom</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> width <span class="op">*</span> height</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> tf.reciprocal(area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The key insight is that <em>affine relations</em> are common in neural network architectures.</p>
+<section id="basics-of-abstract-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="basics-of-abstract-interpretation">Basics of Abstract Interpretation</h3>
+<p>Concrete properties are described in the concrete domain <span class="math inline">\(\mathbb{C}\)</span> with a partial order <span class="math inline">\(\subseteq\)</span>, and abstract properties are described in the abstract domain <span class="math inline">\(\mathbb{A}\)</span> with a partial order <span class="math inline">\(\sqsubseteq\)</span>.</p>
+<ul>
+<li>Abstraction function <span class="math inline">\(\alpha: \mathbb{C} \rightarrow \mathbb{A}\)</span></li>
+<li>Concretization function <span class="math inline">\(\gamma: \mathbb{A} \rightarrow \mathbb{C}\)</span></li>
+</ul>
+<p>Galois connection <span class="math inline">\(\langle\mathbb{C},\subseteq\rangle \overset{\gamma}{\underset{\alpha}{\leftrightarrows}} \langle\mathbb{A},\sqsubseteq\rangle\)</span>: <span class="math display">\[
+\forall c \in \mathbb{C}, a \in \mathbb{A}. \alpha(c) \sqsubseteq a \Leftrightarrow c \subseteq \gamma(a)
+\]</span></p>
+</section>
+<section id="abstract-domain-of-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="abstract-domain-of-intervals">Abstract Domain of Intervals</h3>
+<p><span class="math display">\[
+\mathbb{A}_I \triangleq \{([l_1,u_1],...,[l_n,u_n] | l,u \in \mathbb{R}^n)\}
+\]</span> Here <span class="math inline">\(x \in \mathbb{A}_I \Rightarrow l_i \leq x_i \leq u_i\)</span>.</p>
+<p>Also, we say <span class="math inline">\(a_1 \sqsubseteq a_2\)</span> iff <span class="math inline">\(\forall i. [l_i^1,u_i^1] \subseteq [l_i^2,u_i^2]\)</span>.</p>
+<p>And the abstraction functions are defined as: <span class="math display">\[
+\alpha_I(c) = ([\inf\{x_i | x \in c\}, \sup\{x_i | x \in c\}])_{i=1}^n
+\]</span> That is, the abstraction function maps a concrete set to the smallest interval containing it.</p>
+<p>The concretization function is defined as: <span class="math display">\[
+\gamma_I(a) = \{x \in \mathbb{R}^n | \forall i. l_i^a \leq x_i \leq u_i^a\}
+\]</span></p>
+</section>
+<section id="abstract-domain-of-affine-relations" class="level3">
+<h3 class="anchored" data-anchor-id="abstract-domain-of-affine-relations">Abstract Domain of Affine Relations</h3>
+<p><span class="math display">\[
+\mathbb{A}_E \triangleq \{(\mathbf{A},b)|\mathbb{A} \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, m&gt;0\}
+\]</span></p>
+<p>Here <span class="math inline">\(x \in \mathbb{A}_E \Rightarrow \mathbf{A}x = b\)</span>.</p>
+<p>And the abstraction functions are defined as:</p>
+<p><span class="math display">\[
+\alpha_E(c) = \begin{cases}
+(\mathbf{A},b) &amp; \text{if } c \subseteq \{x | \mathbf{A}x = b\} \text{ and } (\mathbf{A},b) \text{ is in reduced echelon form}\\
+\top &amp; \text{if } c = \mathbb{R}^n\\
+\bot &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p>The concretization function is defined as:</p>
+<p><span class="math display">\[
+\gamma_E(a) = \{x \in \mathbb{R}^n | \mathbf{A}x = b\},
+\]</span> here <span class="math inline">\(a = (\mathbf{A},b)\)</span>.</p>
+</section>
+<section id="abstract-domain-for-neural-architectures" class="level3">
+<h3 class="anchored" data-anchor-id="abstract-domain-for-neural-architectures">Abstract Domain for Neural Architectures</h3>
+<p>The abstract domain for <em>Tensor partitioning and Interval abstraction with affine Equality relation </em><span class="math inline">\(\mathbb{A}_{\text{TIE}}\)</span> is defined as: <span class="math display">\[
+\mathbb{A}_{\text{TIE}} \triangleq \{(\mathcal{P}, a^{\sharp I}, a^{\sharp E})|a^{\sharp I} \in \mathbb{A}_I, a^{\sharp E}\in\mathbb{A}_E\},
+\]</span> where <span class="math inline">\(\mathcal{P} = \{A_1,A_2,...,A_n\}\)</span> is a tensor partitioning.</p>
+<p>The concretization function <span class="math inline">\(\gamma_{\text{TIE}}\)</span> of an element <span class="math inline">\(a^\sharp = (\mathcal{P}, a^{\sharp I}, a^{\sharp E})\)</span> is defined as: <span class="math display">\[
+\gamma_{\text{TIE}}(a^\sharp) = \gamma_I(a^{\sharp I}) \cap \gamma_E(a^{\sharp E})
+\]</span></p>
+<p>Notes for ReLU:</p>
+<ul>
+<li>Create a new symbolic variable <span class="math inline">\(b\)</span> for <span class="math inline">\(a\)</span>.</li>
+<li>And we have <span class="math inline">\(b - a^{\text{ReLU}} = 0\)</span>.</li>
+<li><span class="math inline">\(a^{\text{ReLU}} - a^{-\text{ReLU}} - a =0\)</span>.</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
