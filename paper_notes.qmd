@@ -1,7 +1,11 @@
 ---
 title: Paper Notes
+bibliography: refs.bib
 ---
 
-# Paper Notes
-
 Here are the notes of the papers I've read.
+
+## Formal Methods in AI
+
+*Static Analysis for DL Architecture*:
+- [Detecting numerical bugs in neural network architectures](./Paper_Notes/FSE20.qmd) [@FSE20Zhang]
