@@ -9,7 +9,13 @@ Here are the notes of the papers I've read.
 
 **Static Analysis for DL Architectures**:
 
-- [Detecting numerical bugs in neural network architectures](./Paper_Notes/FSE20.qmd) [@FSE20Zhang]
+- DEBAR: [Detecting numerical bugs in neural network architectures](./Paper_Notes/FSE20.qmd) [@FSE20Zhang]
+  - Affine Relations Abstract Domain.
+  - Tensor Partitioning.
+- RANUM: [Reliability Assurance for Deep Neural Network Architectures Against Numerical Defects](./Paper_Notes/ICSE23.qmd) [@ICSE23Li]
+  - Potential-Defect Detection via Static Analysis.
+  - Feasibility Confirmation via Two-Step Test Generation.
+  - Fix Suggestion via Abstract Optimization.
 
 
 **Static Analysis for DL Models**:
