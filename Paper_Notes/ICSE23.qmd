@@ -17,7 +17,7 @@ We call nodes with zero in-degree as **initial nodes**, which correspond to *inp
 
 We call nodes with positive in-degree as **internal nodes**, which correspond to concrete operators, such as matrix multiplication (`MatMul`) and addition (`Add`).
 
-We let $\mathbfit{x}$ and $\mathbfit{w}$ denote the concatenation of data from all input nodes and data from all weight nodes, respectively. E.g., in @#fig-ranum-computational-graph, $\mathbfit{x}$ concatenates data from nodes 1 and 11; and $\mathbfit{w}$ concatenates data from nodes 2 and 4.
+We let $\mathbfit{x}$ and $\mathbfit{w}$ denote the concatenation of data from all input nodes and data from all weight nodes, respectively. E.g., in @fig-ranum-computational-graph, $\mathbfit{x}$ concatenates data from nodes 1 and 11; and $\mathbfit{w}$ concatenates data from nodes 2 and 4.
 
 We use $f_n^{\textsf{in}}(\mathbfit{x}; \mathbfit{w})$ and $f_n^{\textsf{out}}(\mathbfit{x}; \mathbfit{w})$ to express input and output data of node $n$, respectively, given $\mathbfit{x}$ and $\mathbfit{w}$.
 
