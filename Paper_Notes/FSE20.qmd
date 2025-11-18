@@ -25,8 +25,7 @@ topRight = center + offset
 rectangle = tf.concat([bottomLeft, topRight], axis=1)
 
 # Calculate the reciprocal of their areas.
-bottom, left, top, right = tf.split(rectangle,
-num_or_size_splits=4, axis=1)
+bottom, left, top, right = tf.split(rectangle, num_or_size_splits=4, axis=1)
 width = right - left
 height = top - bottom
 area = width * height

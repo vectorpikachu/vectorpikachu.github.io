@@ -247,12 +247,11 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>rectangle <span class="op">=</span> tf.concat([bottomLeft, topRight], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the reciprocal of their areas.</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>bottom, left, top, right <span class="op">=</span> tf.split(rectangle,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>num_or_size_splits<span class="op">=</span><span class="dv">4</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> right <span class="op">-</span> left</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> top <span class="op">-</span> bottom</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> width <span class="op">*</span> height</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> tf.reciprocal(area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>bottom, left, top, right <span class="op">=</span> tf.split(rectangle, num_or_size_splits<span class="op">=</span><span class="dv">4</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> right <span class="op">-</span> left</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> top <span class="op">-</span> bottom</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> width <span class="op">*</span> height</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> tf.reciprocal(area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The key insight is that <em>affine relations</em> are common in neural network architectures.</p>
 <section id="basics-of-abstract-interpretation" class="level3">
 <h3 class="anchored" data-anchor-id="basics-of-abstract-interpretation">Basics of Abstract Interpretation</h3>
