@@ -257,14 +257,28 @@ Figure&nbsp;1: Computational graph encoded by the snippet
 </figure>
 </div>
 <p><strong>Definition.</strong> For the given computational graph <span class="math inline">\(\mathcal{G} = \langle\mathcal{V}, \mathcal{E} \rangle\)</span>, if there is a node <span class="math inline">\(n_0 \in \mathcal{V}\)</span>, such that there exists a valid input and valid weights that can let the input of node <span class="math inline">\(n_0\)</span> fall within the invalid range, we say there is a numerical defect at node <span class="math inline">\(n_0\)</span>. Formally, <span class="math inline">\(\exists \mathbfit{x}_0 \in \mathcal{X}_{\textsf{valid}}, \mathbfit{w}_0 \in \mathcal{W}_{\textsf{valid}}, f_{n_0}^{\textsf{in}}(\mathbfit{x}_0; \mathbfit{w}_0) \in \mathcal{I}_{n_0,\textsf{invalid}} \Longrightarrow\)</span> <span class="math inline">\(\exists\)</span> numerical defect at node <span class="math inline">\(n_0\)</span>.</p>
-<p>For example, ImageNet <code>Resnet50</code> models have - valid input range <span class="math inline">\(\mathcal{X}_{\textsf{valid}} = [0,1]^{3\times 224 \times 224}\)</span>: image pixel intensities are within <span class="math inline">\([0,1]\)</span>; - valid weight range <span class="math inline">\(\mathcal{W}_{\textsf{valid}} = [-1,1]^{\textsf{weight_shape}}\)</span>: weights of well-trained <code>Resnet50</code> models are typically within <span class="math inline">\([-1,1]\)</span>; - The invalid range <span class="math inline">\(\mathcal{I}_{n_0,\textsf{invalid}}\)</span>: determined by the operator type of node <span class="math inline">\(n_0\)</span>. For example, for the <code>Log</code> operator, the invalid range is <span class="math inline">\((-\infty,U_{\text{min}}]\)</span>, where <span class="math inline">\(U_{\text{min}}\)</span> is the smallest positive number of a tensor’s data type.</p>
+<p>For example, ImageNet <code>Resnet50</code> models have</p>
+<ul>
+<li>valid input range <span class="math inline">\(\mathcal{X}_{\textsf{valid}} = [0,1]^{3\times 224 \times 224}\)</span>: image pixel intensities are within <span class="math inline">\([0,1]\)</span>;</li>
+<li>valid weight range <span class="math inline">\(\mathcal{W}_{\textsf{valid}} = [-1,1]^{p}\)</span>: weights of well-trained <code>Resnet50</code> models are typically within <span class="math inline">\([-1,1]\)</span>;</li>
+<li>The invalid range <span class="math inline">\(\mathcal{I}_{n_0,\textsf{invalid}}\)</span>: determined by the operator type of node <span class="math inline">\(n_0\)</span>. For example, for the <code>Log</code> operator, the invalid range is <span class="math inline">\((-\infty,U_{\text{min}}]\)</span>, where <span class="math inline">\(U_{\text{min}}\)</span> is the smallest positive number of a tensor’s data type.</li>
+</ul>
 <section id="dnn-static-analysis-framework-with-backward-fine-grained-node-labeling-for-potential-defect-detection" class="level3">
 <h3 class="anchored" data-anchor-id="dnn-static-analysis-framework-with-backward-fine-grained-node-labeling-for-potential-defect-detection">DNN Static Analysis Framework with Backward Fine-Grained Node Labeling for Potential-Defect Detection</h3>
 <p>A DNN architecture + valid ranges for input and weight nodes <span class="math inline">\(=&gt;\)</span> interval abstractions for possible inputs and outputs of each node.</p>
 <p>Formally, for given valid ranges of inference input and model weights, namely <span class="math inline">\(\mathcal{X}\)</span> and <span class="math inline">\(\mathcal{W}\)</span>, for each node <span class="math inline">\(n \in \mathcal{V}\)</span>, our framework computes <em>sound</em> input interval abstraction <span class="math inline">\([\mathbfit{l}_n, \mathbfit{u}_n] := \{\mathbfit{x} : \mathbfit{l}_n \leq x \leq \mathbfit{u}_n\}\)</span> such that <span class="math inline">\([\mathbfit{l}_n,\mathbfit{u}_n]\)</span> always captures all possible inputs of the node: <span class="math inline">\([\mathbfit{l}_n,\mathbfit{u}_n] \supseteq \{f_n^{\textsf{in}}(\mathbfit{x}, \mathbfit{w}) : \mathbfit{x} \in \mathcal{X} , \mathbfit{w} \in \mathcal{W}\}\)</span>. We also compute output interval abstractions similarly.</p>
 <p>The interval domain with tensor partitioning provides a degree of freedom in terms of <em>the partition granularity</em>, i.e., we can choose the subblock size for each node’s abstraction. When the finest granularity, i.e., elementwise abstraction, is chosen, the abstraction interval is the most concrete. When the coarsest granularity (i.e., one scalar to summarize the node tensor) is chosen, the abstraction saves the most space and computational cost but loses much precision.</p>
-<p>E.g., <span class="math inline">\(([−1, 0], [0, 1], [1, 2], [−1, 0])\)</span>: - the finest granularity, <span class="math inline">\([\mathbfit{l}_n, \mathbfit{u}_n] = [(−1, 0, 1, −1),(0, 1, 2, 0)]\)</span>. - the coarsest granularity, <span class="math inline">\([\mathbfit{l}_n, \mathbfit{u}_n] = [−1, 2]\)</span>.</p>
-<p>Using the finest instead of the coarsest granularity for some nodes is more beneficial for overall abstraction preciseness. - the control-flow operators, e.g., <code>Loop</code> - the indexing operators, e.g., <code>Slice</code> - shaping operators, e.g., <code>Reshape</code></p>
+<p>E.g., <span class="math inline">\(([−1, 0], [0, 1], [1, 2], [−1, 0])\)</span>:</p>
+<ul>
+<li>the finest granularity, <span class="math inline">\([\mathbfit{l}_n, \mathbfit{u}_n] = [(−1, 0, 1, −1),(0, 1, 2, 0)]\)</span>.</li>
+<li>the coarsest granularity, <span class="math inline">\([\mathbfit{l}_n, \mathbfit{u}_n] = [−1, 2]\)</span>.</li>
+</ul>
+<p>Using the finest instead of the coarsest granularity for some nodes is more beneficial for overall abstraction preciseness.</p>
+<ul>
+<li>the control-flow operators, e.g., <code>Loop</code></li>
+<li>the indexing operators, e.g., <code>Slice</code></li>
+<li>shaping operators, e.g., <code>Reshape</code></li>
+</ul>
 
 
 </section>

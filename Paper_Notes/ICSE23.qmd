@@ -41,8 +41,9 @@ such that there exists a valid input and valid weights that can let the input of
 Formally, $\exists \mathbfit{x}_0 \in \mathcal{X}_{\textsf{valid}}, \mathbfit{w}_0 \in \mathcal{W}_{\textsf{valid}}, f_{n_0}^{\textsf{in}}(\mathbfit{x}_0; \mathbfit{w}_0) \in \mathcal{I}_{n_0,\textsf{invalid}} \Longrightarrow$ $\exists$ numerical defect at node $n_0$.
 
 For example, ImageNet `Resnet50` models have 
+
 - valid input range $\mathcal{X}_{\textsf{valid}} = [0,1]^{3\times 224 \times 224}$: image pixel intensities are within $[0,1]$;
-- valid weight range $\mathcal{W}_{\textsf{valid}} = [-1,1]^{\textsf{weight_shape}}$: weights of well-trained `Resnet50` models are typically within $[-1,1]$;
+- valid weight range $\mathcal{W}_{\textsf{valid}} = [-1,1]^{p}$: weights of well-trained `Resnet50` models are typically within $[-1,1]$;
 - The invalid range $\mathcal{I}_{n_0,\textsf{invalid}}$: determined by the operator type of node $n_0$. For example, for the `Log` operator, the invalid range is $(-\infty,U_{\text{min}}]$, where $U_{\text{min}}$ is the smallest positive number of a tensor’s data type.
 
 ### DNN Static Analysis Framework with Backward Fine-Grained Node Labeling for Potential-Defect Detection
@@ -56,10 +57,12 @@ always captures all possible inputs of the node: $[\mathbfit{l}_n,\mathbfit{u}_n
 The interval domain with tensor partitioning provides a degree of freedom in terms of *the partition granularity*, i.e., we can choose the subblock size for each node’s abstraction. When the finest granularity, i.e., elementwise abstraction, is chosen, the abstraction interval is the most concrete. When the coarsest granularity (i.e., one scalar to summarize the node tensor) is chosen, the abstraction saves the most space and computational cost but loses much precision.
 
 E.g., $([−1, 0], [0, 1], [1, 2], [−1, 0])$:
+
 - the finest granularity, $[\mathbfit{l}_n, \mathbfit{u}_n] = [(−1, 0, 1, −1),(0, 1, 2, 0)]$.
 - the coarsest granularity, $[\mathbfit{l}_n, \mathbfit{u}_n] = [−1, 2]$.
 
 Using the finest instead of the coarsest granularity for some nodes is more beneficial for overall abstraction preciseness.
+
 - the control-flow operators, e.g., `Loop`
 - the indexing operators, e.g., `Slice`
 - shaping operators, e.g., `Reshape`
