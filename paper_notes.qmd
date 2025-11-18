@@ -5,6 +5,16 @@ bibliography: refs.bib
 
 Here are the notes of the papers I've read.
 
+## LLM for Theorem Proving
+
+- SeedProver: [@chen2025seedproverdeepbroadreasoning]
+  - Lemma-Style Proving: 分解任务, 独立验证, 构建知识库, 组合证明.
+  - Test-Time Scaling
+    - Light: Proof Sketch → Lean → Error Feedback → Refine
+    - Medium: Outer Loop for main theorem, Inner Loop for hard lemmas.
+    - Heavy: Conjecture Proposer (Conjecture Pool) → Light Prover → Lemma Pool → Evaluate → Select High-Quality Lemmas, let Medium Prover prove main theorem again.
+  - IMO 2025: 4/6 problems solved.
+
 ## Formal Methods in AI
 
 **Static Analysis for DL Architectures**:

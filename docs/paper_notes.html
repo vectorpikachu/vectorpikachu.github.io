@@ -178,7 +178,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#formal-methods-in-ai" id="toc-formal-methods-in-ai" class="nav-link active" data-scroll-target="#formal-methods-in-ai">Formal Methods in AI</a></li>
+  <li><a href="#llm-for-theorem-proving" id="toc-llm-for-theorem-proving" class="nav-link active" data-scroll-target="#llm-for-theorem-proving">LLM for Theorem Proving</a></li>
+  <li><a href="#formal-methods-in-ai" id="toc-formal-methods-in-ai" class="nav-link" data-scroll-target="#formal-methods-in-ai">Formal Methods in AI</a></li>
   </ul>
 </nav>
     </div>
@@ -205,6 +206,22 @@ window.Quarto = {
 
 
 <p>Here are the notes of the papers I’ve read.</p>
+<section id="llm-for-theorem-proving" class="level2">
+<h2 class="anchored" data-anchor-id="llm-for-theorem-proving">LLM for Theorem Proving</h2>
+<ul>
+<li>SeedProver: <span class="citation" data-cites="chen2025seedproverdeepbroadreasoning">(<a href="#ref-chen2025seedproverdeepbroadreasoning" role="doc-biblioref">Chen et al. 2025</a>)</span>
+<ul>
+<li>Lemma-Style Proving: 分解任务, 独立验证, 构建知识库, 组合证明.</li>
+<li>Test-Time Scaling
+<ul>
+<li>Light: Proof Sketch → Lean → Error Feedback → Refine</li>
+<li>Medium: Outer Loop for main theorem, Inner Loop for hard lemmas.</li>
+<li>Heavy: Conjecture Proposer (Conjecture Pool) → Light Prover → Lemma Pool → Evaluate → Select High-Quality Lemmas, let Medium Prover prove main theorem again.</li>
+</ul></li>
+<li>IMO 2025: 4/6 problems solved.</li>
+</ul></li>
+</ul>
+</section>
 <section id="formal-methods-in-ai" class="level2">
 <h2 class="anchored" data-anchor-id="formal-methods-in-ai">Formal Methods in AI</h2>
 <p><strong>Static Analysis for DL Architectures</strong>:</p>
@@ -240,6 +257,9 @@ window.Quarto = {
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-chen2025seedproverdeepbroadreasoning" class="csl-entry" role="listitem">
+Chen, Luoxin, Jinming Gu, Liankai Huang, Wenhao Huang, Zhicheng Jiang, Allan Jie, Xiaoran Jin, et al. 2025. <span>“Seed-Prover: Deep and Broad Reasoning for Automated Theorem Proving.”</span> <a href="https://arxiv.org/abs/2507.23726">https://arxiv.org/abs/2507.23726</a>.
+</div>
 <div id="ref-ICSE23Li" class="csl-entry" role="listitem">
 Li, Linyi, Yuhao Zhang, Luyao Ren, Yingfei Xiong, and Tao Xie. 2023. <span>“Reliability Assurance for Deep Neural Network Architectures Against Numerical Defects.”</span> In <em>2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)</em>, 1827–39. <a href="https://doi.org/10.1109/ICSE48619.2023.00156">https://doi.org/10.1109/ICSE48619.2023.00156</a>.
 </div>

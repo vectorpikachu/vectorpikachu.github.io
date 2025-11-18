@@ -56,6 +56,13 @@
     "text": "Here are the notes of the papers I’ve read."
   },
   {
+    "objectID": "paper_notes.html#llm-for-theorem-proving",
+    "href": "paper_notes.html#llm-for-theorem-proving",
+    "title": "Paper Notes",
+    "section": "LLM for Theorem Proving",
+    "text": "LLM for Theorem Proving\n\nSeedProver: (Chen et al. 2025)\n\nLemma-Style Proving: 分解任务, 独立验证, 构建知识库, 组合证明.\nTest-Time Scaling\n\nLight: Proof Sketch → Lean → Error Feedback → Refine\nMedium: Outer Loop for main theorem, Inner Loop for hard lemmas.\nHeavy: Conjecture Proposer (Conjecture Pool) → Light Prover → Lemma Pool → Evaluate → Select High-Quality Lemmas, let Medium Prover prove main theorem again.\n\nIMO 2025: 4/6 problems solved."
+  },
+  {
     "objectID": "paper_notes.html#formal-methods-in-ai",
     "href": "paper_notes.html#formal-methods-in-ai",
     "title": "Paper Notes",
