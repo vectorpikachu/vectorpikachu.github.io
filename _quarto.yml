@@ -11,8 +11,8 @@ website:
       - about.qmd
       - href: course_notes.qmd
         text: Course Notes
-      - href: paper_notes.qmd
-        text: Paper Notes
+      - href: blogs.qmd
+        text: Blogs
 
 format:
   html:

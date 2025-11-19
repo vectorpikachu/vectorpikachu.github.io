@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Course Notes – VectorPikachu</title>
+<title>Two quantifiers in a specification – VectorPikachu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-910acf1146e2ab8204dbb00666d88f1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-910acf1146e2ab8204dbb00666d88f1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,8 +74,37 @@ ul.task-list li input[type="checkbox"] {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&amp;family=Ysabeau+Office:ital,wght@0,1..1000;1,1..1000&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -85,9 +114,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">VectorPikachu</span>
     </a>
   </div>
@@ -98,19 +127,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./course_notes.html" aria-current="page"> 
+    <a class="nav-link" href="../course_notes.html"> 
 <span class="menu-text">Course Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blogs.html"> 
+    <a class="nav-link" href="../blogs.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
 </ul>
@@ -129,14 +158,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">24-25-3</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">24-25-2</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">24-25-1</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">23-24-3</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">23-24-2</a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">23-24-1</a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">22-23-2</a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">22-23-1</a></li>
+  <li><a href="#my-findings" id="toc-my-findings" class="nav-link active" data-scroll-target="#my-findings">My findings</a></li>
   </ul>
 </nav>
     </div>
@@ -145,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Course Notes</h1>
+<h1 class="title">Two quantifiers in a specification</h1>
 </div>
 
 
@@ -162,122 +184,65 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Here are the course notes written by myself. I’ve taken 58 courses (147 points) in PKU.</p>
-<section id="section" class="level1">
-<h1>24-25-3</h1>
-<p>2 courses, 4 points in total.</p>
+<p>Let’s consider a Dafny <code>lemma</code> that involves two quantifiers in its specification. For example, we want to prove the following lemma:</p>
+<pre class="dafny"><code>// Test predicate
+ghost predicate P(a: seq&lt;int&gt;, x: int, y: int)
+{
+    (0 &lt;= x &lt; |a| &amp;&amp; 0 &lt;= y &lt; |a|) ==&gt; a[x] &lt; a[y]
+}
+
+lemma test1(a: seq&lt;int&gt;)
+    requires forall x :: (exists y :: P(a, x, y))
+    ensures forall x :: (exists y :: P(a, x, y))
+{
+    // not proved
+    // Dafny can't find the trigger for `x`
+}
+
+lemma test2(a: seq&lt;int&gt;)
+    requires exists x :: (forall y :: P(a, x, y))
+    ensures exists x :: (forall y :: P(a, x, y))
+{
+
+    // not proved
+    // same issue as test1
+}</code></pre>
+<p>In both <code>test1</code> and <code>test2</code>, Dafny fails to prove the lemmas because it cannot find appropriate triggers for the quantifiers.</p>
+<p>And what is a trigger?</p>
+<blockquote class="blockquote">
+<p>Trigger attributes are used on quantifiers and comprehensions.</p>
+<p>The verifier instantiates the body of a quantified expression only when it can find an expression that matches the provided trigger.</p>
+</blockquote>
+<section id="my-findings" class="level2">
+<h2 class="anchored" data-anchor-id="my-findings">My findings</h2>
+<p>I think the main issue can be the Skolemization of the quantifiers.</p>
+<p><strong>Skolemization:</strong> <span class="math inline">\(\forall x \exists y R(x,y) \Leftrightarrow \forall x R(x,f(x))\)</span>, here <span class="math inline">\(f\)</span> is a Skolem function.</p>
+<p>In <code>test1</code>, after Skolemization:</p>
 <ul>
-<li>Topics in Quantitative Finance | <a href="https://vectorpikachu.github.io/qf-slides/">Click here to view the website.</a> <br> 量化金融专题 | <a href="https://vectorpikachu.github.io/qf-slides/">点击此处访问网站.</a></li>
-<li>Inter-cultural Communication <br> 跨文化交流学</li>
+<li>the requirement becomes: <span class="math inline">\(\forall x P(a, x, f(x))\)</span>.</li>
+<li>the ensures becomes: <span class="math inline">\(\forall x P(a, x, g(x))\)</span>.</li>
+<li>Dafny cannot find the relation between <code>f</code> and <code>g</code>, so it cannot prove the lemma.</li>
 </ul>
-</section>
-<section id="section-1" class="level1">
-<h1>24-25-2</h1>
-<p>8 courses, 25 points in total.</p>
+<p>In <code>test2</code>, after Skolemization:</p>
 <ul>
-<li>Introduction to Database Systems | <a href="./PDF/Database.pdf">Click here to view the PDF.</a> <br> 数据库概论 | <a href="./PDF/Database.pdf">点击此处查看PDF.</a></li>
-<li>Public Intermediate German <br> 公共中级德语
-<ul>
-<li><a href="./PDF/25春季公共中级德语笔记.pdf">The notes. 课程笔记.</a></li>
-<li><a href="./PDF/公共中级德语小测.pdf">The tests. 课程小测.</a></li>
-<li><a href="./PDF/Einheit 6-10 单词笔记.pdf">The words. 课程单词.</a></li>
-<li>Here are two passages full of grammer mistakes: <a href="./PDF/职业描述.pdf">Ein Programmierer</a> and <a href="./PDF/假期描述.pdf">Meine Ferien</a>.</li>
-</ul></li>
-<li>Special Topics in China Economic Research | <a href="./PDF/25春季中国经济专题笔记.pdf">Click here to view the PDF.</a> <br> 中国经济专题 | <a href="./PDF/25春季中国经济专题笔记.pdf">点击此处查看PDF.</a></li>
-<li>Intermediate Microeconomics <br> 中级微观经济学</li>
-<li>Programming in Rust <br> Rust程序设计</li>
-<li>Orienteering and Hiking <br> 定向与徒步运动</li>
-<li>Operating Systems (Honor Track) <br> 操作系统 (实验班)</li>
-<li>Modern Astronomy <br> 现代天文学</li>
+<li>the requirement becomes: <span class="math inline">\(P(a, h, y)\)</span>.</li>
+<li>the ensures becomes: <span class="math inline">\(P(a, k, y)\)</span>.</li>
+<li>Similarly, Dafny cannot find the relation between <code>h</code> and <code>k</code>, so it cannot prove the lemma.</li>
 </ul>
-</section>
-<section id="section-2" class="level1">
-<h1>24-25-1</h1>
-<p>6 courses, 21 points in total.</p>
-<ul>
-<li>Public Junior German | <a href="./PDF/德语notes.pdf">Click here to view the PDF.</a> <br> 公共初级德语 | <a href="./PDF/德语notes.pdf">点击此处查看PDF.</a></li>
-<li>Econometrics | <a href="./PDF/计量经济学notes.pdf">Click here to view the PDF.</a> <br> 计量经济学 | <a href="./PDF/计量经济学notes.pdf">点击此处查看PDF.</a></li>
-<li>Software Engineering <br> 软件工程
-<ul>
-<li><a href="./PDF/SE.pdf">The notes. 课程笔记.</a></li>
-<li>The Assignments. 课程作业.
-<ul>
-<li><a href="./PDF/SE-HW/SE-HW1.pdf">Homework 1</a></li>
-<li><a href="./PDF/SE-HW/SE-HW2.pdf">Homework 2</a></li>
-<li><a href="./PDF/SE-HW/SE-HW3.pdf">Homework 3</a></li>
-</ul></li>
-</ul></li>
-<li>A Survey of Mao Tsetung Thoughts and Theory of Socialism with Chinese Charateristics <br> 毛概</li>
-<li>Software Analysis <br> 软件分析技术</li>
-<li>Compiler Principles <br> 编译原理</li>
-<li>…</li>
-</ul>
-</section>
-<section id="section-3" class="level1">
-<h1>23-24-3</h1>
-<p>2 courses, 3 points in total.</p>
-<ul>
-<li>Physical and Aesthetic course <br> 体美</li>
-<li>Aural Culture and World Civilization <br> 听觉文化与世界文明</li>
-</ul>
-</section>
-<section id="section-4" class="level1">
-<h1>23-24-2</h1>
-<p>9 courses, 24 points in total.</p>
-<ul>
-<li>Introduction to Object Oriented Technology <br> 面向对象技术引论</li>
-<li>Comparative Constitutional Law <br> 外国宪法</li>
-<li>Academic English Listening and Speaking <br> 学术英语听说</li>
-<li>Algorithm Design and Anslysis <br> 算法设计与分析</li>
-<li>Information Theory <br> 信息论</li>
-<li>History of Rome <br> 罗马史</li>
-<li>Software Foundations <br> 软件科学基础</li>
-<li>Probability theory and statistics in Information science <br> 信息学中的概率统计</li>
-<li>Intermediate Macroeconomics <br> 中级宏观经济学</li>
-</ul>
-</section>
-<section id="section-5" class="level1">
-<h1>23-24-1</h1>
-<p>8 courses, 24 points in total.</p>
-<ul>
-<li>Human Sex, Reproduction and Health <br> 人类的性、生育与健康</li>
-<li>Music and Mathematics <br> 音乐与数学</li>
-<li>Data Structure and Algorithm (A) <br> 数据结构与算法 (A)</li>
-<li>An Introduction to Marxist Basic Theory <br> 马原</li>
-<li>Introduction to Discrete Mathmatics <br> 离散数学基础</li>
-<li>Principles of Economics <br> 经济学原理</li>
-<li>Introduction to Computer Systems <br> 计算机系统导论</li>
-<li>…</li>
-</ul>
-</section>
-<section id="section-6" class="level1">
-<h1>22-23-2</h1>
-<p>8 courses, 24 points in total.</p>
-<ul>
-<li>Text and Meaning: British and American Short Stories <br> 英美短篇小说文本分析与鉴赏</li>
-<li>Introduction to Artificial Intelligence <br> 人工智能引论</li>
-<li>Practice of Programming in C&amp;C++ <br> 程序设计实习</li>
-<li>Outline of Chinese Modern History <br> 中国近现代史纲要</li>
-<li>习概</li>
-<li>Linear Algebra A (II) <br> 线性代数A (II)</li>
-<li>Advanced Mathematics A (no.2) <br> 高等数学A (二)</li>
-<li>…</li>
-</ul>
-</section>
-<section id="section-7" class="level1">
-<h1>22-23-1</h1>
-<p>11 courses, 27 points in total.</p>
-<ul>
-<li>Introduction to Seismology <br> 地震概论</li>
-<li>Introduction to Computation (A) <br> 计算概论A</li>
-<li>Advanced Mathematics A (no.1) <br> 高等数学A (一)</li>
-<li>Football <br> 足球</li>
-<li>Physics for Information Sciences (1) <br> 信息科学中的物理学 (上)</li>
-<li>Linear Algebra A (I) <br> 线性代数A (I)</li>
-<li>Introduction to Information Science and Technique <br> 信息科学技术概论</li>
-<li>…</li>
-</ul>
-<p>TO BE CONTINUED …</p>
+<p>And based on this understanding, I tried to prove two quantifers of <span class="math inline">\(\forall x \forall y\)</span> and <span class="math inline">\(\exists x \exists y\)</span>, and Dafny can prove them successfully.</p>
+<pre class="dafny"><code>lemma test1(a: seq&lt;int&gt;)
+    requires forall x :: (forall y :: P(a, x, y))
+    ensures forall x :: (forall y :: P(a, x, y))
+{
+    // proved
+}
+
+lemma test2(a: seq&lt;int&gt;)
+    requires exists x :: (exists y :: P(a, x, y))
+    ensures exists x :: (exists y :: P(a, x, y))
+{
+    // proved
+}</code></pre>
 
 
 </section>

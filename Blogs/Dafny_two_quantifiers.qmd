@@ -1,0 +1,74 @@
+---
+title: Two quantifiers in a specification
+---
+
+Let's consider a Dafny `lemma` that involves two quantifiers in its specification. For example, we want to prove the following lemma:
+
+```dafny
+// Test predicate
+ghost predicate P(a: seq<int>, x: int, y: int)
+{
+    (0 <= x < |a| && 0 <= y < |a|) ==> a[x] < a[y]
+}
+
+lemma test1(a: seq<int>)
+    requires forall x :: (exists y :: P(a, x, y))
+    ensures forall x :: (exists y :: P(a, x, y))
+{
+    // not proved
+    // Dafny can't find the trigger for `x`
+}
+
+lemma test2(a: seq<int>)
+    requires exists x :: (forall y :: P(a, x, y))
+    ensures exists x :: (forall y :: P(a, x, y))
+{
+
+    // not proved
+    // same issue as test1
+}
+```
+
+In both `test1` and `test2`, Dafny fails to prove the lemmas because it cannot find appropriate triggers for the quantifiers.
+
+And what is a trigger? 
+
+> Trigger attributes are used on quantifiers and comprehensions.
+> 
+> The verifier instantiates the body of a quantified expression only when it can find an expression that matches the provided trigger.
+
+## My findings
+
+I think the main issue can be the Skolemization of the quantifiers.
+
+**Skolemization:** $\forall x \exists y R(x,y) \Leftrightarrow \forall x R(x,f(x))$, here $f$ is a Skolem function.
+
+In `test1`, after Skolemization:
+
+- the requirement becomes: $\forall x P(a, x, f(x))$.
+- the ensures becomes: $\forall x P(a, x, g(x))$.
+- Dafny cannot find the relation between `f` and `g`, so it cannot prove the lemma.
+
+In `test2`, after Skolemization:
+
+- the requirement becomes: $P(a, h, y)$.
+- the ensures becomes: $P(a, k, y)$.
+- Similarly, Dafny cannot find the relation between `h` and `k`, so it cannot prove the lemma.
+
+And based on this understanding, I tried to prove two quantifers of $\forall x \forall y$ and $\exists x \exists y$, and Dafny can prove them successfully.
+
+```dafny
+lemma test1(a: seq<int>)
+    requires forall x :: (forall y :: P(a, x, y))
+    ensures forall x :: (forall y :: P(a, x, y))
+{
+    // proved
+}
+
+lemma test2(a: seq<int>)
+    requires exists x :: (exists y :: P(a, x, y))
+    ensures exists x :: (exists y :: P(a, x, y))
+{
+    // proved
+}
+```
