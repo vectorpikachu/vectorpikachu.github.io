@@ -46,7 +46,7 @@
     "href": "blogs.html#formal-methods-in-ai",
     "title": "Blogs",
     "section": "Formal Methods in AI",
-    "text": "Formal Methods in AI\nStatic Analysis for DL Architectures:\n\nDEBAR: Detecting numerical bugs in neural network architectures (Zhang et al. 2020)\n\nAffine Relations Abstract Domain.\nTensor Partitioning.\n\nRANUM: Reliability Assurance for Deep Neural Network Architectures Against Numerical Defects (Li et al. 2023)\n\nPotential-Defect Detection via Static Analysis.\nFeasibility Confirmation via Two-Step Test Generation.\nFix Suggestion via Abstract Optimization.\n\n\nStatic Analysis for DL Models:\n\nUse SMT solvers to verify properties of DL models.\nUse integer programming to verify robustness of DL models.\nAbstract interpretation for DL models. (e.g., \\(\\text{AI}^2\\), DeepPoly, etc.)\n\nZonotope abstract domain.\n\n\nSOTA tools:\n\n\\(\\alpha,\\beta\\)-CROWN"
+    "text": "Formal Methods in AI\n\nStatic Analysis for DL Architectures\n\nDEBAR: Detecting numerical bugs in neural network architectures (Zhang et al. 2020)\n\nAffine Relations Abstract Domain.\nTensor Partitioning.\n\nRANUM: Reliability Assurance for Deep Neural Network Architectures Against Numerical Defects (Li et al. 2023)\n\nPotential-Defect Detection via Static Analysis.\nFeasibility Confirmation via Two-Step Test Generation.\nFix Suggestion via Abstract Optimization.\n\n\n\n\nStatic Analysis for DL Models\n\nUse SMT solvers to verify properties of DL models.\nUse integer programming to verify robustness of DL models.\nAbstract interpretation for DL models. (e.g., \\(\\text{AI}^2\\), DeepPoly, etc.)\n\nZonotope abstract domain.\n\n\nSOTA tools:\n\n\\(\\alpha,\\beta\\)-CROWN"
   },
   {
     "objectID": "blogs.html#dafny-blogs",

@@ -25,7 +25,7 @@ In my opinion, some *agent techniques* can be *helpful* for theorem proving as w
 
 ## Formal Methods in AI
 
-**Static Analysis for DL Architectures**:
+### Static Analysis for DL Architectures
 
 - DEBAR: [Detecting numerical bugs in neural network architectures](./Blogs/FSE20.qmd) [@FSE20Zhang]
   - Affine Relations Abstract Domain.
@@ -36,7 +36,7 @@ In my opinion, some *agent techniques* can be *helpful* for theorem proving as w
   - Fix Suggestion via Abstract Optimization.
 
 
-**Static Analysis for DL Models**:
+### Static Analysis for DL Models
 
 - Use SMT solvers to verify properties of DL models.
 - Use integer programming to verify robustness of DL models.
