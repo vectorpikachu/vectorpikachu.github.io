@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -185,28 +220,28 @@ window.Quarto = {
 
 
 <p>Let’s consider a Dafny <code>lemma</code> that involves two quantifiers in its specification. For example, we want to prove the following lemma:</p>
-<pre class="dafny"><code>// Test predicate
-ghost predicate P(a: seq&lt;int&gt;, x: int, y: int)
-{
-    (0 &lt;= x &lt; |a| &amp;&amp; 0 &lt;= y &lt; |a|) ==&gt; a[x] &lt; a[y]
-}
-
-lemma test1(a: seq&lt;int&gt;)
-    requires forall x :: (exists y :: P(a, x, y))
-    ensures forall x :: (exists y :: P(a, x, y))
-{
-    // not proved
-    // Dafny can't find the trigger for `x`
-}
-
-lemma test2(a: seq&lt;int&gt;)
-    requires exists x :: (forall y :: P(a, x, y))
-    ensures exists x :: (forall y :: P(a, x, y))
-{
-
-    // not proved
-    // same issue as test1
-}</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>// Test predicate</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ghost predicate P(a: seq&lt;int&gt;, x: int, y: int)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    (0 &lt;= x &lt; |a| &amp;&amp; 0 &lt;= y &lt; |a|) ==&gt; a[x] &lt; a[y]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>lemma test1(a: seq&lt;int&gt;)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    requires forall x :: (exists y :: P(a, x, y))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ensures forall x :: (exists y :: P(a, x, y))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    // not proved</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    // Dafny can't find the trigger for `x`</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>lemma test2(a: seq&lt;int&gt;)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    requires exists x :: (forall y :: P(a, x, y))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ensures exists x :: (forall y :: P(a, x, y))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    // not proved</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    // same issue as test1</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In both <code>test1</code> and <code>test2</code>, Dafny fails to prove the lemmas because it cannot find appropriate triggers for the quantifiers.</p>
 <p>And what is a trigger?</p>
 <blockquote class="blockquote">
@@ -230,19 +265,19 @@ lemma test2(a: seq&lt;int&gt;)
 <li>Similarly, Dafny cannot find the relation between <code>h</code> and <code>k</code>, so it cannot prove the lemma.</li>
 </ul>
 <p>And based on this understanding, I tried to prove two quantifers of <span class="math inline">\(\forall x \forall y\)</span> and <span class="math inline">\(\exists x \exists y\)</span>, and Dafny can prove them successfully.</p>
-<pre class="dafny"><code>lemma test1(a: seq&lt;int&gt;)
-    requires forall x :: (forall y :: P(a, x, y))
-    ensures forall x :: (forall y :: P(a, x, y))
-{
-    // proved
-}
-
-lemma test2(a: seq&lt;int&gt;)
-    requires exists x :: (exists y :: P(a, x, y))
-    ensures exists x :: (exists y :: P(a, x, y))
-{
-    // proved
-}</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lemma test1(a: seq&lt;int&gt;)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    requires forall x :: (forall y :: P(a, x, y))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ensures forall x :: (forall y :: P(a, x, y))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    // proved</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>lemma test2(a: seq&lt;int&gt;)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    requires exists x :: (exists y :: P(a, x, y))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ensures exists x :: (exists y :: P(a, x, y))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    // proved</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

@@ -4,7 +4,7 @@ title: Two quantifiers in a specification
 
 Let's consider a Dafny `lemma` that involves two quantifiers in its specification. For example, we want to prove the following lemma:
 
-```dafny
+```default
 // Test predicate
 ghost predicate P(a: seq<int>, x: int, y: int)
 {
@@ -57,7 +57,7 @@ In `test2`, after Skolemization:
 
 And based on this understanding, I tried to prove two quantifers of $\forall x \forall y$ and $\exists x \exists y$, and Dafny can prove them successfully.
 
-```dafny
+```default
 lemma test1(a: seq<int>)
     requires forall x :: (forall y :: P(a, x, y))
     ensures forall x :: (forall y :: P(a, x, y))
