@@ -15,6 +15,14 @@ Here are the blogs where I share my thoughts and notes on various topics.
     - Heavy: Conjecture Proposer (Conjecture Pool) → Light Prover → Lemma Pool → Evaluate → Select High-Quality Lemmas, let Medium Prover prove main theorem again.
   - IMO 2025: 4/6 problems solved.
 
+In my opinion, some *agent techniques* can be *helpful* for theorem proving as well, so I may record some notes of agent papers here:
+
+- Live-SWE-Agent: [@xia2025livesweagentsoftwareengineeringagents]
+  - the first *live* software agent that can autonomously and continuously evolve itself *on-the-fly during runtime*
+  - starts with *the most basic* agent scaffold with only access to `bash` tools
+  - autonomously *evolves* its own scaffold implementation
+  - 75.4% in SWE-bench Verified; 45.8% in SWE-Bench Pro.
+
 ## Formal Methods in AI
 
 **Static Analysis for DL Architectures**:
