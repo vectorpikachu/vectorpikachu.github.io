@@ -233,7 +233,12 @@ window.Quarto = {
 <li>the first <em>live</em> software agent that can autonomously and continuously evolve itself <em>on-the-fly during runtime</em></li>
 <li>starts with <em>the most basic</em> agent scaffold with only access to <code>bash</code> tools</li>
 <li>autonomously <em>evolves</em> its own scaffold implementation</li>
-<li>75.4% in SWE-bench Verified; 45.8% in SWE-Bench Pro.</li>
+<li>75.4% in SWE-bench Verified; 45.8% in SWE-Bench Pro. (SOTA in 2025.11)</li>
+<li>Q: What are the tools in Coq/Lean that can help us evolve the proof strategies on-the-fly during proof construction?
+<ul>
+<li>the necessary helper lemmas</li>
+<li>Reducing to only necessary hypotheses that imply the goal <span class="citation" data-cites="brendel2025dilemma">(<a href="#ref-brendel2025dilemma" role="doc-biblioref">Brendel, Sivaraman, and Millstein 2025</a>)</span></li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -282,6 +287,9 @@ window.Quarto = {
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-brendel2025dilemma" class="csl-entry" role="listitem">
+Brendel, Ana, Aishwarya Sivaraman, and Todd Millstein. 2025. <span>“Synthesizing Implication Lemmas for Interactive Theorem Proving.”</span> <em>Proc. ACM Program. Lang.</em> 9 (OOPSLA2). <a href="https://doi.org/10.1145/3763131">https://doi.org/10.1145/3763131</a>.
+</div>
 <div id="ref-chen2025seedproverdeepbroadreasoning" class="csl-entry" role="listitem">
 Chen, Luoxin, Jinming Gu, Liankai Huang, Wenhao Huang, Zhicheng Jiang, Allan Jie, Xiaoran Jin, et al. 2025. <span>“Seed-Prover: Deep and Broad Reasoning for Automated Theorem Proving.”</span> <a href="https://arxiv.org/abs/2507.23726">https://arxiv.org/abs/2507.23726</a>.
 </div>

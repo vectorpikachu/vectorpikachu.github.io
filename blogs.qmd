@@ -21,7 +21,10 @@ In my opinion, some *agent techniques* can be *helpful* for theorem proving as w
   - the first *live* software agent that can autonomously and continuously evolve itself *on-the-fly during runtime*
   - starts with *the most basic* agent scaffold with only access to `bash` tools
   - autonomously *evolves* its own scaffold implementation
-  - 75.4% in SWE-bench Verified; 45.8% in SWE-Bench Pro.
+  - 75.4% in SWE-bench Verified; 45.8% in SWE-Bench Pro. (SOTA in 2025.11)
+  - Q: What are the tools in Coq/Lean that can help us evolve the proof strategies on-the-fly during proof construction?
+    - the necessary helper lemmas 
+    - Reducing to only necessary hypotheses that imply the goal [@brendel2025dilemma]
 
 ## Formal Methods in AI
 
