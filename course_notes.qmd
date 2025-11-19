@@ -55,8 +55,8 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
     - [Homework 3](./PDF/SE-HW/SE-HW3.pdf)
 - A Survey of Mao Tsetung Thoughts and Theory of Socialism with Chinese Charateristics <br>
   毛概
-- Software Analysis <br>
-  软件分析技术
+- Software Analysis | [Check Prof. Xiong's Course Website](https://xiongyingfei.github.io/SA_new/2025/) <br>
+  软件分析技术 | [查看课程网站](https://xiongyingfei.github.io/SA_new/2025/)
 - Compiler Principles <br>
   编译原理
 - ...
@@ -74,20 +74,20 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
 
 9 courses, 24 points in total.
 
-- Introduction to Object Oriented Technology <br>
-  面向对象技术引论
+- Introduction to Object Oriented Technology | [Click here to view the final-term notes.](./PDF/OOP/期末复习.md) <br>
+  面向对象技术引论 | [查看期末复习笔记](./PDF/OOP/期末复习.md)
 - Comparative Constitutional Law <br>
   外国宪法
 - Academic English Listening and Speaking <br>
   学术英语听说
-- Algorithm Design and Anslysis <br>
+- Algorithm Design and Analysis <br>
   算法设计与分析
 - Information Theory <br>
   信息论
-- History of Rome <br>
-  罗马史
-- Software Foundations <br>
-  软件科学基础
+- History of Rome | [Click here to view the PDF.](./PDF/History_of_Rome.pdf) <br>
+  罗马史 | [点击此处查看PDF.](./PDF/History_of_Rome.pdf)
+- Software Foundations | [Check Prof. Xiong's Course Website](https://xiongyingfei.github.io/SF/2025/) <br>
+  软件科学基础 | [查看课程网站](https://xiongyingfei.github.io/SF/2025/)
 - Probability theory and statistics in Information science <br>
   信息学中的概率统计
 - Intermediate Macroeconomics <br>
@@ -99,8 +99,8 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
 
 - Human Sex, Reproduction and Health <br>
   人类的性、生育与健康
-- Music and Mathematics <br>
-  音乐与数学
+- Music and Mathematics | [Click here to view the PDF.](./PDF/Music-And-Math.pdf) <br>
+  音乐与数学 | [点击此处查看PDF.](./PDF/Music-And-Math.pdf)
 - Data Structure and Algorithm (A) <br>
   数据结构与算法 (A)
 - An Introduction to Marxist Basic Theory <br>
