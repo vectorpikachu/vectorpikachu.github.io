@@ -193,7 +193,9 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#my-findings" id="toc-my-findings" class="nav-link active" data-scroll-target="#my-findings">My findings</a></li>
+  <li><a href="#and-what-is-a-trigger" id="toc-and-what-is-a-trigger" class="nav-link active" data-scroll-target="#and-what-is-a-trigger">And what is a trigger?</a></li>
+  <li><a href="#nested-loops" id="toc-nested-loops" class="nav-link" data-scroll-target="#nested-loops">Nested loops</a></li>
+  <li><a href="#my-findings" id="toc-my-findings" class="nav-link" data-scroll-target="#my-findings">My findings</a></li>
   </ul>
 </nav>
     </div>
@@ -243,11 +245,74 @@ window.Quarto = {
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    // same issue as test1</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In both <code>test1</code> and <code>test2</code>, Dafny fails to prove the lemmas because it cannot find appropriate triggers for the quantifiers.</p>
-<p>And what is a trigger?</p>
+<section id="and-what-is-a-trigger" class="level2">
+<h2 class="anchored" data-anchor-id="and-what-is-a-trigger">And what is a trigger?</h2>
+<p>See Dafny Reference Manual on <a href="https://dafny.org/latest/DafnyRef/DafnyRef#sec-trigger"><code>{:trigger}</code></a>.</p>
 <blockquote class="blockquote">
 <p>Trigger attributes are used on quantifiers and comprehensions.</p>
 <p>The verifier instantiates the body of a quantified expression only when it can find an expression that matches the provided trigger.</p>
 </blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>predicate P(i: int)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>predicate Q(i: int)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>lemma {:axiom} PHoldEvenly()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  ensures  forall i {:trigger Q(i)} :: P(i) ==&gt; P(i + 2) &amp;&amp; Q(i)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>lemma PHoldsForTwo()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ensures forall i :: P(i) ==&gt; P(i + 4)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  forall j: int</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ensures P(j) ==&gt; P(j + 4)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    if P(j) {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      assert P(j); // Trivial assertion</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      PHoldEvenly();</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      // Invoking the lemma assumes `forall i :: P(i) ==&gt; P(i + 4)`,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      // but it's not instantiated yet</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      // The verifier sees `Q(j)`, so it instantiates</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      // `forall i :: P(i) ==&gt; P(i + 4)` with `j`</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      // and we get the axiom `P(j) ==&gt; P(j + 2) &amp;&amp; Q(j)`</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      assert Q(j);     // hence it can prove `Q(j)`</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>      assert P(j + 2); //   and it can prove `P(j + 2)`</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>      assert P(j + 4); // But it cannot prove this</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>      // because it did not instantiate `forall i :: P(i) ==&gt; P(i + 4)` with `j+2`</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here are ways one can prove <code>assert P(j + 4);</code>:</p>
+<ul>
+<li>Add assert <code>Q(j + 2);</code> just before assert <code>P(j + 4);</code>, so that <em>the verifier sees the trigger</em>.</li>
+<li>Change the trigger <code>{:trigger Q(i)}</code> to <code>{:trigger P(i)}</code> (<em>replace the trigger</em>).</li>
+<li>Change the trigger <code>{:trigger Q(i)}</code> to <code>{:trigger Q(i)} {:trigger P(i)}</code> (<em>add a trigger</em>).</li>
+<li>Remove <code>{:trigger Q(i)}</code> so that it will automatically determine all possible triggers thanks to the option <code>/autoTriggers:1</code> which is the default.</li>
+</ul>
+</section>
+<section id="nested-loops" class="level2">
+<h2 class="anchored" data-anchor-id="nested-loops">Nested loops</h2>
+<p>See Dafny Reference Manual on <a href="https://dafny.org/latest/DafnyRef/DafnyRef#sec-nested-loops">Nested loops</a>.</p>
+<p>In the case of nested loops, the verifier might timeout sometimes because of inadequate or too much available information. One way to mitigate this problem, when it happens, is to isolate the inner loop by refactoring it into a separate method, with suitable pre and postconditions that will usually assume and prove the invariant again. For example,</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>while X</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  invariant Y</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    while X'</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      invariant Y'</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>could be refactored as this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>while X</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   invariant Y</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   innerLoop();</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>method innerLoop()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  require Y'</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  ensures Y'</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="my-findings" class="level2">
 <h2 class="anchored" data-anchor-id="my-findings">My findings</h2>
 <p>I think the main issue can be the Skolemization of the quantifiers.</p>
@@ -265,19 +330,19 @@ window.Quarto = {
 <li>Similarly, Dafny cannot find the relation between <code>h</code> and <code>k</code>, so it cannot prove the lemma.</li>
 </ul>
 <p>And based on this understanding, I tried to prove two quantifers of <span class="math inline">\(\forall x \forall y\)</span> and <span class="math inline">\(\exists x \exists y\)</span>, and Dafny can prove them successfully.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lemma test1(a: seq&lt;int&gt;)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    requires forall x :: (forall y :: P(a, x, y))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ensures forall x :: (forall y :: P(a, x, y))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    // proved</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>lemma test2(a: seq&lt;int&gt;)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    requires exists x :: (exists y :: P(a, x, y))</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ensures exists x :: (exists y :: P(a, x, y))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    // proved</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lemma test1(a: seq&lt;int&gt;)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    requires forall x :: (forall y :: P(a, x, y))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ensures forall x :: (forall y :: P(a, x, y))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    // proved</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>lemma test2(a: seq&lt;int&gt;)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    requires exists x :: (exists y :: P(a, x, y))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    ensures exists x :: (exists y :: P(a, x, y))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    // proved</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

@@ -46,7 +46,21 @@
     "href": "Blogs/Dafny_two_quantifiers.html",
     "title": "Two quantifiers in a specification",
     "section": "",
-    "text": "Let’s consider a Dafny lemma that involves two quantifiers in its specification. For example, we want to prove the following lemma:\nIn both test1 and test2, Dafny fails to prove the lemmas because it cannot find appropriate triggers for the quantifiers.\nAnd what is a trigger?"
+    "text": "Let’s consider a Dafny lemma that involves two quantifiers in its specification. For example, we want to prove the following lemma:\nIn both test1 and test2, Dafny fails to prove the lemmas because it cannot find appropriate triggers for the quantifiers."
+  },
+  {
+    "objectID": "Blogs/Dafny_two_quantifiers.html#and-what-is-a-trigger",
+    "href": "Blogs/Dafny_two_quantifiers.html#and-what-is-a-trigger",
+    "title": "Two quantifiers in a specification",
+    "section": "And what is a trigger?",
+    "text": "And what is a trigger?\nSee Dafny Reference Manual on {:trigger}.\n\nTrigger attributes are used on quantifiers and comprehensions.\nThe verifier instantiates the body of a quantified expression only when it can find an expression that matches the provided trigger.\n\npredicate P(i: int)\npredicate Q(i: int)\n\nlemma {:axiom} PHoldEvenly()\n  ensures  forall i {:trigger Q(i)} :: P(i) ==&gt; P(i + 2) && Q(i)\n\nlemma PHoldsForTwo()\n  ensures forall i :: P(i) ==&gt; P(i + 4)\n{\n  forall j: int\n    ensures P(j) ==&gt; P(j + 4)\n  {\n    if P(j) {\n      assert P(j); // Trivial assertion\n      \n      PHoldEvenly();\n      // Invoking the lemma assumes `forall i :: P(i) ==&gt; P(i + 4)`,\n      // but it's not instantiated yet\n      \n      // The verifier sees `Q(j)`, so it instantiates\n      // `forall i :: P(i) ==&gt; P(i + 4)` with `j`\n      // and we get the axiom `P(j) ==&gt; P(j + 2) && Q(j)`\n      assert Q(j);     // hence it can prove `Q(j)`\n      assert P(j + 2); //   and it can prove `P(j + 2)`\n      assert P(j + 4); // But it cannot prove this\n      // because it did not instantiate `forall i :: P(i) ==&gt; P(i + 4)` with `j+2`\n    }\n  }\n}\nHere are ways one can prove assert P(j + 4);:\n\nAdd assert Q(j + 2); just before assert P(j + 4);, so that the verifier sees the trigger.\nChange the trigger {:trigger Q(i)} to {:trigger P(i)} (replace the trigger).\nChange the trigger {:trigger Q(i)} to {:trigger Q(i)} {:trigger P(i)} (add a trigger).\nRemove {:trigger Q(i)} so that it will automatically determine all possible triggers thanks to the option /autoTriggers:1 which is the default."
+  },
+  {
+    "objectID": "Blogs/Dafny_two_quantifiers.html#nested-loops",
+    "href": "Blogs/Dafny_two_quantifiers.html#nested-loops",
+    "title": "Two quantifiers in a specification",
+    "section": "Nested loops",
+    "text": "Nested loops\nSee Dafny Reference Manual on Nested loops.\nIn the case of nested loops, the verifier might timeout sometimes because of inadequate or too much available information. One way to mitigate this problem, when it happens, is to isolate the inner loop by refactoring it into a separate method, with suitable pre and postconditions that will usually assume and prove the invariant again. For example,\nwhile X\n  invariant Y\n{\n    while X'\n      invariant Y'\n    {\n\n    }\n}\ncould be refactored as this:\nwhile X\n   invariant Y\n {\n   innerLoop();\n }\n...\nmethod innerLoop()\n  require Y'\n  ensures Y'"
   },
   {
     "objectID": "Blogs/Dafny_two_quantifiers.html#my-findings",
