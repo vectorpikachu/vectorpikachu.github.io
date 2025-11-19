@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Blogs – VectorPikachu</title>
+<title>Dataflow Analysis – VectorPikachu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,47 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-910acf1146e2ab8204dbb00666d88f1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-910acf1146e2ab8204dbb00666d88f1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -124,7 +104,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -134,9 +114,9 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">VectorPikachu</span>
     </a>
   </div>
@@ -147,19 +127,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./course_notes.html"> 
+    <a class="nav-link" href="../course_notes.html"> 
 <span class="menu-text">Course Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blogs.html" aria-current="page"> 
+    <a class="nav-link" href="../blogs.html"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
 </ul>
@@ -178,14 +158,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#llm-for-theorem-proving" id="toc-llm-for-theorem-proving" class="nav-link active" data-scroll-target="#llm-for-theorem-proving">LLM for Theorem Proving</a></li>
-  <li><a href="#formal-methods-in-ai" id="toc-formal-methods-in-ai" class="nav-link" data-scroll-target="#formal-methods-in-ai">Formal Methods in AI</a>
-  <ul class="collapse">
-  <li><a href="#static-analysis-for-dl-architectures" id="toc-static-analysis-for-dl-architectures" class="nav-link" data-scroll-target="#static-analysis-for-dl-architectures">Static Analysis for DL Architectures</a></li>
-  <li><a href="#static-analysis-for-dl-models" id="toc-static-analysis-for-dl-models" class="nav-link" data-scroll-target="#static-analysis-for-dl-models">Static Analysis for DL Models</a></li>
-  </ul></li>
-  <li><a href="#dafny-blogs" id="toc-dafny-blogs" class="nav-link" data-scroll-target="#dafny-blogs">Dafny Blogs</a></li>
-  <li><a href="#others" id="toc-others" class="nav-link" data-scroll-target="#others">Others</a></li>
+  <li><a href="#dataflow-analysis-with-monotone-frameworks" id="toc-dataflow-analysis-with-monotone-frameworks" class="nav-link active" data-scroll-target="#dataflow-analysis-with-monotone-frameworks">Dataflow Analysis with Monotone Frameworks</a></li>
   </ul>
 </nav>
     </div>
@@ -194,7 +167,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Blogs</h1>
+<h1 class="title">Dataflow Analysis</h1>
 </div>
 
 
@@ -211,105 +184,21 @@ window.Quarto = {
 </header>
 
 
-<p>Here are the blogs where I share my thoughts and notes on various topics.</p>
-<section id="llm-for-theorem-proving" class="level2">
-<h2 class="anchored" data-anchor-id="llm-for-theorem-proving">LLM for Theorem Proving</h2>
+<p>Dataflow analysis is a static analysis technique used to gather information about the possible set of values computed at various points in a program, aiding in optimization and error detection.</p>
+<section id="dataflow-analysis-with-monotone-frameworks" class="level2">
+<h2 class="anchored" data-anchor-id="dataflow-analysis-with-monotone-frameworks">Dataflow Analysis with Monotone Frameworks</h2>
+<p><strong>Semilattice (半格).</strong> Semilattice is a structure <span class="math inline">\((S, \sqcup)\)</span>, where <span class="math inline">\(S\)</span> is a set and <span class="math inline">\(\sqcup: S \times S \to S\)</span> is a binary operation on <span class="math inline">\(S\)</span> that is:</p>
 <ul>
-<li>SeedProver: <span class="citation" data-cites="chen2025seedproverdeepbroadreasoning">(<a href="#ref-chen2025seedproverdeepbroadreasoning" role="doc-biblioref">Chen et al. 2025</a>)</span>
-<ul>
-<li>Lemma-Style Proving: 分解任务, 独立验证, 构建知识库, 组合证明.</li>
-<li>Test-Time Scaling
-<ul>
-<li>Light: Proof Sketch → Lean → Error Feedback → Refine</li>
-<li>Medium: Outer Loop for main theorem, Inner Loop for hard lemmas.</li>
-<li>Heavy: Conjecture Proposer (Conjecture Pool) → Light Prover → Lemma Pool → Evaluate → Select High-Quality Lemmas, let Medium Prover prove main theorem again.</li>
-</ul></li>
-<li>IMO 2025: 4/6 problems solved.</li>
-</ul></li>
+<li>idempotent (幂等): <span class="math inline">\(x \sqcup x = x\)</span>;</li>
+<li>commutative (交换): <span class="math inline">\(x \sqcup y = y \sqcup x\)</span>;</li>
+<li>associative (结合): <span class="math inline">\(x \sqcup (y \sqcup z) = (x \sqcup y) \sqcup z\)</span>.</li>
 </ul>
-<p>In my opinion, some <em>agent techniques</em> can be <em>helpful</em> for theorem proving as well, so I may record some notes of agent papers here:</p>
-<ul>
-<li>Live-SWE-Agent: <span class="citation" data-cites="xia2025livesweagentsoftwareengineeringagents">(<a href="#ref-xia2025livesweagentsoftwareengineeringagents" role="doc-biblioref">Xia et al. 2025</a>)</span>
-<ul>
-<li>the first <em>live</em> software agent that can autonomously and continuously evolve itself <em>on-the-fly during runtime</em></li>
-<li>starts with <em>the most basic</em> agent scaffold with only access to <code>bash</code> tools</li>
-<li>autonomously <em>evolves</em> its own scaffold implementation</li>
-<li>75.4% in SWE-bench Verified; 45.8% in SWE-Bench Pro. (SOTA in 2025.11)</li>
-<li>Q: What are the tools in Coq/Lean that can help us evolve the proof strategies on-the-fly during proof construction?
-<ul>
-<li>the necessary helper lemmas</li>
-<li>Reducing to only necessary hypotheses that imply the goal <span class="citation" data-cites="brendel2025dilemma">(<a href="#ref-brendel2025dilemma" role="doc-biblioref">Brendel, Sivaraman, and Millstein 2025</a>)</span></li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="formal-methods-in-ai" class="level2">
-<h2 class="anchored" data-anchor-id="formal-methods-in-ai">Formal Methods in AI</h2>
-<section id="static-analysis-for-dl-architectures" class="level3">
-<h3 class="anchored" data-anchor-id="static-analysis-for-dl-architectures">Static Analysis for DL Architectures</h3>
-<ul>
-<li>DEBAR: <a href="./Blogs/FSE20.html">Detecting numerical bugs in neural network architectures</a> <span class="citation" data-cites="FSE20Zhang">(<a href="#ref-FSE20Zhang" role="doc-biblioref">Zhang et al. 2020</a>)</span>
-<ul>
-<li>Affine Relations Abstract Domain.</li>
-<li>Tensor Partitioning.</li>
-</ul></li>
-<li>RANUM: <a href="./Blogs/ICSE23.html">Reliability Assurance for Deep Neural Network Architectures Against Numerical Defects</a> <span class="citation" data-cites="ICSE23Li">(<a href="#ref-ICSE23Li" role="doc-biblioref">Li et al. 2023</a>)</span>
-<ul>
-<li>Potential-Defect Detection via Static Analysis.</li>
-<li>Feasibility Confirmation via Two-Step Test Generation.</li>
-<li>Fix Suggestion via Abstract Optimization.</li>
-</ul></li>
-</ul>
-</section>
-<section id="static-analysis-for-dl-models" class="level3">
-<h3 class="anchored" data-anchor-id="static-analysis-for-dl-models">Static Analysis for DL Models</h3>
-<ul>
-<li>Use SMT solvers to verify properties of DL models.</li>
-<li>Use integer programming to verify robustness of DL models.</li>
-<li>Abstract interpretation for DL models. (e.g., <span class="math inline">\(\text{AI}^2\)</span>, DeepPoly, etc.)
-<ul>
-<li>Zonotope abstract domain.</li>
-</ul></li>
-</ul>
-<p>SOTA tools:</p>
-<ul>
-<li><span class="math inline">\(\alpha,\beta\)</span>-CROWN</li>
-</ul>
-</section>
-</section>
-<section id="dafny-blogs" class="level2">
-<h2 class="anchored" data-anchor-id="dafny-blogs">Dafny Blogs</h2>
-<ul>
-<li><a href="./Blogs/Dafny_two_quantifiers.html">Two quantifiers in a specification</a></li>
-</ul>
-</section>
-<section id="others" class="level2">
-<h2 class="anchored" data-anchor-id="others">Others</h2>
-<ul>
-<li>A brief note about <a href="./Blogs/DataflowAnalysis.html">Dataflow Analysis</a></li>
-</ul>
-
+<p><strong>Bounded Semilattice (有界半格).</strong> A bounded semilattice is a semilattice that has a least element (bottom) <span class="math inline">\(\bot\)</span> such that for all <span class="math inline">\(x \in S\)</span>, <span class="math inline">\(x \sqcup \bot = x\)</span>.</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-brendel2025dilemma" class="csl-entry" role="listitem">
-Brendel, Ana, Aishwarya Sivaraman, and Todd Millstein. 2025. <span>“Synthesizing Implication Lemmas for Interactive Theorem Proving.”</span> <em>Proc. ACM Program. Lang.</em> 9 (OOPSLA2). <a href="https://doi.org/10.1145/3763131">https://doi.org/10.1145/3763131</a>.
-</div>
-<div id="ref-chen2025seedproverdeepbroadreasoning" class="csl-entry" role="listitem">
-Chen, Luoxin, Jinming Gu, Liankai Huang, Wenhao Huang, Zhicheng Jiang, Allan Jie, Xiaoran Jin, et al. 2025. <span>“Seed-Prover: Deep and Broad Reasoning for Automated Theorem Proving.”</span> <a href="https://arxiv.org/abs/2507.23726">https://arxiv.org/abs/2507.23726</a>.
-</div>
-<div id="ref-ICSE23Li" class="csl-entry" role="listitem">
-Li, Linyi, Yuhao Zhang, Luyao Ren, Yingfei Xiong, and Tao Xie. 2023. <span>“Reliability Assurance for Deep Neural Network Architectures Against Numerical Defects.”</span> In <em>2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)</em>, 1827–39. <a href="https://doi.org/10.1109/ICSE48619.2023.00156">https://doi.org/10.1109/ICSE48619.2023.00156</a>.
-</div>
-<div id="ref-xia2025livesweagentsoftwareengineeringagents" class="csl-entry" role="listitem">
-Xia, Chunqiu Steven, Zhe Wang, Yan Yang, Yuxiang Wei, and Lingming Zhang. 2025. <span>“Live-SWE-Agent: Can Software Engineering Agents Self-Evolve on the Fly?”</span> <a href="https://arxiv.org/abs/2511.13646">https://arxiv.org/abs/2511.13646</a>.
-</div>
-<div id="ref-FSE20Zhang" class="csl-entry" role="listitem">
-Zhang, Yuhao, Luyao Ren, Liqian Chen, Yingfei Xiong, Shing-Chi Cheung, and Tao Xie. 2020. <span>“Detecting Numerical Bugs in Neural Network Architectures.”</span> In <em>Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering</em>, 826–37. ESEC/FSE 2020. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3368089.3409720">https://doi.org/10.1145/3368089.3409720</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

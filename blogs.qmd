@@ -53,3 +53,7 @@ SOTA tools:
 ## Dafny Blogs
 
 - [Two quantifiers in a specification](Blogs/Dafny_two_quantifiers.qmd)
+
+## Others
+
+- A brief note about [Dataflow Analysis](./Blogs/DataflowAnalysis.qmd)

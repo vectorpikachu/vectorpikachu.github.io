@@ -1,0 +1,15 @@
+---
+title: Dataflow Analysis
+---
+
+Dataflow analysis is a static analysis technique used to gather information about the possible set of values computed at various points in a program, aiding in optimization and error detection.
+
+## Dataflow Analysis with Monotone Frameworks
+
+**Semilattice (半格).** Semilattice is a structure $(S, \sqcup)$, where $S$ is a set and $\sqcup: S \times S \to S$ is a binary operation on $S$ that is:
+
+- idempotent (幂等): $x \sqcup x = x$;
+- commutative (交换): $x \sqcup y = y \sqcup x$;
+- associative (结合): $x \sqcup (y \sqcup z) = (x \sqcup y) \sqcup z$.
+
+**Bounded Semilattice (有界半格).** A bounded semilattice is a semilattice that has a least element (bottom) $\bot$ such that for all $x \in S$, $x \sqcup \bot = x$.
