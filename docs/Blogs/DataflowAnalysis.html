@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -41,6 +76,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-910acf1146e2ab8204dbb00666d88f1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
+<link href="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,6 +110,39 @@ ul.task-list li input[type="checkbox"] {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&amp;family=Ysabeau+Office:ital,wght@0,1..1000;1,1..1000&amp;display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  loader: {
+    load: ['[tex]/boldsymbol']
+  },
+  tex: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {
+      '[+]': ['boldsymbol']
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+    <style type="text/css">
+    .ps-root .ps-algorithm {
+      border-top: 2px solid;
+      border-bottom: 2px solid;
+    }
+    .pseudocode-container {
+      text-align: left;
+    }
+    </style>
+  
+      <style type="text/css">
+      .ps-algorithm > .ps-line {
+        text-align: left;
+      }
+      </style>
+    
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -158,7 +228,23 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dataflow-analysis-with-monotone-frameworks" id="toc-dataflow-analysis-with-monotone-frameworks" class="nav-link active" data-scroll-target="#dataflow-analysis-with-monotone-frameworks">Dataflow Analysis with Monotone Frameworks</a></li>
+  <li><a href="#dataflow-analysis-with-monotone-frameworks" id="toc-dataflow-analysis-with-monotone-frameworks" class="nav-link active" data-scroll-target="#dataflow-analysis-with-monotone-frameworks">Dataflow Analysis with Monotone Frameworks</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations">Mathematical Foundations</a></li>
+  <li><a href="#dataflow-analysis-framework" id="toc-dataflow-analysis-framework" class="nav-link" data-scroll-target="#dataflow-analysis-framework">Dataflow Analysis Framework</a>
+  <ul class="collapse">
+  <li><a href="#convergence-and-safety" id="toc-convergence-and-safety" class="nav-link" data-scroll-target="#convergence-and-safety">Convergence and Safety</a></li>
+  </ul></li>
+  <li><a href="#examples-of-dataflow-analyses" id="toc-examples-of-dataflow-analyses" class="nav-link" data-scroll-target="#examples-of-dataflow-analyses">Examples of Dataflow Analyses</a>
+  <ul class="collapse">
+  <li><a href="#sign-analysis" id="toc-sign-analysis" class="nav-link" data-scroll-target="#sign-analysis">Sign Analysis</a></li>
+  <li><a href="#reaching-definitions-analysis" id="toc-reaching-definitions-analysis" class="nav-link" data-scroll-target="#reaching-definitions-analysis">Reaching Definitions Analysis</a></li>
+  <li><a href="#available-expressions-analysis" id="toc-available-expressions-analysis" class="nav-link" data-scroll-target="#available-expressions-analysis">Available Expressions Analysis</a></li>
+  <li><a href="#liveness-analysis" id="toc-liveness-analysis" class="nav-link" data-scroll-target="#liveness-analysis">Liveness Analysis</a></li>
+  <li><a href="#very-busy-expressions-analysis" id="toc-very-busy-expressions-analysis" class="nav-link" data-scroll-target="#very-busy-expressions-analysis">Very Busy Expressions Analysis</a></li>
+  <li><a href="#constant-propagation-analysis" id="toc-constant-propagation-analysis" class="nav-link" data-scroll-target="#constant-propagation-analysis">Constant Propagation Analysis</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -185,8 +271,10 @@ window.Quarto = {
 
 
 <p>Dataflow analysis is a static analysis technique used to gather information about the possible set of values computed at various points in a program, aiding in optimization and error detection.</p>
-<section id="dataflow-analysis-with-monotone-frameworks" class="level2">
-<h2 class="anchored" data-anchor-id="dataflow-analysis-with-monotone-frameworks">Dataflow Analysis with Monotone Frameworks</h2>
+<section id="dataflow-analysis-with-monotone-frameworks" class="level1">
+<h1>Dataflow Analysis with Monotone Frameworks</h1>
+<section id="mathematical-foundations" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-foundations">Mathematical Foundations</h2>
 <p><strong>Semilattice (半格).</strong> Semilattice is a structure <span class="math inline">\((S, \sqcup)\)</span>, where <span class="math inline">\(S\)</span> is a set and <span class="math inline">\(\sqcup: S \times S \to S\)</span> is a binary operation on <span class="math inline">\(S\)</span> that is:</p>
 <ul>
 <li>idempotent (幂等): <span class="math inline">\(x \sqcup x = x\)</span>;</li>
@@ -194,8 +282,254 @@ window.Quarto = {
 <li>associative (结合): <span class="math inline">\(x \sqcup (y \sqcup z) = (x \sqcup y) \sqcup z\)</span>.</li>
 </ul>
 <p><strong>Bounded Semilattice (有界半格).</strong> A bounded semilattice is a semilattice that has a least element (bottom) <span class="math inline">\(\bot\)</span> such that for all <span class="math inline">\(x \in S\)</span>, <span class="math inline">\(x \sqcup \bot = x\)</span>.</p>
+<p><strong>Partial Order (偏序).</strong> A partial order is a binary relation <span class="math inline">\(\sqsubseteq\)</span> over a set <span class="math inline">\(S\)</span> that is:</p>
+<ul>
+<li>reflexive (自反): <span class="math inline">\(x \sqsubseteq x\)</span> for all <span class="math inline">\(x \in S\)</span>;</li>
+<li>transitive (传递): if <span class="math inline">\(x \sqsubseteq y\)</span> and <span class="math inline">\(y \sqsubseteq z\)</span>, then <span class="math inline">\(x \sqsubseteq z\)</span>;</li>
+<li>antisymmetric (反对称): if <span class="math inline">\(x \sqsubseteq y\)</span> and <span class="math inline">\(y \sqsubseteq x\)</span>, then <span class="math inline">\(x = y\)</span>.</li>
+</ul>
+<p>Every bounded semilattice <span class="math inline">\((S, \sqcup, \bot)\)</span> induces a partial order <span class="math inline">\(\sqsubseteq\)</span> defined by <span class="math inline">\(x \sqsubseteq y\)</span> if and only if <span class="math inline">\(x \sqcup y = y\)</span>.</p>
+<p><strong>Monotone (Increasing) Function.</strong> A function <span class="math inline">\(f: S \to S\)</span> is monotone with respect to a partial order <span class="math inline">\(\sqsubseteq\)</span> if for all <span class="math inline">\(x, y \in S\)</span>, <span class="math inline">\(x \sqsubseteq y\)</span> implies <span class="math inline">\(f(x) \sqsubseteq f(y)\)</span>.</p>
+<p><strong>Fixed Point.</strong> A fixed point of a function <span class="math inline">\(f: S \to S\)</span> is an element <span class="math inline">\(x \in S\)</span> such that <span class="math inline">\(f(x) = x\)</span>.</p>
+<p><strong>Fixed Point Theorem.</strong> In a bounded semilattice, whose height is finite, every monotone function has a least fixed point, which can be computed as the limit of the ascending chain starting from the least element.</p>
+<p><em>Proof.</em> Let <span class="math inline">\((S, \sqcup, \bot)\)</span> be a bounded semilattice with finite height, and let <span class="math inline">\(f: S \to S\)</span> be a monotone function. We construct an ascending chain starting from <span class="math inline">\(\bot\)</span>: <span class="math display">\[
+    x_0 = \bot, \quad x_{n+1} = f(x_n).
+\]</span></p>
+<p><span class="math inline">\(\bot \sqsubseteq f(\bot) \sqsubseteq f(f(\bot)) \sqsubseteq \cdots\)</span>, that is, <span class="math inline">\(x_0 \sqsubseteq x_1 \sqsubseteq x_2 \sqsubseteq \cdots\)</span>. Since the height of the semilattice is finite, this chain must stabilize at some <span class="math inline">\(x_k\)</span> such that <span class="math inline">\(x_k = f(x_k)\)</span>. Thus, <span class="math inline">\(x_k\)</span> is a fixed point of <span class="math inline">\(f\)</span>. Moreover, it is the least fixed point because any other fixed point <span class="math inline">\(y\)</span> must satisfy <span class="math inline">\(\bot \sqsubseteq y\)</span>, and by monotonicity, <span class="math inline">\(x_n \sqsubseteq f^n(y) = y\)</span> for all <span class="math inline">\(n\)</span>, leading to <span class="math inline">\(x_k \sqsubseteq y\)</span>. And thus, <span class="math inline">\(x_k\)</span> is the least fixed point of <span class="math inline">\(f\)</span>.</p>
+</section>
+<section id="dataflow-analysis-framework" class="level2">
+<h2 class="anchored" data-anchor-id="dataflow-analysis-framework">Dataflow Analysis Framework</h2>
+<div id="dataflow-framework" class="pseudocode-container quarto-float" data-no-end="false" data-comment-delimiter="//" data-line-number="true" data-pseudocode-number="1" data-caption-prefix="Algorithm" data-indent-size="1.2em" data-line-number-punc=":">
+<div class="pseudocode">
+\begin{algorithm} \caption{Dataflow Analysis Framework} \begin{algorithmic} \Require A control flow graph (CFG) $G = (V, E)$, a semilattice $(S, \sqcup, \bot)$, an initial value of entry node $\text{OUT}_{\text{entry}} \in S$, transfer functions $f_v: S \to S$ for each node $v \in V - \text{entry}$. \Ensure Dataflow values $\text{OUT}_v \in S$ for each node $v \in V$. \Procedure{Workflow}{$G, (S, \sqcup, \bot), \text{OUT}_{\text{entry}}, \{f_v\}_{v \in V - \text{entry}}$} \State $\forall v \in V - \text{entry}, \text{OUT}_v = \bot$ \State $\text{ToVisit} = V - \text{entry}$ \While{$\text{ToVisit} \neq \varnothing$} \State Select and remove a node $v$ from $\text{ToVisit}$ \State $\text{IN}_v = \bigsqcup_{(u, v) \in E} \text{OUT}_u$ \State $\text{OUT}_v^{\text{NEW}} = f_v(\text{IN}_v)$ \If{$\text{OUT}_v^{\text{NEW}} \neq \text{OUT}_v$} \State $\text{OUT}_v = \text{OUT}_v^{\text{NEW}}$ \State $\text{ToVisit} = \text{ToVisit} \cup \{ w \mid (v, w) \in E \}$ \EndIf \EndWhile \EndProcedure \end{algorithmic} \end{algorithm}
+</div>
+</div>
+<section id="convergence-and-safety" class="level3">
+<h3 class="anchored" data-anchor-id="convergence-and-safety">Convergence and Safety</h3>
+<p>Convergence = Termination + Confluent</p>
+<section id="termination" class="level4">
+<h4 class="anchored" data-anchor-id="termination">Termination</h4>
+<p><strong>Termination of <a href="#dataflow-framework" class="quarto-xref">Algorithm 1</a>.</strong> Suppose <span class="math inline">\(\text{OUT}_v^i\)</span> is the value of <span class="math inline">\(\text{OUT}_v\)</span> after the <span class="math inline">\(i\)</span>-th update. Now let’s prove that for each node <span class="math inline">\(v\)</span>, the sequence <span class="math inline">\(\{\text{OUT}_v^i\}\)</span> is ascending:</p>
+<ul>
+<li>Using the induction on the number of updates.</li>
+<li>Base case: before any updates, <span class="math inline">\(\text{OUT}_v^0 = \bot\)</span>. After one update, we must have <span class="math inline">\(\text{OUT}_v^0 \sqsubseteq \text{OUT}_v^1\)</span>.</li>
+<li>Now assume after <span class="math inline">\(k\)</span> updates, <span class="math inline">\(\{\text{OUT}_v^i\}_{i \leq k}\)</span> is ascending for all <span class="math inline">\(v\)</span>. Let’s consider the <span class="math inline">\((k+1)\)</span>-th update.
+<ul>
+<li>Node <span class="math inline">\(v\)</span> is not selected for update: <span class="math inline">\(\text{OUT}_v^{k+1} = \text{OUT}_v^k\)</span>. And we must have <span class="math inline">\(\text{OUT}_v^k \sqsubseteq \text{OUT}_v^{k+1}\)</span>.</li>
+<li>Node <span class="math inline">\(v\)</span> is selected for update: <span class="math inline">\(\text{OUT}_v^{k+1} = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^k \right)\)</span>.
+<ul>
+<li>If <span class="math inline">\(\text{OUT}_v^k = \bot\)</span>, then <span class="math inline">\(\text{OUT}_v^k \sqsubseteq \text{OUT}_v^{k+1}\)</span>.</li>
+<li>If <span class="math inline">\(\text{OUT}_v^k \neq \bot\)</span>, then there must be a previous update <span class="math inline">\(j &lt; k\)</span> such that <span class="math inline">\(\text{OUT}_v^k = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^j \right)\)</span>. By the induction hypothesis, for all <span class="math inline">\(u\)</span> with <span class="math inline">\((u, v) \in E\)</span>, we have <span class="math inline">\(\text{OUT}_u^j \sqsubseteq \text{OUT}_u^k\)</span>. By monotonicity of <span class="math inline">\(f_v\)</span> and <span class="math inline">\(\sqcup\)</span>, we have: <span class="math display">\[
+  \text{OUT}_v^k = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^j \right) \sqsubseteq f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^k \right) = \text{OUT}_v^{k+1}.
+\]</span></li>
+</ul></li>
+<li>Thus, in both cases, we have <span class="math inline">\(\text{OUT}_v^k \sqsubseteq \text{OUT}_v^{k+1}\)</span>.</li>
+</ul></li>
+<li>By induction, we conclude that for each node <span class="math inline">\(v\)</span>, the sequence <span class="math inline">\(\{\text{OUT}_v^i\}\)</span> is ascending.</li>
+</ul>
+<p>Since <span class="math inline">\((S, \sqcup, \bot)\)</span> has finite height, the ascending sequence <span class="math inline">\(\{\text{OUT}_v^i\}\)</span> must stabilize at some <span class="math inline">\(\text{OUT}_v^*\)</span>. Therefore, <a href="#dataflow-framework" class="quarto-xref">Algorithm 1</a> terminates.</p>
+</section>
+<section id="confluent" class="level4">
+<h4 class="anchored" data-anchor-id="confluent">Confluent</h4>
+<p>We define the following Round-Robin (轮询) function: <span class="math display">\[
+F(X) = \left(f_v\left( \bigsqcup_{(u, v) \in E} X(u) \right) \right)_{v \in V},
+\]</span> where <span class="math inline">\(X = (X(v))_{v \in V} \in S^{|V|}\)</span> is a vector of dataflow values for all nodes in the CFG.</p>
+<p><span class="math inline">\(F\)</span> is monotone because it is composed of monotone functions (the transfer functions <span class="math inline">\(f_v\)</span> and the join operation <span class="math inline">\(\sqcup\)</span>). By the Fixed Point Theorem, since <span class="math inline">\((S, \sqcup, \bot)\)</span> has finite height, <span class="math inline">\(F\)</span> has a least fixed point.</p>
+<p>Now let’s prove <strong><span class="math inline">\(F\)</span> and <a href="#dataflow-framework" class="quarto-xref">Algorithm 1</a> compute the same fixed point</strong> → This is called <strong>Confluent</strong>. That is, no matter how we select nodes for update in <a href="#dataflow-framework" class="quarto-xref">Algorithm 1</a>, we always reach the same final dataflow values.</p>
+<ul>
+<li>The main difference is that <a href="#dataflow-framework" class="quarto-xref">Algorithm 1</a> updates nodes one at a time, while <span class="math inline">\(F\)</span> updates all nodes simultaneously.</li>
+</ul>
+<p>Let <span class="math inline">\(X_i = (\text{OUT}_v^i)_{v \in V}\)</span> be the vector of dataflow values after the <span class="math inline">\(i\)</span>-th update. <span class="math inline">\(Y_i = F^i(\text{OUT}_{\text{entry}}, \bot, \ldots, \bot)\)</span>. And we want to prove that for all <span class="math inline">\(i\)</span>, <span class="math inline">\(X_i \sqsubseteq Y_i\)</span>.</p>
+<ul>
+<li>Using induction on <span class="math inline">\(i\)</span>.</li>
+<li>Base case: <span class="math inline">\(i = 0\)</span>, <span class="math inline">\(X_0 = (\text{OUT}_{\text{entry}}, \bot, \ldots, \bot) = Y_0\)</span>.</li>
+<li>Now assume <span class="math inline">\(X_k \sqsubseteq Y_k\)</span> for some <span class="math inline">\(k \geq 0\)</span>. Let’s consider the <span class="math inline">\((k+1)\)</span>-th update.
+<ul>
+<li>Suppose node <span class="math inline">\(v\)</span> is selected for update. Then: <span class="math display">\[
+    \text{OUT}_v^{k+1} = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^k \right) = f_v\left( \bigsqcup_{(u, v) \in E} X_k(u) \right).
+\]</span> By the induction hypothesis, for all <span class="math inline">\(u\)</span> with <span class="math inline">\((u, v) \in E\)</span>, we have <span class="math inline">\(X_k(u) \sqsubseteq Y_k(u)\)</span>. By monotonicity of <span class="math inline">\(f_v\)</span> and <span class="math inline">\(\sqcup\)</span>, we have: <span class="math display">\[
+    \text{OUT}_v^{k+1} = f_v\left( \bigsqcup_{(u, v) \in E} X_k(u) \right) \sqsubseteq f_v\left( \bigsqcup_{(u, v) \in E} Y_k(u) \right) = Y_{k+1}(v).
+\]</span></li>
+<li>For nodes not selected for update, <span class="math inline">\(\text{OUT}_w^{k+1} = \text{OUT}_w^k \sqsubseteq Y_k(w) \sqsubseteq Y_{k+1}(w)\)</span>.</li>
+<li>Thus, in both cases, we have <span class="math inline">\(X_{k+1} \sqsubseteq Y_{k+1}\)</span>.</li>
+</ul></li>
+<li>By induction, we conclude that for all <span class="math inline">\(i\)</span>, <span class="math inline">\(X_i \sqsubseteq Y_i\)</span>.</li>
+</ul>
+<p>Suppose <a href="#dataflow-framework" class="quarto-xref">Algorithm 1</a> terminates at iteration <span class="math inline">\(N\)</span>, then <span class="math inline">\(X_N\)</span> is a fixed point of <span class="math inline">\(F\)</span> (You can simply check and find <span class="math inline">\(F(X_N) = X_N\)</span>). Since <span class="math inline">\(X_N \sqsubseteq Y_N\)</span> for all <span class="math inline">\(N\)</span>, and <span class="math inline">\(Y_N\)</span> converges to the least fixed point of <span class="math inline">\(F\)</span>, we conclude that <span class="math inline">\(X_N\)</span> is the least fixed point of <span class="math inline">\(F\)</span>.</p>
+<p>Conclusively, <a href="#dataflow-framework" class="quarto-xref">Algorithm 1</a> computes the least fixed point of the Round-Robin function <span class="math inline">\(F\)</span>.</p>
+</section>
+<section id="safety" class="level4">
+<h4 class="anchored" data-anchor-id="safety">Safety</h4>
+<p><strong>Safety.</strong> We will state the safety property using abstract interpretation. Let <span class="math inline">\(C\)</span> be the concrete domain of program states, and let <span class="math inline">\(\alpha: C \to S\)</span> be the abstraction function mapping concrete states to abstract states in the semilattice <span class="math inline">\(S\)</span>. We say that the dataflow analysis is safe if for every program point <span class="math inline">\(v\)</span> and every concrete state <span class="math inline">\(c\)</span> reachable at <span class="math inline">\(v\)</span>, the abstract value <span class="math inline">\(\text{OUT}_v\)</span> computed by the analysis satisfies:</p>
+<p><span class="math display">\[
+    \alpha(c) \sqsubseteq \text{OUT}_v.
+\]</span></p>
+<p>This means that the abstract value <span class="math inline">\(\text{OUT}_v\)</span> over-approximates all possible concrete states at that program point, ensuring that no concrete behavior is missed by the analysis.</p>
+<p>Since <span class="math inline">\(f_v\)</span> are designed to be sound abstractions of the concrete semantics, and the join operation <span class="math inline">\(\sqcup\)</span> combines information from all predecessors, the dataflow analysis framework guarantees that the computed abstract values are safe with respect to the concrete program semantics.</p>
+</section>
+</section>
+</section>
+<section id="examples-of-dataflow-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-dataflow-analyses">Examples of Dataflow Analyses</h2>
+<section id="sign-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="sign-analysis">Sign Analysis</h3>
+<p>We define a lattice of signs: <span class="math display">\[
+  \text{Sign} = \{ \bot, -, 0, +, \top\}.
+\]</span></p>
+<p>Let <span class="math inline">\(\text{Var}\)</span> be the set of variables occurring in the given program. The semilattice for sign analysis is defined as: <span class="math display">\[
+    S = \text{Var} \to \text{Sign},
+\]</span></p>
+<p>The abstract interpretation of this lattice is as follows:</p>
+<ul>
+<li>The concrete domain <span class="math inline">\(C\)</span> is <span class="math inline">\(\text{Var} \to \mathbb{Z}\)</span>, mapping variables to integer values.</li>
+<li>The abstraction function <span class="math inline">\(\alpha: C \to S\)</span> is defined by: <span class="math display">\[
+  \alpha(c)(x) = \begin{cases}
+    - &amp; \text{if } c(x) &lt; 0 \\
+    0 &amp; \text{if } c(x) = 0 \\
+    + &amp; \text{if } c(x) &gt; 0
+  \end{cases}
+\]</span></li>
+<li>The concretization function <span class="math inline">\(\gamma: S \to 2^C\)</span> is defined by: <span class="math display">\[
+  \gamma(s) = \{ c \in C \mid \forall x \in \text{Var}, c(x) \text{ matches } s(x) \}
+\]</span></li>
+</ul>
+<p>The transfer functions: <span class="math display">\[
+  f_v(s) = \begin{cases}
+   x := e &amp; \text{update } s \text{ based on the sign of } e \\
+   ...
+  \end{cases}
+\]</span></p>
+<p>The join operation <span class="math inline">\(\sqcup\)</span> is defined pointwise: <span class="math display">\[
+    (s_1 \sqcup s_2)(x) = \text{join\_sign}(s_1(x), s_2(x)),
+\]</span></p>
+</section>
+<section id="reaching-definitions-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="reaching-definitions-analysis">Reaching Definitions Analysis</h3>
+<p>For every program point, we want to determine which definitions may reach that point.</p>
+<p>Example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>1. a = 100;     // [a -&gt; 1]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>2. if (c &gt; 0)   // [a -&gt; 1]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>3.   a = 200;   // [a -&gt; 3]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>4.   b = a;     // [b -&gt; 4]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>5. return a;    // [a -&gt; {1, 3}, b -&gt; 4]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The semilattice for reaching definitions analysis is defined as: <span class="math display">\[
+    S = \text{Var} \to 2^{\text{Def}},
+\]</span> which is the mapping from variables to the set of definitions that may reach that variable.</p>
+<p>The initial value for each variable is the empty set: <span class="math display">\[
+    \bot(x) = \varnothing,
+\]</span> and the initial value for the entry node is also the empty set for all variables.</p>
+<p>The join operation <span class="math inline">\(\sqcup\)</span> is defined pointwise as the union of sets: <span class="math display">\[
+    (s_1 \sqcup s_2)(x) = s_1(x) \cup s_2(x).
+\]</span></p>
+<p>The transfer functions are defined as follows: <span id="eq-standard"><span class="math display">\[
+    f_v(s)(x) = (s(x) - \text{KILL}_v(x)) \cup \text{GEN}_v(x),
+\tag{1}\]</span></span></p>
+<ul>
+<li>for an assignment statement <span class="math inline">\(x := e\)</span> at node <span class="math inline">\(v\)</span>:
+<ul>
+<li><span class="math inline">\(\text{KILL}_v(x)\)</span> is the set of all definitions of <span class="math inline">\(x\)</span> in the program (since the new definition at <span class="math inline">\(v\)</span> kills all previous definitions of <span class="math inline">\(x\)</span>).</li>
+<li><span class="math inline">\(\text{GEN}_v(x) = \{ v \}\)</span>, representing the new definition of <span class="math inline">\(x\)</span> at node <span class="math inline">\(v\)</span>.</li>
+</ul></li>
+<li>for other statements, <span class="math inline">\(\text{KILL}_v(x) = \varnothing\)</span> and <span class="math inline">\(\text{GEN}_v(x) = \varnothing\)</span> for all variables <span class="math inline">\(x\)</span>.</li>
+</ul>
+<p><a href="#eq-standard" class="quarto-xref">Equation&nbsp;1</a> is the standard way to define transfer functions for dataflow analysis.</p>
+</section>
+<section id="available-expressions-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="available-expressions-analysis">Available Expressions Analysis</h3>
+<p>For every program point, we want to determine the expressions that have already been computed and whose values are still available. E.g., <span class="math inline">\(a+b\)</span> is available at a program point if on every path from the entry to that point, <span class="math inline">\(a+b\)</span> has been computed and neither <span class="math inline">\(a\)</span> nor <span class="math inline">\(b\)</span> has been modified since then.</p>
+<p>Example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>1. a = c + (b + 10); // 1 end: {b + 10, c + (b + 10)}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>2. if (a &gt; b)        // 2 end: {b + 10, c + (b + 10), a &gt; b}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>3.   c = a + 10;     // 3 end: {b + 10, a + 10, a &gt; b}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>4. return a;         // 4 end: {b + 10, a &gt; b}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The semilattice for available expressions analysis is <span class="math inline">\(2^\text{Expr}\)</span>, which is the set of all expressions in the program.</p>
+<p>The initial value for each variable is the set of all expressions, and the initial value for the entry node is the empty set.</p>
+<p>And the join operation <span class="math inline">\(\sqcup\)</span> is defined as the intersection of sets: <span class="math display">\[
+    (s_1 \sqcup s_2) = s_1 \cap s_2.
+\]</span></p>
+<p>The transfer functions are defined as follows: <span class="math display">\[
+    f_v(s) = (s - \text{KILL}_v) \cup \text{GEN}_v,
+\]</span></p>
+<ul>
+<li>for an assignment statement <span class="math inline">\(x := e\)</span> at node <span class="math inline">\(v\)</span>:
+<ul>
+<li><span class="math inline">\(\text{KILL}_v\)</span> is the set of all expressions that contain the variable <span class="math inline">\(x\)</span> (since assigning to <span class="math inline">\(x\)</span> may change the value of these expressions).</li>
+<li><span class="math inline">\(\text{GEN}_v = \{ e \}\)</span>, representing the expression computed at node <span class="math inline">\(v\)</span>.</li>
+</ul></li>
+<li>for other statements, <span class="math inline">\(\text{KILL}_v = \varnothing\)</span> and <span class="math inline">\(\text{GEN}_v =\)</span> the expression computed at node <span class="math inline">\(v\)</span>.</li>
+</ul>
+</section>
+<section id="liveness-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="liveness-analysis">Liveness Analysis</h3>
+<p>We want to determine, for every program point, which variables may be used in the future before being redefined.</p>
+<ul>
+<li>The semilattice: <span class="math inline">\(S = 2^{\text{Var}}\)</span>.</li>
+<li>Here we must revert the control flow graph (CFG) edges, so that the analysis proceeds backward from the exit to the entry.</li>
+<li>The initial value for each variable is the empty set, and the initial value for the exit node is also the empty set.</li>
+<li>The join operation <span class="math inline">\(\sqcup\)</span> is defined as the union of sets.</li>
+<li>The transfer functions:
+<ul>
+<li><span class="math inline">\(\text{GEN}_v\)</span> is the set of variables used in node <span class="math inline">\(v\)</span>.</li>
+<li><span class="math inline">\(\text{KILL}_v\)</span> is the set of variables defined (or assigned) in node <span class="math inline">\(v\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="very-busy-expressions-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="very-busy-expressions-analysis">Very Busy Expressions Analysis</h3>
+<p>For every program point, we want to determine the expressions that will be computed on every path from that point to the exit, before any of their operands are redefined.</p>
+<p>Example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>1. if (a &gt; b)  // Here, {b - a, a + b, a &gt; b} are very busy</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>2.   x = b - a</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>3.   y = x - y + (a + b + b)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>4. else</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>5.   y = b - a</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>6.   x = x - y + (a + b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>The semilattice: <span class="math inline">\(S = 2^{\text{Expr}}\)</span>.</li>
+<li>The analysis proceeds backward from the exit to the entry.</li>
+<li>The initial value for each variable is the emptyset, and the initial value for the exit node is also the emptyset.</li>
+<li>The join operation <span class="math inline">\(\sqcup\)</span> is defined as the intersection of sets.</li>
+<li>The transfer functions:
+<ul>
+<li><span class="math inline">\(\text{GEN}_v\)</span> is the set of expressions computed in node <span class="math inline">\(v\)</span>.</li>
+<li><span class="math inline">\(\text{KILL}_v\)</span> is the set of expressions that contain any variable defined (or assigned) in node <span class="math inline">\(v\)</span>.</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./Assets/Very-Busy-Expressions-Analysis.svg" class="img-fluid figure-img"></p>
+<figcaption>The Analysis Result of the Example</figcaption>
+</figure>
+</div>
+</section>
+<section id="constant-propagation-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="constant-propagation-analysis">Constant Propagation Analysis</h3>
+<p>For every program point, we want to determine the variables that have a constant value.</p>
+<p>Example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>var x, y, z;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x = 27;</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y = input;</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>z = 2 * x + y;</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>if (x &lt; 0) { y = z - 3; } else { y = 12; }</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>output y;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>The semilattice: <span class="math inline">\(S = \text{Var} \to (\mathbb{Z} \cup \{\bot, \top\})\)</span>. <span class="math inline">\(\bot\)</span> represents “not a constant” and <span class="math inline">\(\top\)</span> represents “undefined”.</li>
+<li>The initial value for each variable is <span class="math inline">\(\bot\)</span>, and the initial value for the entry node is also <span class="math inline">\(\bot\)</span> for all variables.</li>
+<li>The join operation <span class="math inline">\(\sqcup\)</span> is defined as follows: <span class="math display">\[
+  (s_1 \sqcup s_2)(x) = \begin{cases}
+    \bot &amp; \text{if } s_1(x) = \bot \text{ or } s_2(x) = \bot \\
+    c &amp; \text{if } s_1(x) = s_2(x) = c \in \mathbb{Z} \\
+    \bot &amp; \text{if } s_1(x) \neq s_2(x) \\
+    s_1(x) &amp; \text{if } s_2(x) = \top \\
+    s_2(x) &amp; \text{if } s_1(x) = \top
+  \end{cases}
+\]</span></li>
+<li>The transfer functions are defined based on the operations in the program, propagating constant values and updating variables accordingly.</li>
+</ul>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -600,6 +934,38 @@ window.Quarto = {
   });
   </script>
 </div> <!-- /content -->
+    <script type="text/javascript">
+    (function(d) {
+      d.querySelectorAll(".pseudocode-container").forEach(function(el) {
+        let pseudocodeOptions = {
+          indentSize: el.dataset.indentSize,
+          commentDelimiter: el.dataset.commentDelimiter,
+          lineNumber: el.dataset.lineNumber.toLowerCase() === "true",
+          lineNumberPunc: el.dataset.lineNumberPunc,
+          noEnd: el.dataset.noEnd.toLowerCase() === "true",
+          titlePrefix: el.dataset.captionPrefix
+        };
+        pseudocode.renderElement(el.querySelector(".pseudocode"), pseudocodeOptions);
+      });
+    })(document);
+    (function(d) {
+      d.querySelectorAll(".pseudocode-container").forEach(function(el) {
+        let captionSpan = el.querySelector(".ps-root > .ps-algorithm > .ps-line > .ps-keyword")
+        if (captionSpan !== null) {
+          let captionPrefix = el.dataset.captionPrefix + " ";
+          let captionNumber = "";
+          if (el.dataset.pseudocodeNumber) {
+            captionNumber = el.dataset.pseudocodeNumber + " ";
+            if (el.dataset.chapterLevel) {
+              captionNumber = el.dataset.chapterLevel + "." + captionNumber;
+            }
+          }
+          captionSpan.innerHTML = captionPrefix + captionNumber;
+        }
+      });
+    })(document);
+    </script>
+  
 
 
 

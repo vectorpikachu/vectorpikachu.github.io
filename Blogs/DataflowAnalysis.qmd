@@ -4,7 +4,9 @@ title: Dataflow Analysis
 
 Dataflow analysis is a static analysis technique used to gather information about the possible set of values computed at various points in a program, aiding in optimization and error detection.
 
-## Dataflow Analysis with Monotone Frameworks
+# Dataflow Analysis with Monotone Frameworks
+
+## Mathematical Foundations
 
 **Semilattice (半格).** Semilattice is a structure $(S, \sqcup)$, where $S$ is a set and $\sqcup: S \times S \to S$ is a binary operation on $S$ that is:
 
@@ -13,3 +15,309 @@ Dataflow analysis is a static analysis technique used to gather information abou
 - associative (结合): $x \sqcup (y \sqcup z) = (x \sqcup y) \sqcup z$.
 
 **Bounded Semilattice (有界半格).** A bounded semilattice is a semilattice that has a least element (bottom) $\bot$ such that for all $x \in S$, $x \sqcup \bot = x$.
+
+**Partial Order (偏序).** A partial order is a binary relation $\sqsubseteq$ over a set $S$ that is:
+
+- reflexive (自反): $x \sqsubseteq x$ for all $x \in S$;
+- transitive (传递): if $x \sqsubseteq y$ and $y \sqsubseteq z$, then $x \sqsubseteq z$;
+- antisymmetric (反对称): if $x \sqsubseteq y$ and $y \sqsubseteq x$, then $x = y$.
+
+Every bounded semilattice $(S, \sqcup, \bot)$ induces a partial order $\sqsubseteq$ defined by $x \sqsubseteq y$ if and only if $x \sqcup y = y$.
+
+**Monotone (Increasing) Function.** A function $f: S \to S$ is monotone with respect to a partial order $\sqsubseteq$ if for all $x, y \in S$, $x \sqsubseteq y$ implies $f(x) \sqsubseteq f(y)$.
+
+**Fixed Point.** A fixed point of a function $f: S \to S$ is an element $x \in S$ such that $f(x) = x$.
+
+**Fixed Point Theorem.** In a bounded semilattice, whose height is finite, every monotone function has a least fixed point, which can be computed as the limit of the ascending chain starting from the least element.
+
+*Proof.* Let $(S, \sqcup, \bot)$ be a bounded semilattice with finite height, and let $f: S \to S$ be a monotone function. We construct an ascending chain starting from $\bot$:
+$$
+    x_0 = \bot, \quad x_{n+1} = f(x_n).
+$$
+
+$\bot \sqsubseteq f(\bot) \sqsubseteq f(f(\bot)) \sqsubseteq \cdots$, that is, $x_0 \sqsubseteq x_1 \sqsubseteq x_2 \sqsubseteq \cdots$. Since the height of the semilattice is finite, this chain must stabilize at some $x_k$ such that $x_k = f(x_k)$. Thus, $x_k$ is a fixed point of $f$. Moreover, it is the least fixed point because any other fixed point $y$ must satisfy $\bot \sqsubseteq y$, and by monotonicity, $x_n \sqsubseteq f^n(y) = y$ for all $n$, leading to $x_k \sqsubseteq y$. And thus, $x_k$ is the least fixed point of $f$.
+
+## Dataflow Analysis Framework
+
+```pseudocode
+#| label: dataflow-framework
+
+\begin{algorithm}
+\caption{Dataflow Analysis Framework}
+\begin{algorithmic}
+\Require A control flow graph (CFG) $G = (V, E)$,
+         a semilattice $(S, \sqcup, \bot)$,
+         an initial value of entry node $\text{OUT}_{\text{entry}} \in S$,
+         transfer functions $f_v: S \to S$ for each node $v \in V - \text{entry}$.
+\Ensure Dataflow values $\text{OUT}_v \in S$ for each node $v \in V$.
+\Procedure{Workflow}{$G, (S, \sqcup, \bot), \text{OUT}_{\text{entry}}, \{f_v\}_{v \in V - \text{entry}}$}
+  \State $\forall v \in V - \text{entry}, \text{OUT}_v = \bot$
+  \State $\text{ToVisit} = V - \text{entry}$
+  \While{$\text{ToVisit} \neq \varnothing$}
+    \State Select and remove a node $v$ from $\text{ToVisit}$
+    \State $\text{IN}_v = \bigsqcup_{(u, v) \in E} \text{OUT}_u$
+    \State $\text{OUT}_v^{\text{NEW}} = f_v(\text{IN}_v)$
+    \If{$\text{OUT}_v^{\text{NEW}} \neq \text{OUT}_v$}
+      \State $\text{OUT}_v = \text{OUT}_v^{\text{NEW}}$
+      \State $\text{ToVisit} = \text{ToVisit} \cup \{ w \mid (v, w) \in E \}$
+    \EndIf
+  \EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+
+### Convergence and Safety
+
+Convergence = Termination + Confluent
+
+#### Termination
+
+**Termination of @dataflow-framework.** Suppose $\text{OUT}_v^i$ is the value of $\text{OUT}_v$ after the $i$-th update. Now let's prove that for each node $v$, the sequence $\{\text{OUT}_v^i\}$ is ascending:
+
+- Using the induction on the number of updates.
+- Base case: before any updates, $\text{OUT}_v^0 = \bot$. After one update, we must have $\text{OUT}_v^0 \sqsubseteq \text{OUT}_v^1$.
+- Now assume after $k$ updates, $\{\text{OUT}_v^i\}_{i \leq k}$ is ascending for all $v$. Let's consider the $(k+1)$-th update.
+  - Node $v$ is not selected for update: $\text{OUT}_v^{k+1} = \text{OUT}_v^k$. And we must have $\text{OUT}_v^k \sqsubseteq \text{OUT}_v^{k+1}$.
+  - Node $v$ is selected for update: $\text{OUT}_v^{k+1} = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^k \right)$.
+    - If $\text{OUT}_v^k = \bot$, then $\text{OUT}_v^k \sqsubseteq \text{OUT}_v^{k+1}$.
+    - If $\text{OUT}_v^k \neq \bot$, then there must be a previous update $j < k$ such that $\text{OUT}_v^k = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^j \right)$. By the induction hypothesis, for all $u$ with $(u, v) \in E$, we have $\text{OUT}_u^j \sqsubseteq \text{OUT}_u^k$. By monotonicity of $f_v$ and $\sqcup$, we have:
+    $$
+        \text{OUT}_v^k = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^j \right) \sqsubseteq f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^k \right) = \text{OUT}_v^{k+1}.
+    $$
+  - Thus, in both cases, we have $\text{OUT}_v^k \sqsubseteq \text{OUT}_v^{k+1}$.
+- By induction, we conclude that for each node $v$, the sequence $\{\text{OUT}_v^i\}$ is ascending.
+
+Since $(S, \sqcup, \bot)$ has finite height, the ascending sequence $\{\text{OUT}_v^i\}$ must stabilize at some $\text{OUT}_v^*$. Therefore, @dataflow-framework terminates.
+
+#### Confluent
+
+We define the following Round-Robin (轮询) function:
+$$
+F(X) = \left(f_v\left( \bigsqcup_{(u, v) \in E} X(u) \right) \right)_{v \in V},
+$$
+where $X = (X(v))_{v \in V} \in S^{|V|}$ is a vector of dataflow values for all nodes in the CFG.
+
+$F$ is monotone because it is composed of monotone functions (the transfer functions $f_v$ and the join operation $\sqcup$). By the Fixed Point Theorem, since $(S, \sqcup, \bot)$ has finite height, $F$ has a least fixed point.
+
+Now let's prove **$F$ and @dataflow-framework compute the same fixed point** → This is called **Confluent**. That is, no matter how we select nodes for update in @dataflow-framework, we always reach the same final dataflow values.
+
+- The main difference is that @dataflow-framework updates nodes one at a time, while $F$ updates all nodes simultaneously.
+
+Let $X_i = (\text{OUT}_v^i)_{v \in V}$ be the vector of dataflow values after the $i$-th update. $Y_i = F^i(\text{OUT}_{\text{entry}}, \bot, \ldots, \bot)$. And we want to prove that for all $i$, $X_i \sqsubseteq Y_i$.
+
+- Using induction on $i$.
+- Base case: $i = 0$, $X_0 = (\text{OUT}_{\text{entry}}, \bot, \ldots, \bot) = Y_0$.
+- Now assume $X_k \sqsubseteq Y_k$ for some $k \geq 0$. Let's consider the $(k+1)$-th update.
+  - Suppose node $v$ is selected for update. Then:
+    $$
+        \text{OUT}_v^{k+1} = f_v\left( \bigsqcup_{(u, v) \in E} \text{OUT}_u^k \right) = f_v\left( \bigsqcup_{(u, v) \in E} X_k(u) \right).
+    $$
+    By the induction hypothesis, for all $u$ with $(u, v) \in E$, we have $X_k(u) \sqsubseteq Y_k(u)$. By monotonicity of $f_v$ and $\sqcup$, we have:
+    $$
+        \text{OUT}_v^{k+1} = f_v\left( \bigsqcup_{(u, v) \in E} X_k(u) \right) \sqsubseteq f_v\left( \bigsqcup_{(u, v) \in E} Y_k(u) \right) = Y_{k+1}(v).
+    $$
+  - For nodes not selected for update, $\text{OUT}_w^{k+1} = \text{OUT}_w^k \sqsubseteq Y_k(w) \sqsubseteq Y_{k+1}(w)$.
+  - Thus, in both cases, we have $X_{k+1} \sqsubseteq Y_{k+1}$.
+- By induction, we conclude that for all $i$, $X_i \sqsubseteq Y_i$.
+
+Suppose @dataflow-framework terminates at iteration $N$, then $X_N$ is a fixed point of $F$ (You can simply check and find $F(X_N) = X_N$). Since $X_N \sqsubseteq Y_N$ for all $N$, and $Y_N$ converges to the least fixed point of $F$, we conclude that $X_N$ is the least fixed point of $F$.
+
+Conclusively, @dataflow-framework computes the least fixed point of the Round-Robin function $F$.
+
+#### Safety
+
+**Safety.** We will state the safety property using abstract interpretation. Let $C$ be the concrete domain of program states, and let $\alpha: C \to S$ be the abstraction function mapping concrete states to abstract states in the semilattice $S$. We say that the dataflow analysis is safe if for every program point $v$ and every concrete state $c$ reachable at $v$, the abstract value $\text{OUT}_v$ computed by the analysis satisfies:
+
+$$
+    \alpha(c) \sqsubseteq \text{OUT}_v.
+$$
+
+This means that the abstract value $\text{OUT}_v$ over-approximates all possible concrete states at that program point, ensuring that no concrete behavior is missed by the analysis.
+
+Since $f_v$ are designed to be sound abstractions of the concrete semantics, and the join operation $\sqcup$ combines information from all predecessors, the dataflow analysis framework guarantees that the computed abstract values are safe with respect to the concrete program semantics.
+
+## Examples of Dataflow Analyses
+
+### Sign Analysis
+
+We define a lattice of signs:
+$$
+  \text{Sign} = \{ \bot, -, 0, +, \top\}.
+$$
+
+Let $\text{Var}$ be the set of variables occurring in the given program. The semilattice for sign analysis is defined as:
+$$
+    S = \text{Var} \to \text{Sign},
+$$
+
+The abstract interpretation of this lattice is as follows:
+
+- The concrete domain $C$ is $\text{Var} \to \mathbb{Z}$, mapping variables to integer values.
+- The abstraction function $\alpha: C \to S$ is defined by:
+  $$
+    \alpha(c)(x) = \begin{cases}
+      - & \text{if } c(x) < 0 \\
+      0 & \text{if } c(x) = 0 \\
+      + & \text{if } c(x) > 0
+    \end{cases}
+  $$
+- The concretization function $\gamma: S \to 2^C$ is defined by:
+  $$
+    \gamma(s) = \{ c \in C \mid \forall x \in \text{Var}, c(x) \text{ matches } s(x) \}
+  $$
+
+The transfer functions:
+$$
+  f_v(s) = \begin{cases}
+   x := e & \text{update } s \text{ based on the sign of } e \\
+   ...
+  \end{cases}
+$$
+
+The join operation $\sqcup$ is defined pointwise:
+$$
+    (s_1 \sqcup s_2)(x) = \text{join\_sign}(s_1(x), s_2(x)),
+$$
+
+### Reaching Definitions Analysis
+
+For every program point, we want to determine which definitions may reach that point.
+
+Example:
+
+```default
+1. a = 100;     // [a -> 1]
+2. if (c > 0)   // [a -> 1]
+3.   a = 200;   // [a -> 3]
+4.   b = a;     // [b -> 4]
+5. return a;    // [a -> {1, 3}, b -> 4]
+```
+
+The semilattice for reaching definitions analysis is defined as:
+$$
+    S = \text{Var} \to 2^{\text{Def}},
+$$
+which is the mapping from variables to the set of definitions that may reach that variable.
+
+The initial value for each variable is the empty set:
+$$
+    \bot(x) = \varnothing,
+$$
+and the initial value for the entry node is also the empty set for all variables.
+
+The join operation $\sqcup$ is defined pointwise as the union of sets:
+$$
+    (s_1 \sqcup s_2)(x) = s_1(x) \cup s_2(x).
+$$
+
+The transfer functions are defined as follows:
+$$
+    f_v(s)(x) = (s(x) - \text{KILL}_v(x)) \cup \text{GEN}_v(x),
+$$ {#eq-standard}
+
+- for an assignment statement $x := e$ at node $v$:
+  - $\text{KILL}_v(x)$ is the set of all definitions of $x$ in the program (since the new definition at $v$ kills all previous definitions of $x$).
+  - $\text{GEN}_v(x) = \{ v \}$, representing the new definition of $x$ at node $v$.
+- for other statements, $\text{KILL}_v(x) = \varnothing$ and $\text{GEN}_v(x) = \varnothing$ for all variables $x$.
+
+@eq-standard is the standard way to define transfer functions for dataflow analysis.
+
+### Available Expressions Analysis
+
+For every program point, we want to determine the expressions that have already been computed and whose values are still available. E.g., $a+b$ is available at a program point if on every path from the entry to that point, $a+b$ has been computed and neither $a$ nor $b$ has been modified since then.
+
+Example:
+
+```default
+1. a = c + (b + 10); // 1 end: {b + 10, c + (b + 10)}
+2. if (a > b)        // 2 end: {b + 10, c + (b + 10), a > b}
+3.   c = a + 10;     // 3 end: {b + 10, a + 10, a > b}
+4. return a;         // 4 end: {b + 10, a > b}
+```
+
+The semilattice for available expressions analysis is $2^\text{Expr}$, which is the set of all expressions in the program.
+
+The initial value for each variable is the set of all expressions, and the initial value for the entry node is the empty set.
+
+And the join operation $\sqcup$ is defined as the intersection of sets:
+$$
+    (s_1 \sqcup s_2) = s_1 \cap s_2.
+$$
+
+The transfer functions are defined as follows:
+$$
+    f_v(s) = (s - \text{KILL}_v) \cup \text{GEN}_v,
+$$
+
+- for an assignment statement $x := e$ at node $v$:
+  - $\text{KILL}_v$ is the set of all expressions that contain the variable $x$ (since assigning to $x$ may change the value of these expressions).
+  - $\text{GEN}_v = \{ e \}$, representing the expression computed at node $v$.
+- for other statements, $\text{KILL}_v = \varnothing$ and $\text{GEN}_v =$ the expression computed at node $v$.
+
+### Liveness Analysis
+
+We want to determine, for every program point, which variables may be used in the future before being redefined.
+
+- The semilattice: $S = 2^{\text{Var}}$.
+- Here we must revert the control flow graph (CFG) edges, so that the analysis proceeds backward from the exit to the entry.
+- The initial value for each variable is the empty set, and the initial value for the exit node is also the empty set.
+- The join operation $\sqcup$ is defined as the union of sets.
+- The transfer functions:
+  - $\text{GEN}_v$ is the set of variables used in node $v$.
+  - $\text{KILL}_v$ is the set of variables defined (or assigned) in node $v$.
+
+### Very Busy Expressions Analysis
+
+For every program point, we want to determine the expressions that will be computed on every path from that point to the exit, before any of their operands are redefined.
+
+Example:
+
+```default
+1. if (a > b)  // Here, {b - a, a + b, a > b} are very busy
+2.   x = b - a
+3.   y = x - y + (a + b + b)
+4. else
+5.   y = b - a
+6.   x = x - y + (a + b)
+```
+
+- The semilattice: $S = 2^{\text{Expr}}$.
+- The analysis proceeds backward from the exit to the entry.
+- The initial value for each variable is the emptyset, and the initial value for the exit node is also the emptyset.
+- The join operation $\sqcup$ is defined as the intersection of sets.
+- The transfer functions:
+  - $\text{GEN}_v$ is the set of expressions computed in node $v$.
+  - $\text{KILL}_v$ is the set of expressions that contain any variable defined (or assigned) in node $v$.
+
+![The Analysis Result of the Example](./Assets/Very-Busy-Expressions-Analysis.svg)
+
+### Constant Propagation Analysis
+
+For every program point, we want to determine the variables that have a constant value.
+
+Example:
+
+```default
+var x, y, z;
+x = 27;
+y = input;
+z = 2 * x + y;
+if (x < 0) { y = z - 3; } else { y = 12; }
+output y;
+```
+
+- The semilattice: $S = \text{Var} \to (\mathbb{Z} \cup \{\bot, \top\})$. $\bot$ represents "not a constant" and $\top$ represents "undefined".
+- The initial value for each variable is $\bot$, and the initial value for the entry node is also $\bot$ for all variables.
+- The join operation $\sqcup$ is defined as follows:
+  $$
+    (s_1 \sqcup s_2)(x) = \begin{cases}
+      \bot & \text{if } s_1(x) = \bot \text{ or } s_2(x) = \bot \\
+      c & \text{if } s_1(x) = s_2(x) = c \in \mathbb{Z} \\
+      \bot & \text{if } s_1(x) \neq s_2(x) \\
+      s_1(x) & \text{if } s_2(x) = \top \\
+      s_2(x) & \text{if } s_1(x) = \top
+    \end{cases}
+  $$
+- The transfer functions are defined based on the operations in the program, propagating constant values and updating variables accordingly.
+
