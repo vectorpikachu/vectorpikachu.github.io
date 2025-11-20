@@ -15,7 +15,7 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
 
 # 24-25-2
 
-8 courses, 25 points in total.
+8 courses, 20 points in total.
 
 - Introduction to Database Systems | [Click here to view the PDF.](./PDF/Database.pdf) <br>
   数据库概论 | [点击此处查看PDF.](./PDF/Database.pdf)
@@ -40,7 +40,7 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
 
 # 24-25-1
 
-6 courses, 21 points in total.
+7 courses, 21 points in total.
 
 - Public Junior German | [Click here to view the PDF.](./PDF/德语notes.pdf) <br>
   公共初级德语 | [点击此处查看PDF.](./PDF/德语notes.pdf)
