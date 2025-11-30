@@ -29,4 +29,7 @@ And my research interest lies on *Program Verification*, including Dafny, Coq, V
 - College English Test Band6, CET6 | 650 <br>
   大学英语六级考试 | 650
 
+## Awards
 
+- 2025 CCF ChinaSoft Theorem Proving Contest | Third Prize <br>
+  2025中国软件大会定理证明竞赛 | 三等奖
