@@ -22,7 +22,7 @@ And my research interest lies on *Program Verification*, including Dafny, Coq, V
   **北京大学** | *中国北京* <br>
   软件工程 | 2022 年 9 月 - 2026 年 6 月
 - **Peking University** | *Beijing, China* <br>
-  B.S. in Economics (Dual Program in National School of Development, NSD) | Sept 2023 - June 2026 <br>
+  B.S. in Economics (Dual Degree Program in National School of Development, NSD) | Sept 2023 - June 2026 <br>
   **北京大学** | 中国北京 <br>
   经济学 (国发院双学位) | 2023 年 9 月 - 2026 年 6 月
 
