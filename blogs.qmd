@@ -7,6 +7,9 @@ Here are the blogs where I share my thoughts and notes on various topics.
 
 ## LLM for Theorem Proving
 
+CCF软件工程专业委员会首批发布的三个重要难题之一：自动程序定理证明（如何高度自动化地生成程序定理的形式化证明？）<br>
+One of the three key challenges initially released by the CCF Technical Committee of Software Engineering: Automated Program Theorem Proving (How can formal proofs of program theorems be generated in a highly automated manner?)
+
 - SeedProver: [@chen2025seedproverdeepbroadreasoning]
   - Lemma-Style Proving: 分解任务, 独立验证, 构建知识库, 组合证明.
   - Test-Time Scaling
