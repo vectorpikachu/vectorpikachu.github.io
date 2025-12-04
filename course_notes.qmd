@@ -4,6 +4,13 @@ title: "Course Notes"
 
 Here are the course notes written by myself. I've taken 58 courses (147 points) in PKU.
 
+# 25-26-1
+
+...
+
+- Mathmatical Logic | [Click here to view the notes.](./Course_Notes/数理逻辑/数理逻辑.qmd) <br>
+  数理逻辑 | [点击此处查看笔记.](./Course_Notes/数理逻辑/数理逻辑.qmd)
+
 # 24-25-3
 
 2 courses, 4 points in total.

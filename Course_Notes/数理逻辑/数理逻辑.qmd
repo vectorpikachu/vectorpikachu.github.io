@@ -1,0 +1,153 @@
+---
+title: "数理逻辑"
+author: "VectorPikachu"
+date: today
+keywords: 
+  - 命题逻辑
+  - 一阶谓词演算
+number-sections: true
+---
+
+## 命题逻辑
+
+形式系统包括两部分: 表述命题的形式语言, 由形式语言表述的公理和推理规则.
+
+## 一阶谓词演算
+
+接下来我们要建立**谓词演算**的两个形式系统 $N_{\mathcal{L}}$ 和 $P_{\mathcal{L}}$, 它们分别对应于命题演算的形式系统 $N$ 和 $P$.
+
+要讨论形式系统, 就是要讨论:
+
+1. 形式语言
+2. 公理和推理规则
+
+### 一阶语言
+
+而谓词演算系统的形式语言即为一阶语言. 它包括:
+
+- 符号库
+  - 非逻辑符号
+    - 个体常元符号: $c, c_1,c_2,\ldots$
+    - 谓词符号: $F^n, G^n, \ldots$. $n$ 为谓词符号的元数.
+    - 函数符号: $f^n, g^n, \ldots$. $n$ 为函数符号的元数.
+
+    由一些非逻辑符号作为元素组成的集合通常记为 $\mathcal{L}$. <br>
+    一阶语言与符号库指定的非逻辑符号 $\mathcal{L}$ 有关, 称为 [$\mathcal{L}$ 生成的一阶语言]{.mark}.
+  - 逻辑符号
+    - 个体变元符号: $x_0, x_1, x_2, \ldots$
+    - 联结词符号: $\neg, \land, \lor, \to, \leftrightarrow$
+    - 量词符号: $\forall, \exists$
+    - 辅助符号: $), , , ($
+- 谓词公式
+  - 项: $\mathcal{L}$ 生成的一阶语言中的“项”归纳定义如下:
+    1. **个体变元符号**和 **$\mathcal{L}$ 中的个体常元符号**都是 $\mathcal{L}$ 的项;
+    2. 若 $f^n$ 是 $\mathcal{L}$ 中的一个 $n$ 元函数符号, 且 $t_1, t_2, \ldots, t_n$ 都是 $\mathcal{L}$ 的项, 则 $f^n(t_1, t_2, \ldots, t_n)$ 也是 $\mathcal{L}$ 的项;
+    3. $\mathcal{L}$ 中的每个项都是有限次应用上述两条所定义的构造规则得到的.
+  - 公式: $\mathcal{L}$ 生成的一阶语言中的“公式”归纳定义如下:
+    1. (**原子公式**) 若 $F^n$ 是 $\mathcal{L}$ 中的一个 $n$ 元谓词符号, 且 $t_1, t_2, \ldots, t_n$ 都是 $\mathcal{L}$ 的项, 则 $F^n(t_1, t_2, \ldots, t_n)$ 是 $\mathcal{L}$ 的一个公式;
+    2. 若 $\alpha$ 是 $\mathcal{L}$ 的一个公式, 则 $\neg \alpha$ 也是 $\mathcal{L}$ 的一个公式;
+    3. 若 $\alpha$ 和 $\beta$ 都是 $\mathcal{L}$ 的公式, 则 $(\alpha \land \beta), (\alpha \lor \beta), (\alpha \to \beta), (\alpha \leftrightarrow \beta)$ 都是 $\mathcal{L}$ 的公式;
+    4. 若 $\alpha$ 是 $\mathcal{L}$ 的一个公式, 且 $x$ 是个体变元符号, 则 $(\forall x) \alpha$ 和 $(\exists x) \alpha$ 都是 $\mathcal{L}$ 的公式;
+    5. $\mathcal{L}$ 中的每个公式都是有限次应用上述四条所定义的构造规则得到的.
+
+::: {.callout-note title="辖域"}
+称公式 $(\forall x) \alpha$ 中的 $\alpha$ 为量词 $(\forall x)$ 的**辖域**; 同理, 公式 $(\exists x) \alpha$ 中的 $\alpha$ 也为量词 $(\exists x)$ 的辖域.
+:::
+
+::: {.callout-note title="约束出现与自由出现"}
+变元符号 $x$ 在公式 $\alpha$ 中的某处出现被称为[约束出现]{.mark}, 如果该变元出现在某个量词 $(\forall x)$ 或 $(\exists x)$ 的辖域内, 或者是 $(\forall x)$ 中的 $x$, 或者是 $(\exists x)$ 中的 $x$; 否则称为[自由出现]{.mark}.
+:::
+
+::: {.callout-note title="约束变元与自由变元"}
+设个体变元 $x$ 在公式 $\alpha$ 中*所有出现都是约束出现*, 则称 $x$ 为 $\alpha$ 的[约束变元]{.mark}; 反之, 若 $x$ 在 $\alpha$ 中有自由出现, 则称 $x$ 为 $\alpha$ 的[自由变元]{.mark}.
+:::
+
+::: {.callout-note}
+## $t$ 对 $x$ 在 $\alpha$ 中可代入
+
+设 $\alpha$ 是 $\mathcal{L}$ 中的公式, $t$ 是 $\mathcal{L}$ 中的项, 且 $x$ 是 $\mathcal{L}$ 中的个体变元符号. 如果对 $t$ 中每个出现的变元符号 $y$, $\alpha$ 中每处自由出现的 $x$ 都不在某个量词 $(\forall y)$ 或 $(\exists y)$ 的辖域内, 则称 [$t$ 对 $x$ 在 $\alpha$ 中可代入]{.mark} 或 [$t$ 对 $x$ 在 $\alpha$ 中自由]{.mark}.
+
+ps: 这句话就是说, 把公式 $\alpha$ 中的 $x$ 全部替换成项 $t$ 后, 不会导致 $\alpha$ 的真假值改变.
+:::
+
+$\alpha(x/t)$ 是将 $\alpha$ 中的每个自由出现的 $x$ 都替换成项 $t$ 所得到的公式 (不论 $t$ 是否对 $x$ 在 $\alpha$ 中自由), 这称为 $\alpha$ 的一个[例式]{.mark}.
+
+简单的性质:
+
+- $x$ 对 $x$ 在任一公式 $\alpha$ 中自由.
+- 若 $x$ 不在 $\alpha$ 中自由出现, 则 $t$ 对 $x$ 在 $\alpha$ 中自由.
+- 若 $t$ 对 $x$ 在 $\alpha$ 中自由, 则 $\alpha$ 与 $\alpha(x/t)$ 的“可满足性”差别不大.
+
+::: {.callout-note title="闭公式 (closed formula)"}
+1. 若 $\mathcal{L}$ 的项 $t$ 中不含任何个体变元符号, 则称 $t$ 为 $\mathcal{L}$ 的一个闭项;
+2. 若 $\mathcal{L}$ 的公式 $\alpha$ 中不含任何自由变元符号, 则称 $\alpha$ 为 $\mathcal{L}$ 的一个闭公式.
+:::
+
+### 一阶谓词演算自然推演系统 $N_{\mathcal{L}}$
+
+现在给定了形式语言 ($\mathcal{L}$ 生成的一阶语言), $N_{\mathcal{L}}$ 的形式推理为:
+
+- 形式公理: $\varnothing$
+- 形式规则: 15 条
+  - (1)-(10): 与命题演算自然推演系统 $N$ 的规则相同.
+  - 增加前提率: 若 $\Gamma \vdash \alpha$, 则 $\Gamma, \beta \vdash \alpha$. $(+)$
+  - $\forall$ 消去律: 若 $\Gamma \vdash \forall x \alpha$, 且 $t$ 对 $x$ 在 $\alpha$ 中自由, 则 $\Gamma \vdash \alpha(x/t)$. $(\forall -)$
+  - $\forall$ 引入律: 若 $\Gamma \vdash \alpha$, 且 $x$ 不在 $\Gamma$ 的任何公式中自由出现, 则 $\Gamma \vdash \forall x \alpha$. $(\forall +)$
+  - $\exists$ 消去律: 若 $\Gamma, \alpha \vdash \beta$, 且 $x$ 不在 $\Gamma \cup \{\beta\}$ 的任何公式中自由出现, 则 $\Gamma, \exists x \alpha \vdash \beta$. $(\exists -)$
+  - $\exists$ 引入律: 若 $\Gamma \vdash \alpha(x/t)$, 且 $t$ 对 $x$ 在 $\alpha$ 中自由, 则 $\Gamma \vdash \exists x \alpha$. $(\exists +)$
+
+两个特例: $\alpha(x/x)=\alpha$, 且 $x$ 对 $x$ 在 $\alpha$ 中自由.
+
+- 若 $\Gamma \vdash \forall x \alpha$, 则 $\Gamma \vdash \alpha$. $(\forall -)$
+- 若 $\Gamma \vdash \alpha$, 则 $\Gamma \vdash \exists x \alpha$. $(\exists +)$
+
+::: {.callout-note}
+## $N_{\mathcal{L}}$ 的形式证明序列
+
+若有限序列
+$$
+\Gamma_1 \vdash \alpha_1, \quad \Gamma_2 \vdash \alpha_2, \quad \ldots,  \quad \Gamma_n \vdash \alpha_n
+$$
+满足:
+
+1. 每个 $\Gamma_i (1 \leq i \leq n)$ 都是 $N_{\mathcal{L}}$ 的有限公式集;
+2. 每个 $\Gamma_i (1 \leq i \leq n)$ 都是对此序列中它之前的若干 $\Gamma_j \vdash \alpha_j (1 \leq j < i)$ 应用 $N_{\mathcal{L}}$ 的形式推理规则得到的.
+
+则称此序列为 $N_{\mathcal{L}}$ 的一个[(形式) 证明序列]{.mark}.
+
+也称 $\alpha_n$ 可由 $\Gamma_n$ 在 $N_{\mathcal{L}}$ 中形式推出, 记为 $\Gamma_n \vdash_{N_{\mathcal{L}}} \alpha_n$, 或 $\Gamma_n \vdash \alpha_n$.
+:::
+
+$N$ 的定理也是 $N_{\mathcal{L}}$ 的定理.
+
+$N_{\mathcal{L}}$ 中的一些可证式子:
+
+\begin{aligned}
+&\begin{cases}
+\alpha \to \forall x \beta \vdash\dashv \forall x (\alpha \to \beta) \\
+\alpha \to \exists x \beta \vdash\dashv \exists x (\alpha \to \beta) \\
+\end{cases} \quad \text{若 } x \text{ 不在 } \alpha \text{ 中自由出现.} \\
+
+&\begin{cases}
+\forall x \alpha \to \beta \vdash\dashv \exists x (\alpha \to \beta) \\
+\exists x \alpha \to \beta \vdash\dashv \forall x (\alpha \to \beta) \\
+\end{cases} \quad \text{若 } x \text{ 不在 } \beta \text{ 中自由出现.} \\
+
+&\begin{cases}
+\alpha \land \forall x \beta \vdash\dashv \forall x (\alpha \land \beta) \\
+\alpha \land \exists x \beta \vdash\dashv \exists x (\alpha \land \beta) \\
+\alpha \lor \forall x \beta \vdash\dashv \forall x (\alpha \lor \beta) \\
+\alpha \lor \exists x \beta \vdash\dashv \exists x (\alpha \lor \beta) \\
+\end{cases} \quad \text{若 } x \text{ 不在 } \alpha \text{ 中自由出现.} \\
+
+&\begin{cases}
+\neg \forall x \alpha \vdash\dashv \exists x \neg \alpha \\
+\neg \exists x \alpha \vdash\dashv \forall x \neg \alpha \\
+\end{cases} \\
+
+&\begin{cases}
+\forall x \alpha \vdash\dashv \forall y \alpha(x/y) \\
+\exists x \alpha \vdash\dashv \exists y \alpha(x/y) \\
+\end{cases} \quad \text{若 } y \text{ 不在 } \alpha \text{ 中自由出现.}
+
+\end{aligned}
