@@ -151,3 +151,31 @@ $N_{\mathcal{L}}$ 中的一些可证式子:
 \end{cases} \quad \text{若 } y \text{ 不在 } \alpha \text{ 中自由出现.}
 
 \end{aligned}
+
+:::{.callout-note title="前束范式"}
+$\mathcal{L}$ 的一个公式 $\alpha$ 如果具有如下形状:
+$$
+Q_1 v_1 Q_2 v_2 \ldots Q_n v_n \beta
+$$
+其中:
+
+  - $Q_i$ 为量词 $\forall$ 或 $\exists$ ($1 \leq i \leq n$);
+  - $v_i$ 为个体变元符号 ($1 \leq i \leq n$);
+  - $\beta$ 为不含量词的公式.
+
+则称 $\alpha$ 为[$\mathcal{L}$ 的一个前束范式]{.mark}.
+:::
+
+**范式定理:** 对 $\mathcal{L}$ 中任一个公式 $\alpha$, 存在 $\mathcal{L}$ 的一个前束范式 $\alpha'$, 使得 $\alpha\vdash\dashv\alpha'$. 也称此 $\alpha'$ 为 $\alpha$ 的一个[前束范式]{.mark}.
+
+*Proof.* 对于 $\alpha$ 中所含的联结词与量词的个数 $d$ 进行归纳证明.
+
+
+:::{.callout-note title="谓词公式按前束范式的分类"}
+设 $n$ 是一个非零的自然数.
+
+1. 若前束范式 $\alpha$ 的量词以全称量词开始, 并且全称量词组与存在量词组有 $n-1$ 次交替, 则称 $\alpha$ 为[$\Pi_n$ 型前束范式]{.mark}, 简称[$\Pi_n$ 型公式]{.mark}.
+2. 若前束范式 $\alpha$ 的量词以存在量词开始, 并且存在量词组与全称量词组有 $n-1$ 次交替, 则称 $\alpha$ 为[$\Sigma_n$ 型前束范式]{.mark}, 简称[$\Sigma_n$ 型公式]{.mark}.
+
+例如: $\forall x_1 \forall x_2 (F^1(x_1)\to F^1(x_2))$ 是 $\Pi_1$ 型公式; $\exists x_1 \forall x_2 \exists x_3 (F^2(x_1,x_2)\lor F^1(x_3))$ 是 $\Sigma_3$ 型公式.
+:::
