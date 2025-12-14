@@ -179,3 +179,25 @@ $$
 
 例如: $\forall x_1 \forall x_2 (F^1(x_1)\to F^1(x_2))$ 是 $\Pi_1$ 型公式; $\exists x_1 \forall x_2 \exists x_3 (F^2(x_1,x_2)\lor F^1(x_3))$ 是 $\Sigma_3$ 型公式.
 :::
+
+### 一阶谓词演算的形式系统 $K_{\mathcal{L}}$
+
+$K_{\mathcal{L}}$ 与 $P$ 相对应. 给定非逻辑符号集 $\mathcal{L}$, $K_{\mathcal{L}}$ 的构成如下:
+
+- 形式语言: $\mathcal{L}$ 生成的一阶语言的一个子语言.
+- 形式推理:
+  - 形式公理: 命题演算系统 $P$ 的所有公理 (3 条), 加上下列公理模式:
+    1. (K4): $\forall x \alpha \to \alpha(x/t)$, 其中 $t$ 对 $x$ 在 $\alpha$ 中自由.
+    2. (K5): $\alpha \to \forall x \alpha$, 若 $x$ 不在 $\alpha$ 中自由出现.
+    3. (K6): $\forall x (\alpha\to\beta) \to (\forall x \alpha \to \forall x \beta)$.
+    4. (K7): 若 $\alpha$ 是 $K_{\mathcal{L}}$ 的一个公理, 则 $\forall x \alpha$ 也是 $K_{\mathcal{L}}$ 的一个公理.
+  - 形式规则: 与命题演算系统 $P$ 的规则相同, 即 **分离规则 (M)**.
+
+::: {.callout-note}
+## $K_{\mathcal{L}}$ 公式的简写
+
+- $\alpha \lor \beta$ 为 $\neg \alpha \to \beta$ 的简写.
+- $\alpha \land \beta$ 为 $\neg (\alpha \to \neg \beta)$ 的简写.
+- $\alpha \leftrightarrow \beta$ 为 $\neg((\alpha\to\beta)\to\neg(\beta\to\alpha))$ 的简写.
+- $\exists x \alpha$ 为 $\neg \forall x \neg \alpha$ 的简写.
+:::
