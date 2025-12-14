@@ -72,10 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f16cd255ecb5ae9510f6a112aa2ee9ab.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-910acf1146e2ab8204dbb00666d88f1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a469db7a3cea21920168e563ee0f7105.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -299,7 +299,7 @@ window.Quarto = {
 </section>
 <section id="dataflow-analysis-framework" class="level2">
 <h2 class="anchored" data-anchor-id="dataflow-analysis-framework">Dataflow Analysis Framework</h2>
-<div id="dataflow-framework" class="pseudocode-container quarto-float" data-pseudocode-number="1" data-no-end="false" data-line-number-punc=":" data-line-number="true" data-comment-delimiter="//" data-caption-prefix="Algorithm" data-indent-size="1.2em">
+<div id="dataflow-framework" class="pseudocode-container quarto-float" data-indent-size="1.2em" data-line-number-punc=":" data-pseudocode-number="1" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number="true" data-no-end="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{Dataflow Analysis Framework} \begin{algorithmic} \Require A control flow graph (CFG) $G = (V, E)$, a semilattice $(S, \sqcup, \bot)$, an initial value of entry node $\text{OUT}_{\text{entry}} \in S$, transfer functions $f_v: S \to S$ for each node $v \in V - \text{entry}$. \Ensure Dataflow values $\text{OUT}_v \in S$ for each node $v \in V$. \Procedure{Workflow}{$G, (S, \sqcup, \bot), \text{OUT}_{\text{entry}}, \{f_v\}_{v \in V - \text{entry}}$} \State $\forall v \in V - \text{entry}, \text{OUT}_v = \bot$ \State $\text{ToVisit} = V - \text{entry}$ \While{$\text{ToVisit} \neq \varnothing$} \State Select and remove a node $v$ from $\text{ToVisit}$ \State $\text{IN}_v = \bigsqcup_{(u, v) \in E} \text{OUT}_u$ \State $\text{OUT}_v^{\text{NEW}} = f_v(\text{IN}_v)$ \If{$\text{OUT}_v^{\text{NEW}} \neq \text{OUT}_v$} \State $\text{OUT}_v = \text{OUT}_v^{\text{NEW}}$ \State $\text{ToVisit} = \text{ToVisit} \cup \{ w \mid (v, w) \in E \}$ \EndIf \EndWhile \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
