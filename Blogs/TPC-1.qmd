@@ -1,0 +1,57 @@
+---
+title: "第一届定理证明竞赛"
+author: "VectorPikachu"
+date: today
+number-sections: true
+---
+
+2025 年 11 月 29 日 下午 12:30 - 17:30, 中国软件大会会场 (武汉国际会议中心).
+
+Coq.8.20.1, with VST.2.15
+
+## 谓词与互归纳证明
+
+给定谓词 `P`、`Q`、`R`，以及如下互归纳定义的谓词`A`、`B`。
+
+- Coq: `Inductive A xxx with B xxx`
+- `a_ind`, `b_ind`
+
+（50 分）试证明定理 `neg_a`，提示：根据 `A` 或 `B` 的互归纳原理。
+
+```default
+From Coq Require Import List Lia.
+Import ListNotations.
+Section ProblemA. 
+          
+Parameter P: nat -> Prop.
+Parameter Q: nat -> Prop.
+Parameter R: nat -> nat -> Prop. 
+
+Inductive A : nat -> Prop :=
+  ca0: forall n, P n -> A n
+| ca1: forall n1, (forall n2, R n1 n2 -> B n2) -> A n1
+with B: nat -> Prop :=
+  cb0: forall n, Q n -> B n
+| cb1: forall n1 n2, R n1 n2 -> A n2 -> B n1. 
+
+Scheme a_ind := Induction for A Sort Prop 
+  with b_ind := Induction for B Sort Prop.
+
+Theorem neg_a:
+  (forall n, ~P n /\ ~Q n) ->
+  (forall n1, exists n2, R n1 n2) -> 
+  (forall n, A n -> False).
+Proof.
+intros HnPQ HR.
+apply a_ind with (fun (n : nat) (_ : B n) => False).
+- intros. specialize (HnPQ n). destruct HnPQ.
+  apply H; assumption.
+- intros. specialize (HR n1). destruct HR as [n2 HR].
+  specialize (H n2 HR). assumption.
+- intros. specialize (HnPQ n). destruct HnPQ.
+  apply H0; assumption.
+- intros. assumption.
+Qed.
+
+End ProblemA.
+```
