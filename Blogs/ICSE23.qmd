@@ -48,7 +48,7 @@ For example, ImageNet `Resnet50` models have
 
 ### DNN Static Analysis Framework with Backward Fine-Grained Node Labeling for Potential-Defect Detection
 
-A DNN architecture + valid ranges for input and weight nodes $=>$ interval abstractions for possible inputs and outputs of each node.
+A DNN architecture + valid ranges for input and weight nodes $\Rightarrow$ interval abstractions for possible inputs and outputs of each node.
 
 Formally, for given valid ranges of inference input and model weights, namely $\mathcal{X}$ and $\mathcal{W}$, for each node $n \in \mathcal{V}$,
 our framework computes *sound* input interval abstraction $[\mathbfit{l}_n, \mathbfit{u}_n] := \{\mathbfit{x} : \mathbfit{l}_n \leq x \leq \mathbfit{u}_n\}$ such that $[\mathbfit{l}_n,\mathbfit{u}_n]$

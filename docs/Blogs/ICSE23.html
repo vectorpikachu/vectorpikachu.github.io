@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,10 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-daa61cdf0a0f2a7b7769a5faa9ec7e5c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ebbede3f255f00f2ca408d38e0ffdffb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c9f56c5ebcb4a342d9707af1818d3050.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-13088808e5007bdc91306a6c5cb370c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -300,7 +300,7 @@ Figure&nbsp;1: Computational graph encoded by the snippet
 </ul>
 <section id="dnn-static-analysis-framework-with-backward-fine-grained-node-labeling-for-potential-defect-detection" class="level3">
 <h3 class="anchored" data-anchor-id="dnn-static-analysis-framework-with-backward-fine-grained-node-labeling-for-potential-defect-detection">DNN Static Analysis Framework with Backward Fine-Grained Node Labeling for Potential-Defect Detection</h3>
-<p>A DNN architecture + valid ranges for input and weight nodes <span class="math inline">\(=&gt;\)</span> interval abstractions for possible inputs and outputs of each node.</p>
+<p>A DNN architecture + valid ranges for input and weight nodes <span class="math inline">\(\Rightarrow\)</span> interval abstractions for possible inputs and outputs of each node.</p>
 <p>Formally, for given valid ranges of inference input and model weights, namely <span class="math inline">\(\mathcal{X}\)</span> and <span class="math inline">\(\mathcal{W}\)</span>, for each node <span class="math inline">\(n \in \mathcal{V}\)</span>, our framework computes <em>sound</em> input interval abstraction <span class="math inline">\([\mathbfit{l}_n, \mathbfit{u}_n] := \{\mathbfit{x} : \mathbfit{l}_n \leq x \leq \mathbfit{u}_n\}\)</span> such that <span class="math inline">\([\mathbfit{l}_n,\mathbfit{u}_n]\)</span> always captures all possible inputs of the node: <span class="math inline">\([\mathbfit{l}_n,\mathbfit{u}_n] \supseteq \{f_n^{\textsf{in}}(\mathbfit{x}, \mathbfit{w}) : \mathbfit{x} \in \mathcal{X} , \mathbfit{w} \in \mathcal{W}\}\)</span>. We also compute output interval abstractions similarly.</p>
 <p>The interval domain with tensor partitioning provides a degree of freedom in terms of <em>the partition granularity</em>, i.e., we can choose the subblock size for each node’s abstraction. When the finest granularity, i.e., elementwise abstraction, is chosen, the abstraction interval is the most concrete. When the coarsest granularity (i.e., one scalar to summarize the node tensor) is chosen, the abstraction saves the most space and computational cost but loses much precision.</p>
 <p>E.g., <span class="math inline">\(([−1, 0], [0, 1], [1, 2], [−1, 0])\)</span>:</p>
