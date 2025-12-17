@@ -264,3 +264,358 @@ induction l2.
       reflexivity.
 Qed.
 ```
+
+## 二叉树镜像证明（100 分）
+
+### 题目
+
+基于以下定义：
+
+- 二叉树 `tree`
+- 二叉树的镜像 `mirror`
+- 一个二叉树是对称的（symmetric）如果它等于自身的镜像 `symmetric`
+
+如果直接使用对称性的定义来检查一个二叉树是否对称，需要首先计算二叉树的镜像，然后做相等性比较，效率不高。我们可以通过以下方式定义更高效的对称性检查。其中，`check_mirror` 检查两个二叉树是否互为镜像，`check_symmetric` 则检查两个子树是否互为镜像。
+证明 check_mirror 和 check_symmetric 的正确性：
+
+-（50 分）定理 `check_mirror_correct`
+-（50 分）定理 `check_symmetric_correct`
+
+### 定理
+
+```default
+From Coq Require Import List Lia.
+Import ListNotations.
+
+Inductive tree (A : Type) : Type :=
+| Leaf : tree A
+| Node : A -> tree A -> tree A -> tree A.
+
+Arguments Leaf {A}.
+Arguments Node {A} _ _ _.
+
+Fixpoint mirror {A : Type} (t : tree A) : tree A :=
+  match t with
+  | Leaf => Leaf
+  | Node x l r => Node x (mirror r) (mirror l)
+  end.
+
+Definition is_symmetric {A : Type} (t : tree A) : Prop :=
+  t = mirror t.
+
+Fixpoint check_mirror {A : Type} (t1 t2 : tree A) : Prop :=
+  match t1, t2 with
+  | Leaf, Leaf => True
+  | Node x1 l1 r1, Node x2 l2 r2 =>
+    (x1 = x2) /\ (check_mirror l1 r2) /\ (check_mirror r1 l2)
+  | _, _ => False
+  end.
+
+Definition check_symmetric {A : Type} (t : tree A) : Prop :=
+  match t with
+  | Leaf => True
+  | Node x l r => check_mirror l r
+  end.
+
+Lemma check_mirror_correct : forall {A : Type} (t1 t2 : tree A),
+  check_mirror t1 t2 <-> t1 = mirror t2.
+Proof.
+split.
+- revert t2. induction t1; intros.
+  + destruct t2.
+    * simpl. reflexivity.
+    * unfold check_mirror in H. inversion H.
+  + destruct t2.
+    * inversion H.
+    * inversion H; subst.
+      destruct H1.
+      unfold mirror.
+      fold (mirror t2_2).
+      fold (mirror t2_1).
+      specialize (IHt1_1 t2_2 H0).
+      specialize (IHt1_2 t2_1 H1).
+      rewrite <- IHt1_1.
+      rewrite IHt1_2.
+      reflexivity.
+- revert t2. induction t1; intros.
+  + destruct t2.
+    * simpl. simpl in H. lia.
+    * inversion H.
+  + destruct t2.
+    * inversion H.
+    * unfold mirror in H.
+      fold (mirror t2_2) in H.
+      fold (mirror t2_1) in H.
+      inversion H; subst.
+      unfold check_mirror.
+      split; try reflexivity.
+      fold (check_mirror (mirror t2_2) t2_2).
+      fold (check_mirror (mirror t2_1) t2_1).
+      split.
+      -- apply IHt1_1. reflexivity.
+      -- apply IHt1_2. reflexivity.
+Qed.
+
+Lemma mirror_mirror: forall {A : Type} (t: tree A),
+  mirror (mirror t) = t.
+Proof.
+induction t; intros.
+- simpl. reflexivity.
+- unfold mirror.
+  fold (mirror t1).
+  fold (mirror t2).
+  fold (mirror (mirror t1)).
+  fold (mirror (mirror t2)).
+  rewrite IHt1. rewrite IHt2.
+  reflexivity.
+Qed.
+
+Theorem check_symmetric_correct: forall {A : Type} (t: tree A),
+  check_symmetric t <-> is_symmetric t.
+Proof.
+split.
+- induction t. 
+  + intros. unfold is_symmetric. unfold mirror. reflexivity.
+  + intros.
+    unfold check_symmetric in H.
+    unfold is_symmetric.
+    rewrite check_mirror_correct in H.
+    subst t1.
+    remember (mirror t2) as m2.
+    unfold mirror.
+    fold (mirror t2).
+    fold (mirror m2).
+    subst m2.
+    rewrite mirror_mirror.
+    reflexivity.
+- induction t; intros.
+  + unfold check_symmetric. constructor.
+  + unfold is_symmetric in H.
+    unfold check_symmetric.
+    unfold mirror in H.
+    fold (mirror t1) in H.
+    fold (mirror t2) in H.
+    inversion H; subst.
+    repeat (rewrite mirror_mirror).
+    apply check_mirror_correct.
+    reflexivity.
+Qed.
+```
+
+## 二分搜索极小点证明（200 分）
+
+### 题目
+
+我们考虑一个自然数的数组，满足数组中任何两个相邻的元素不相等 `neighbor_nonequal`
+
+一个索引是数组中的*极小点*，如果这个索引上的值小于两边的值（如果这个索引在边界上，则对应边的条件自动满足）。`is_local_min` 定义索引 $i$ 是数组 `xs` 的极小点
+
+可以证明总是存在一个极小点。实际上，二分搜索方法 `local_min` 可以保证返回一个极小点
+
+这个算法的正确性证明遵循以下步骤。
+
+首先，将 `is_local_min` 的定义扩展到区间的情况 `is_local_min_part`
+
+其次，函数 `local_min` 的归纳性质如下：假设 `a` 和 `b` 分别小于左侧/右侧的值，则 `local_min xs a b` 返回一个满足 `is_local_min_part` 条件的索引。该证明首先根据 `local_min` 的定义做归纳，对 `local_min` 的几种情况分类讨论，试给出定理 `local_min_correct_induct` 中相应分类讨论的证明步骤（四类情况的分数设置依次为20 分 +20 分 +60 分 +60 分）。
+
+最后，使用 `local_min_correct_induct` 验证正确性结论 `local_min_correct` （40 分）
+
+### 定理
+
+```default
+From Coq Require Import Arith List Lia.
+
+Definition neighbor_nonequal (xs : list nat) : Prop :=
+  forall i, i < length xs - 1 -> nth i xs 0 <> nth (i + 1) xs 0.
+
+Definition is_local_min (xs : list nat) (i : nat) : Prop :=
+  i < length xs /\
+  (i = 0 \/ nth i xs 0 < nth (i - 1) xs 0) /\
+  (i = length xs - 1 \/ nth i xs 0 < nth (i + 1) xs 0).
+
+Lemma ge_exists:
+ forall  right left (g : right > left)
+  (n : left + 1 <> right),
+  exists n0 : nat, right = n0 + left /\ n0 > 1.
+Proof.
+  induction right; simpl; intros.
+  - inversion g.
+  - destruct left.
+    + exists (S right).
+      lia.
+    + specialize (IHright left).
+      apply Arith_base.gt_S_n_stt in g.
+      rewrite plus_Sn_m in n.
+      rewrite Nat.succ_inj_wd_neg in n.
+      specialize (IHright g n).
+      destruct IHright as (k & Hk1 & Hk2).
+      exists k.
+      lia.
+Qed.
+
+Lemma div2_plus_2n: forall n k, Nat.div2 (k + (n + n)) = Nat.div2 k + n.
+Proof.
+  induction n; simpl; intros.
+  - rewrite ! Nat.add_0_r.
+    lia.
+  - specialize (IHn (S (S k))).
+    replace (S (S k) + (n + n)) with (k + S (n + S n))  in IHn by lia.
+    rewrite IHn.
+    simpl.
+    lia.
+Qed.
+
+Lemma div2_le: forall n k,
+  n <= k -> Nat.div2 n <= Nat.div2 k.
+Proof.
+  intros.
+  pose proof (Nat.Div0.div_le_mono n k 2) as Heq.
+  rewrite ! Nat.div2_div.
+  apply Heq.
+  lia.
+Qed.
+
+Inductive local_min : forall (xs : list nat) (l r i: nat), Prop :=
+  | case_le_right_left : forall xs l r,
+      r <= l -> 
+      local_min xs l r l
+  | case_left_plus_1_eq_right_l: forall xs l r,
+      l < r -> 
+      r = l+1 ->
+      nth l xs 0 < nth r xs 0 ->
+      local_min xs l r l
+  | case_left_plus_1_eq_right_r: forall xs l r,
+      l < r -> 
+      r = l+1 ->
+      nth r xs 0 <= nth l xs 0 ->
+      local_min xs l r r
+  | case_mid_1: forall xs l r mid i,
+      l < r -> 
+      l+1 <> r ->
+      mid = Nat.div2 (l + r) ->
+      nth (mid - 1) xs 0 < nth mid xs 0 ->
+      local_min xs l (mid - 1) i ->
+      local_min xs l r i
+  | case_mid_r: forall xs l r mid i,
+      l < r -> 
+      l+1 <> r ->
+      mid = Nat.div2 (l + r) ->
+      nth mid xs 0 <= nth (mid - 1) xs 0 ->
+      local_min xs mid r i ->
+      local_min xs l r i
+.
+
+Definition is_local_min_part (ls : list nat) (l r i: nat) : Prop :=
+  i >= l /\ i <= r /\
+  (i = 0 \/ (i < length ls /\ (i-1) < length ls /\ nth i ls 0 < nth (i-1) ls 0)) /\
+  (i = length ls - 1 \/ (i < length ls /\ (i+1) < length ls /\ nth i ls 0 < nth (i+1) ls 0)).
+
+Print nth.
+
+Lemma local_min_correct_induct :
+  forall xs a b i,
+    neighbor_nonequal xs ->
+    0 <= a -> a <= b -> b < length xs ->
+    (a = 0 \/ (a < length xs /\ (a-1) < length xs /\ nth a xs 0 < nth (a-1) xs 0)) ->
+    (b = length xs - 1 \/ (b < length xs /\ (b+1) < length xs /\ nth b xs 0 < nth (b+1) xs 0)) ->
+    local_min xs a b i ->
+    is_local_min_part xs a b i.
+Proof.
+  intros xs l r i H_neighbor H_a_lower H_ab H_b_upper H_a_cond H_b_cond Hi.
+  unfold is_local_min_part.
+  induction Hi; try lia.
+  - assert (Heq: l = r) by lia.
+    subst l.
+    lia.
+
+  - subst r. lia.
+
+  - subst r. assert (l + 1 - 1 = l) by lia.
+    replace (l + 1 - 1).
+    unfold neighbor_nonequal in H_neighbor.
+    specialize (H_neighbor l).
+    lia.
+  
+  - assert (l <= r - 2) by lia.
+  
+  assert (H_l_mid: l <= mid - 1). { 
+    rewrite H1.
+     pose proof (Nat.div2_le_mono (2 * (l + 1)) (l + r)).
+     rewrite Nat.div2_double in H4.
+     assert (r >= 2) by lia.
+     lia.
+    } 
+  assert (H_mid_r: mid - 1 <= r). { 
+    rewrite H1.
+    pose proof (Nat.div2_le_mono (l + r) (2 * (r + 1))).
+    rewrite Nat.div2_double in H4.
+    lia.
+   }
+  assert (H_mid_length: mid - 1 < length xs). { lia. } 
+  assert (H_mid_cond: mid - 1 = length xs - 1 \/ mid - 1 < length xs /\ mid - 1 + 1 < length xs /\ nth (mid - 1) xs 0 < nth (mid - 1 + 1) xs 0). {
+    assert (mid >= l+1). { pose proof (Nat.div2_le_mono (2 * (l + 1)) (l + r)). rewrite Nat.div2_double in H4. assert (l + 1 <= r) by lia. lia. }
+    remember (mid - 1) as m.
+    Search (_ < _ -> _ \/ _).
+    assert (m + 0 < length xs - 1 + 1) by lia.
+    assert (m + 1 = mid) by lia.
+    rewrite H6.
+    lia.
+   }
+  specialize (IHHi H_neighbor H_a_lower H_l_mid H_mid_length H_a_cond H_mid_cond).
+  destruct IHHi.
+  destruct H5.
+  assert (i <= r) by lia.
+  lia.
+  
+
+  - assert (H_l_mid: l+1 <= mid ). {
+    pose proof (Nat.div2_le_mono (2 * (l + 1)) (l + r)). rewrite Nat.div2_double in H3. assert (l + 1 <= r) by lia. lia.
+  }
+    assert (H_mid_r: mid <= r-1). {
+      pose proof (Nat.div2_le_mono (l+r) (2*(r-1))). rewrite Nat.div2_double in H3. assert (l <= r-1) by lia. lia.
+    }
+    assert (H_0_mid: 0 <= mid) by lia.
+    assert (H_mid_r_r: mid <= r) by lia.
+    assert (H_mid_cond: mid = 0 \/
+      mid < length xs /\
+      mid - 1 < length xs /\
+      nth mid xs 0 < nth (mid - 1) xs 0). {
+        assert (mid > 0) by lia.
+        right.
+        split. lia. split. lia.
+        assert (mid - 1 + 1 = mid) by lia.
+        unfold neighbor_nonequal in H_neighbor.
+        assert (nth (mid - 1) xs 0 <> nth mid xs 0). {
+          remember (mid - 1) as m.
+          rewrite <- H4.
+          apply H_neighbor.
+          lia.
+        }
+        lia.
+      }
+    specialize (IHHi H_neighbor H_0_mid H_mid_r_r H_b_upper H_mid_cond H_b_cond).
+    destruct IHHi.
+    destruct H4.
+    assert (i >= l) by lia.
+    lia.
+Qed.
+
+Theorem local_min_correct:
+  forall xs i,
+    neighbor_nonequal xs ->
+    length xs > 0 ->
+    local_min xs 0 (length xs - 1) i ->
+    is_local_min xs i.
+Proof.
+  intros.
+assert (H_a_lower: 0 <= 0) by lia.
+assert (H_a_b: 0 <= length xs - 1) by lia.
+assert (H_b_upper: length xs - 1 < length xs) by lia.
+assert (H_a_cond: 0 = 0 \/ 0 < length xs /\ 0 - 1 < length xs /\ nth 0 xs 0 < nth (0 - 1) xs 0) by lia.
+assert (H_b_cond: length xs - 1 = length xs - 1 \/ length xs - 1 < length xs /\ length xs - 1 + 1 < length xs /\ nth (length xs - 1) xs 0 < nth (length xs - 1 + 1) xs 0) by lia.
+pose proof (local_min_correct_induct xs 0 (length xs - 1) i H H_a_lower H_a_b H_b_upper H_a_cond H_b_cond H1).
+unfold is_local_min_part in H2.
+unfold is_local_min.
+lia.
+Qed.
+```
