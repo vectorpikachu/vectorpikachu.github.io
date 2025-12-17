@@ -9,3 +9,8 @@ You can navigate to the [About](about.qmd) page to learn more about me. You can 
 - [About Me](about.qmd)
 - [Course Notes](course_notes.qmd)
 - [Blogs](blogs.qmd)
+
+
+*Please read the following article and start protecting red pandas. These adorable creatures are facing serious threats such as habitat loss, illegal hunting, and climate change. By raising awareness, supporting conservation efforts, and making eco-friendly choices in our daily lives, we can all play a part in ensuring their survival. Every small action counts -- let’s protect red pandas before it’s too late!*
+
+[![被忽视的小熊猫的一生](./Red_Panda_Figure.jpg)](https://mp.weixin.qq.com/s/Nry_b9fkIiEA4RrQueoTAA)
