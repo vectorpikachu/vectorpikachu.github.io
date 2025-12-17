@@ -60,3 +60,4 @@ SOTA tools:
 ## Others
 
 - A brief note about [Dataflow Analysis](./Blogs/DataflowAnalysis.qmd)
+- The first Theorem Proving Competition: [第一届定理证明竞赛](Blogs/TPC-1.qmd)

@@ -1,4 +1,8 @@
 /* css styles */
+body code {
+  font-family: "Fira Code", monospace !important;
+}
+
 body {
   font-family: "Ysabeau Office", "LXGW WenKai Screen", "Noto Sans SC", sans-serif !important;
   font-optical-sizing: auto;
@@ -7,10 +11,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Ysabeau Office", "LXGW WenKai Screen", "Noto Sans SC", sans-serif !important;
   font-weight: 700;
-}
-
-code {
-  font-family: "Fira Code", monospace !important;
 }
 
 pre code {

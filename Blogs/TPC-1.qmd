@@ -9,7 +9,9 @@ number-sections: true
 
 Coq.8.20.1, with VST.2.15
 
-## 谓词与互归纳证明
+## 谓词与互归纳证明（50 分）
+
+### 题目
 
 给定谓词 `P`、`Q`、`R`，以及如下互归纳定义的谓词`A`、`B`。
 
@@ -17,6 +19,8 @@ Coq.8.20.1, with VST.2.15
 - `a_ind`, `b_ind`
 
 （50 分）试证明定理 `neg_a`，提示：根据 `A` 或 `B` 的互归纳原理。
+
+### 定理
 
 ```default
 From Coq Require Import List Lia.
@@ -54,4 +58,209 @@ apply a_ind with (fun (n : nat) (_ : B n) => False).
 Qed.
 
 End ProblemA.
+```
+
+## 列表前缀和列表连续段证明（100 分）
+
+### 题目
+
+`prefixes` 函数计算了一个列表的所有前缀。例如：
+```default
+prefixes [1; 2] = [ []      ;
+                    [1]     ;
+                    [1; 2]  ]
+```
+
+```default
+prefixes [0; 1; 2] =  [] ::
+                      map (cons 0 (prefixes [1; 2]))
+                   = [] ::
+                     [ 0 :: []      ;
+                       0 :: [1]     ;
+                       0 :: [1; 2]  ]
+                   = [ []           ;
+                       [0]          ;
+                       [0; 1]       ;
+                       [0; 1; 2]    ]
+```
+
+接下去，请证明，`prefixes l` 中的确实是 `l` 的全部前缀。
+
+- （20 分）`in_prefixes`
+- （20 分）`in_prefixes_inv`
+
+`sublists` 定义了列表中的所有连续段。请证明 `sublists l` 的元素确实是 `l` 中的所有连续段。提示：必要时可以添加并证明一些前置引理帮助完成证明。
+
+- （30 分）`in_sublists`
+- （30 分）`in_sublists_inv`
+
+### 定理
+
+```default
+From Coq Require Import ZArith List.
+Import ListNotations.
+Local Open Scope Z.
+Local Open Scope list.
+
+(************)
+(** 习题：  *)
+(************)
+
+(** 下面定义的_[prefixes]_函数计算了一个列表的所有前缀。*)
+
+Fixpoint prefixes {A: Type} (l: list A): list (list A) :=
+  match l with
+  | nil => [nil]
+  | a :: l0 => nil :: (map (cons a) (prefixes l0))
+  end.
+
+(** 例如：
+   
+        prefixes [1; 2]    = [ []     ;
+                               [1]    ;
+                               [1; 2] ] 
+   
+        prefixes [0; 1; 2] = [] ::
+                             map (cons 0 (prefixes [1; 2]))
+                           = [] ::
+                             [ 0 :: []     ;
+                               0 :: [1]    ;
+                               0 :: [1; 2] ]
+                           = [ []        ;
+                               [0]       ;
+                               [0; 1]    ;
+                               [0; 1; 2] ]
+      
+    接下去，请分三步证明，_[prefixes l]_中的确实是_[l]_的全部前缀。*)
+
+Theorem in_prefixes:
+  forall A (l1 l2: list A),
+    In l1 (prefixes (l1 ++ l2)).
+(* 请在此处填入你的证明，以_[Qed]_结束。 *)
+Proof.
+intros A l1.
+induction l1; intros.
+- rewrite app_nil_l. destruct l2.
+  + unfold prefixes. simpl. left. reflexivity.
+  + unfold prefixes. simpl. left. reflexivity.
+- rewrite <- app_comm_cons.
+  unfold prefixes. simpl.
+  right. fold (prefixes (l1 ++ l2)).
+  apply in_map.
+  apply IHl1.
+Qed.
+
+Theorem in_prefixes_inv:
+  forall A (l1 l: list A),
+    In l1 (prefixes l) ->
+    exists l2, l1 ++ l2 = l.
+(* 请在此处填入你的证明，以_[Qed]_结束。 *)
+Proof.
+intros A l1.
+induction l1; intros.
+- exists l. simpl. reflexivity.
+- destruct l.
+  + unfold prefixes in H. simpl in H. destruct H.
+    * discriminate H.
+    * inversion H.
+  + unfold prefixes in H. simpl in H. destruct H.
+    * discriminate H.
+    * fold (prefixes l) in H.
+      rewrite in_map_iff in H.
+      destruct H. destruct H.
+      inversion H; subst.
+      specialize (IHl1 l H0).
+      destruct IHl1.
+      exists x.
+      rewrite <- app_comm_cons.
+      rewrite <- H1.
+      reflexivity.
+Qed.
+
+(************)
+(** 习题：  *)
+(************)
+
+(** 下面的_[sublists]_定义了列表中的所有连续段。*)
+
+Fixpoint sublists {A: Type} (l: list A): list (list A) :=
+  match l with
+  | nil => [nil]
+  | a :: l0 => map (cons a) (prefixes l0) ++ sublists l0
+  end.
+
+(** 请证明_[sublists l]_的元素确实是_[l]_中的所有连续段。提示：必要时可以添加并证明一
+    些前置引理帮助完成证明。*)
+
+Lemma nil_in_sublists: 
+  forall A (l : list A),
+    In [] (sublists l).
+Proof.
+induction l.
+- simpl. left. reflexivity.
+- unfold sublists. fold (sublists l).
+  rewrite in_app_iff. right. assumption.
+Qed.
+
+Lemma app_left_in_sublists:
+  forall A (l1 l2 : list A),
+    In l1 (sublists (l1 ++ l2)).
+Proof.
+intros A l1.
+induction l1; intros.
+- simpl. apply nil_in_sublists.
+- simpl. rewrite in_app_iff. left.
+  rewrite in_map_iff.
+  exists l1.
+  split; try reflexivity; try (apply in_prefixes).
+Qed.
+
+
+Theorem in_sublists:
+  forall A (l1 l2 l3: list A),
+    In l2 (sublists (l1 ++ l2 ++ l3)).
+(* 请在此处填入你的证明，以_[Qed]_结束。 *)
+Proof.
+intros A l1.
+induction l1; intros.
+- rewrite app_nil_l.
+  apply app_left_in_sublists.
+- unfold sublists.
+  simpl.
+  fold (sublists (l1 ++ l2 ++ l3)).
+  rewrite in_app_iff. right.
+  apply IHl1.
+Qed.
+
+Theorem in_sublists_inv:
+  forall A (l2 l: list A),
+    In l2 (sublists l) ->
+    exists l1 l3, l1 ++ l2 ++ l3 = l.
+Proof.
+intros A l2.
+induction l2.
+- intros. simpl. exists []. exists l. simpl. reflexivity.
+- induction l.
+  + intros. unfold sublists in H. simpl in H.
+    destruct H; inversion H.
+  + unfold sublists. simpl. fold (sublists l).
+    intros. rewrite in_app_iff in H.
+    destruct H.
+    * rewrite in_map_iff in H. destruct H.
+      destruct H. inversion H; subst.
+      exists [].
+      simpl.
+      pose proof (in_prefixes_inv A l2 l H0).
+      destruct H1.
+      exists x.
+      rewrite H1.
+      reflexivity.
+    * specialize (IHl H). destruct IHl.
+      destruct H0. exists (a0 :: x).
+      exists x0.
+      simpl.
+      rewrite <- H0.
+      simpl.
+      reflexivity.
+Qed.
 ```
