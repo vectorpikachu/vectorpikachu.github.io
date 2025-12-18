@@ -299,7 +299,7 @@ window.Quarto = {
 </section>
 <section id="dataflow-analysis-framework" class="level2">
 <h2 class="anchored" data-anchor-id="dataflow-analysis-framework">Dataflow Analysis Framework</h2>
-<div id="dataflow-framework" class="pseudocode-container quarto-float" data-pseudocode-number="1" data-line-number="true" data-line-number-punc=":" data-caption-prefix="Algorithm" data-indent-size="1.2em" data-no-end="false" data-comment-delimiter="//">
+<div id="dataflow-framework" class="pseudocode-container quarto-float" data-comment-delimiter="//" data-pseudocode-number="1" data-line-number="true" data-indent-size="1.2em" data-caption-prefix="Algorithm" data-no-end="false" data-line-number-punc=":">
 <div class="pseudocode">
 \begin{algorithm} \caption{Dataflow Analysis Framework} \begin{algorithmic} \Require A control flow graph (CFG) $G = (V, E)$, a semilattice $(S, \sqcup, \bot)$, an initial value of entry node $\text{OUT}_{\text{entry}} \in S$, transfer functions $f_v: S \to S$ for each node $v \in V - \text{entry}$. \Ensure Dataflow values $\text{OUT}_v \in S$ for each node $v \in V$. \Procedure{Workflow}{$G, (S, \sqcup, \bot), \text{OUT}_{\text{entry}}, \{f_v\}_{v \in V - \text{entry}}$} \State $\forall v \in V - \text{entry}, \text{OUT}_v = \bot$ \State $\text{ToVisit} = V - \text{entry}$ \While{$\text{ToVisit} \neq \varnothing$} \State Select and remove a node $v$ from $\text{ToVisit}$ \State $\text{IN}_v = \bigsqcup_{(u, v) \in E} \text{OUT}_u$ \State $\text{OUT}_v^{\text{NEW}} = f_v(\text{IN}_v)$ \If{$\text{OUT}_v^{\text{NEW}} \neq \text{OUT}_v$} \State $\text{OUT}_v = \text{OUT}_v^{\text{NEW}}$ \State $\text{ToVisit} = \text{ToVisit} \cup \{ w \mid (v, w) \in E \}$ \EndIf \EndWhile \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
