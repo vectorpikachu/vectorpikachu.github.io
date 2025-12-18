@@ -9,6 +9,7 @@ author: "VectorPikachu"
 This book is the textbook for CS 3110 *Data Structures and Functional Programming* at **Cornell University**. 
 
 现在我的 WSL2 里的环境如下:
+
 - `opam --version`: `2.4.1`
 - `opam switch list`: `4.14.1`(`ocaml-base-compiler = 4.14.1`), `default`(`ocaml-base-compiler = 5.3.0`)
 
@@ -33,6 +34,7 @@ utop
 ![utop 运行示例](./figs/utop.png)
 
 The best workflow when using the toplevel with code stored in files is:
+
 - Edit the code in the file.
 - Load the code in the toplevel with `#use`.
 - Interactively test the code.
@@ -63,6 +65,7 @@ ocamlc -o hello.byte hello.ml
 (executable
  (name hello))
 ```
+
 - 创建一个名为 `dune-project` 的文件, 里面写上: `(lang dune 3.4)`
 - `dune build hello.exe` 来构建
 - 接下来在 `_build/default/hello.exe` 处就可以找到构建后的可执行文件
@@ -87,6 +90,7 @@ dune exec bin/main.exe
 ### Ocaml 里的表达式
 
 注意: 
+
 - ocaml 里的 `*` 只能用作**整数**乘法, 浮点数必须为 `*.` (这后面有个**小数点**.)
 - **字符串的 `^` 表示拼接**
 ![Ocaml 里的表达式](./figs/expressions.png)
@@ -95,6 +99,7 @@ dune exec bin/main.exe
 ![`if`表达式, `let ... in ...` 表达式, `assert` 表达式](./figs/if+let.png)
 
 **函数表达式**:
+
 - 普通函数: `let f x = ...`
 - 递归函数: `let rec f x = ...`
 - Mutually Recursive Function: `let rec f x1 ... xn = e1 and g y1 ... ym = e2`
@@ -109,6 +114,7 @@ square (inc 5);;
 
 #### Polymorphic Functions
 *identity function*: `let id x = x`; `val id : 'a -> 'a = <fun>`.
+
 - `'a` 是一个类型变量
 
 我们可以通过: 提供参数的类型, 提供函数的类型, 提供参数之间的运算 (这样来确定参数类型), 把多态函数确定下来.
@@ -149,9 +155,11 @@ let rec count_aux n acc =
 let count_tr n = count_aux n 0
 ```
 > **A recursive call in tail position does not need a new stack frame. It can just reuse the existing stack frame.**
+> 
 > A good compiler (and the OCaml compiler is good this way) can notice when a recursive call is in _tail position_, which is a technical way of saying “there’s no more computation to be done after it returns”.
 
 换言之, 返回后就不会有更多的计算了.
+
 - `count` 在计算完 `count (n - 1)` 之后还需要计算一次 `1 + ...`;
 - 而 `count_aux` 返回后不必进行计算了.
 
@@ -194,12 +202,14 @@ let rec sum lst = ...
 let rec sum lst = ...
 ```
 ### Printing
+
 - 使用 `print_endline` 来打印, 多个打印可以使用分号的语法糖.
 - 可以使用 `print_string`, `print_float`, `print_newline` 等
 - 可以使用 `Printf.printf`: `%s` 代表 string, `%F` 代表 float.
 ![Printing](./figs/printing.png)
 
 ### Debugging
+
 - 使用 print
 - `#trace` 很牛
 - `ocamldebug`
@@ -242,11 +252,13 @@ let rec ( ^^ ) x y = if y = 0 then 1. else x *. (( ^^ ) x (y - 1));;
 
 ## Datas and Types
 ### Lists
+
 - `[]: 'a list` (**注意到: list 是放在类型后面的.**)
 - `e1 :: e2 :: e3 = e1 :: (e2 :: e3)`
 - `[e1; e2; ...; en] = e1 :: e2 :: ... :: en :: []`
 
 列表常见的语法:
+
 - Pattern Matching with Lists
 ```ocaml
 let rec sum lst =
@@ -280,6 +292,7 @@ let d = Tue
  (name test_calculator)
  (libraries ounit2 calculator))
 ```
+
 4. `test` 的 `test_calculator.ml` 文件里写入:
 ```ocaml
 open OUnit2
@@ -293,6 +306,7 @@ let tests = "test suite for sum" >::: [
   
 let _ = run_test_tt_main tests
 ```
+
 5. `dune exec test/test_calculator.exe`
 ![正确和错误的示例](./figs/OUnit2.png)
 这里的 `>::` 和 `>:::` 都是 `Ounit2` 自定义的运算符.
@@ -380,6 +394,7 @@ let lst2 = map p [1; 2]
 ```
 
 比较两种实现:
+
 - 第一种实现 evaluates to: `p 1 :: (p 2 :: [])`, 那么 `p 2` 会先被调用, 然后是 `p 1`. 打印的顺序是 `2` 然后是 `1`.
 - 第二种实现 evaluates to: `let h' = p 1 in h' :: (let h' = p 2 in h' :: [])`, 那么 `p 1` 会先被调用, 然后是 `p 2`. 打印的顺序是 `1` 然后是 `2`.
 

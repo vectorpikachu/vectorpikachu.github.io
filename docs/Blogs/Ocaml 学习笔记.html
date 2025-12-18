@@ -291,7 +291,11 @@ window.Quarto = {
 
 <p><a href="https://cs3110.github.io/textbook/cover.html">OCaml Programming: Correct + Efficient + Beautiful — OCaml Programming: Correct + Efficient + Beautiful</a></p>
 <p>This book is the textbook for CS 3110 <em>Data Structures and Functional Programming</em> at <strong>Cornell University</strong>.</p>
-<p>现在我的 WSL2 里的环境如下: - <code>opam --version</code>: <code>2.4.1</code> - <code>opam switch list</code>: <code>4.14.1</code>(<code>ocaml-base-compiler = 4.14.1</code>), <code>default</code>(<code>ocaml-base-compiler = 5.3.0</code>)</p>
+<p>现在我的 WSL2 里的环境如下:</p>
+<ul>
+<li><code>opam --version</code>: <code>2.4.1</code></li>
+<li><code>opam switch list</code>: <code>4.14.1</code>(<code>ocaml-base-compiler = 4.14.1</code>), <code>default</code>(<code>ocaml-base-compiler = 5.3.0</code>)</li>
+</ul>
 <p>使用下面的命令创建一个新的 Switch:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> switch create cs3110-2025fa ocaml-base-compiler.5.3.0</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="va">$(</span><span class="ex">opam</span> env<span class="va">)</span></span>
@@ -309,7 +313,13 @@ window.Quarto = {
 <figcaption>utop 运行示例</figcaption>
 </figure>
 </div>
-<p>The best workflow when using the toplevel with code stored in files is: - Edit the code in the file. - Load the code in the toplevel with&nbsp;<code>#use</code>. - Interactively test the code. - Exit the toplevel.&nbsp;<strong>Warning:</strong>&nbsp;do not skip this step. <code>#quit;;</code></p>
+<p>The best workflow when using the toplevel with code stored in files is:</p>
+<ul>
+<li>Edit the code in the file.</li>
+<li>Load the code in the toplevel with&nbsp;<code>#use</code>.</li>
+<li>Interactively test the code.</li>
+<li>Exit the toplevel.&nbsp;<strong>Warning:</strong>&nbsp;do not skip this step. <code>#quit;;</code></li>
+</ul>
 </section>
 <section id="storing-code-in-files" class="level3">
 <h3 class="anchored" data-anchor-id="storing-code-in-files">Storing code in files</h3>
@@ -355,9 +365,19 @@ window.Quarto = {
 </section>
 <section id="ocaml-里的表达式" class="level3">
 <h3 class="anchored" data-anchor-id="ocaml-里的表达式">Ocaml 里的表达式</h3>
-<p>注意: - ocaml 里的 <code>*</code> 只能用作<strong>整数</strong>乘法, 浮点数必须为 <code>*.</code> (这后面有个<strong>小数点</strong>.) - <strong>字符串的 <code>^</code> 表示拼接</strong> <img src="./figs/expressions.png" class="img-fluid" alt="Ocaml 里的表达式"></p>
+<p>注意:</p>
+<ul>
+<li>ocaml 里的 <code>*</code> 只能用作<strong>整数</strong>乘法, 浮点数必须为 <code>*.</code> (这后面有个<strong>小数点</strong>.)</li>
+<li><strong>字符串的 <code>^</code> 表示拼接</strong> <img src="./figs/expressions.png" class="img-fluid" alt="Ocaml 里的表达式"></li>
+</ul>
 <p><code>if</code> 表达式, <code>let ... in ...</code> 表达式, <code>assert</code> 表达式, 函数表达式. <img src="./figs/if+let.png" class="img-fluid" alt="if表达式, let ... in ... 表达式, assert 表达式"></p>
-<p><strong>函数表达式</strong>: - 普通函数: <code>let f x = ...</code> - 递归函数: <code>let rec f x = ...</code> - Mutually Recursive Function: <code>let rec f x1 ... xn = e1 and g y1 ... ym = e2</code> - 也可以把函数写成: <code>let f = fun x -&gt; ...</code></p>
+<p><strong>函数表达式</strong>:</p>
+<ul>
+<li>普通函数: <code>let f x = ...</code></li>
+<li>递归函数: <code>let rec f x = ...</code></li>
+<li>Mutually Recursive Function: <code>let rec f x1 ... xn = e1 and g y1 ... ym = e2</code></li>
+<li>也可以把函数写成: <code>let f = fun x -&gt; ...</code></li>
+</ul>
 <p>OCaml 提供一个 <code>|&gt;</code> 的中缀运算符, 实现<strong>管道 (Pipelines) 操作</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>square (inc <span class="dv">5</span>);;</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> |&gt; inc |&gt; square;;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -369,7 +389,10 @@ window.Quarto = {
 </div>
 <section id="polymorphic-functions" class="level4">
 <h4 class="anchored" data-anchor-id="polymorphic-functions">Polymorphic Functions</h4>
-<p><em>identity function</em>: <code>let id x = x</code>; <code>val id : 'a -&gt; 'a = &lt;fun&gt;</code>. - <code>'a</code> 是一个类型变量</p>
+<p><em>identity function</em>: <code>let id x = x</code>; <code>val id : 'a -&gt; 'a = &lt;fun&gt;</code>.</p>
+<ul>
+<li><code>'a</code> 是一个类型变量</li>
+</ul>
 <p>我们可以通过: 提供参数的类型, 提供函数的类型, 提供参数之间的运算 (这样来确定参数类型), 把多态函数确定下来. <img src="./figs/poly-func.png" class="img-fluid" alt="Polymorphic Functions"></p>
 </section>
 <section id="labeled-and-optional-arguments" class="level4">
@@ -407,9 +430,14 @@ window.Quarto = {
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> count_tr n = count_aux n <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
-<p><strong>A recursive call in tail position does not need a new stack frame. It can just reuse the existing stack frame.</strong> A good compiler (and the OCaml compiler is good this way) can notice when a recursive call is in&nbsp;<em>tail position</em>, which is a technical way of saying “there’s no more computation to be done after it returns”.</p>
+<p><strong>A recursive call in tail position does not need a new stack frame. It can just reuse the existing stack frame.</strong></p>
+<p>A good compiler (and the OCaml compiler is good this way) can notice when a recursive call is in&nbsp;<em>tail position</em>, which is a technical way of saying “there’s no more computation to be done after it returns”.</p>
 </blockquote>
-<p>换言之, 返回后就不会有更多的计算了. - <code>count</code> 在计算完 <code>count (n - 1)</code> 之后还需要计算一次 <code>1 + ...</code>; - 而 <code>count_aux</code> 返回后不必进行计算了.</p>
+<p>换言之, 返回后就不会有更多的计算了.</p>
+<ul>
+<li><code>count</code> 在计算完 <code>count (n - 1)</code> 之后还需要计算一次 <code>1 + ...</code>;</li>
+<li>而 <code>count_aux</code> 返回后不必进行计算了.</li>
+</ul>
 <p><strong>The Recipe for Tail Recursion.</strong>&nbsp;In a nutshell, here’s how we made a function be tail recursive: 1. Change the function into a helper function. Add an extra argument: the accumulator, often named&nbsp;<code>acc</code>. 2. Write a new “main” version of the function that calls the helper. It passes the original base case’s return value as the initial value of the accumulator. 3. Change the helper function to return the accumulator in the base case. 4. Change the helper function’s recursive case. It now needs to do the extra work on the accumulator argument, before the recursive call. This is the only step that requires much ingenuity.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">(** </span><span class="ot">[</span>fact n<span class="ot">]</span><span class="co"> is </span><span class="ot">[</span>n<span class="ot">]</span><span class="co"> factorial. *)</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">rec</span> fact n =</span>
@@ -565,7 +593,10 @@ window.Quarto = {
 <li><code>e1 :: e2 :: e3 = e1 :: (e2 :: e3)</code></li>
 <li><code>[e1;&nbsp;e2;&nbsp;...;&nbsp;en] = e1&nbsp;::&nbsp;e2&nbsp;::&nbsp;...&nbsp;::&nbsp;en&nbsp;::&nbsp;[]</code></li>
 </ul>
-<p>列表常见的语法: - Pattern Matching with Lists</p>
+<p>列表常见的语法:</p>
+<ul>
+<li>Pattern Matching with Lists</li>
+</ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">rec</span> sum lst =</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">match</span> lst <span class="kw">with</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  | [] -&gt; <span class="dv">0</span></span>
@@ -688,7 +719,11 @@ window.Quarto = {
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  | h :: t -&gt; <span class="kw">let</span> h' = f h <span class="kw">in</span> h' :: map f t</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> lst2 = map p [<span class="dv">1</span>; <span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>比较两种实现: - 第一种实现 evaluates to: <code>p 1 :: (p 2 :: [])</code>, 那么 <code>p 2</code> 会先被调用, 然后是 <code>p 1</code>. 打印的顺序是 <code>2</code> 然后是 <code>1</code>. - 第二种实现 evaluates to: <code>let h' = p 1 in h' :: (let h' = p 2 in h' :: [])</code>, 那么 <code>p 1</code> 会先被调用, 然后是 <code>p 2</code>. 打印的顺序是 <code>1</code> 然后是 <code>2</code>.</p>
+<p>比较两种实现:</p>
+<ul>
+<li>第一种实现 evaluates to: <code>p 1 :: (p 2 :: [])</code>, 那么 <code>p 2</code> 会先被调用, 然后是 <code>p 1</code>. 打印的顺序是 <code>2</code> 然后是 <code>1</code>.</li>
+<li>第二种实现 evaluates to: <code>let h' = p 1 in h' :: (let h' = p 2 in h' :: [])</code>, 那么 <code>p 1</code> 会先被调用, 然后是 <code>p 2</code>. 打印的顺序是 <code>1</code> 然后是 <code>2</code>.</li>
+</ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">rec</span> map_tr_aux f acc = <span class="kw">function</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  | [] -&gt; acc</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  | h :: t -&gt; map_tr_aux f (f h :: acc) t</span>
