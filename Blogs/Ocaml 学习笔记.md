@@ -84,7 +84,9 @@ dune exec bin/main.exe
 ![`dune init` 的运行示例](./figs/dune.png)
 
 在 VSCode 里显示如下:
+
 ![Dune Project in VSCode](./figs/project_in_code.png)
+
 可以和 `typst watch main.typ` 一样, 我们也有: `dune build --watch`.
 
 ### Ocaml 里的表达式
@@ -93,9 +95,11 @@ dune exec bin/main.exe
 
 - ocaml 里的 `*` 只能用作**整数**乘法, 浮点数必须为 `*.` (这后面有个**小数点**.)
 - **字符串的 `^` 表示拼接**
+
 ![Ocaml 里的表达式](./figs/expressions.png)
 
 `if` 表达式, `let ... in ...` 表达式, `assert` 表达式, 函数表达式.
+
 ![`if`表达式, `let ... in ...` 表达式, `assert` 表达式](./figs/if+let.png)
 
 **函数表达式**:
@@ -110,6 +114,7 @@ OCaml 提供一个 `|>` 的中缀运算符, 实现**管道 (Pipelines) 操作**:
 square (inc 5);;
 5 |> inc |> square;;
 ```
+
 ![函数表达式和 Pipeline](./figs/func.png)
 
 #### Polymorphic Functions
@@ -118,6 +123,7 @@ square (inc 5);;
 - `'a` 是一个类型变量
 
 我们可以通过: 提供参数的类型, 提供函数的类型, 提供参数之间的运算 (这样来确定参数类型), 把多态函数确定下来.
+
 ![Polymorphic Functions](./figs/poly-func.png)
 
 #### Labeled and Optional Arguments
@@ -131,6 +137,7 @@ let f ~name1:(arg1 : int) ~name2:(arg2 : int) = arg1 + arg2
 let f ?name:(arg1=8) arg2 = arg1 + arg2
 (* ?name代表的是可选参数, 你可以直接使用 f 7, 也可以 f ~name:2 7 *)
 ```
+
 ![Labeled and Optional Arguments](./figs/Labeled-and-Optional-Arguments.png)
 
 #### Partial Application
@@ -142,6 +149,7 @@ add5 2
 ```
 
 与此同时, `( + )` 也是一个函数, 我们甚至可以自己定义自己的中缀运算符: `let ( op ) ... = ...`
+
 ![Partial Application and Operators as Functions](./figs/func-2.png)
 
 #### 尾递归 (Tail Recursion)
@@ -189,6 +197,7 @@ let zfact_tr n = zfact_aux n Z.one;;
 
 zfact_tr (Z.of_int 50)
 ```
+
 ![尾递归和`zarith`库](./figs/zarith.png)
 
 ### Documentation
@@ -206,6 +215,7 @@ let rec sum lst = ...
 - 使用 `print_endline` 来打印, 多个打印可以使用分号的语法糖.
 - 可以使用 `print_string`, `print_float`, `print_newline` 等
 - 可以使用 `Printf.printf`: `%s` 代表 string, `%F` 代表 float.
+
 ![Printing](./figs/printing.png)
 
 ### Debugging
@@ -213,6 +223,7 @@ let rec sum lst = ...
 - 使用 print
 - `#trace` 很牛
 - `ocamldebug`
+
 ![使用`#trace`来debug](./figs/trace.png)
 
 ### Exercises
@@ -308,7 +319,9 @@ let _ = run_test_tt_main tests
 ```
 
 5. `dune exec test/test_calculator.exe`
+
 ![正确和错误的示例](./figs/OUnit2.png)
+
 这里的 `>::` 和 `>:::` 都是 `Ounit2` 自定义的运算符.
 
 ### Records and Tuples
@@ -317,8 +330,11 @@ type ptype = TNormal | TFire | TWater
 type mon = {name : string; hp : int; ptype : ptype}
 {name = "Charmander"; hp = 39; ptype = TFire}
 ```
+
 ![Records and Tuples](./figs/Records+Tuples.png)
+
 ### Type Synonyms
+
 ```ocaml
 type point = float * float
 type vector = float list
@@ -338,8 +354,11 @@ let rec list_max lst =
 list_max [1; 2; 3; 4; 10; 0];;
 (* - : int option = Some 10 *)
 ```
+
 ![Options](./figs/options.png)
+
 ### Algebraic Data Types
+
 ```ocaml
 type point = float * float
 type shape =
@@ -372,9 +391,11 @@ let lst_hi = Cons ("hi", Nil)  (* similar to ["hi"] *)
 ```
 
 ### Exceptions
+
 ```ocmal
 exception E of t
 ```
+
 ![Exceptions](./figs/exceptions.png)
 
 ## Higher-Order Functions
