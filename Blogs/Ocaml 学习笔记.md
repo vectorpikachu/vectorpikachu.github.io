@@ -251,8 +251,8 @@ let rec ( ^^ ) x y = if y = 0 then 1. else x *. (( ^^ ) x (y - 1));;
 | `==`         | Physical equality (same object)                               |
 | `!=`         | Physical inequality (not same object)                         |
 | `&&`         | Boolean and                                                   |
-| `\|\|`       | Boolean or                                                    |
-| `\|>`        | Reverse function application (`x \|> f` is the same as `f x`) |
+| `||`         | Boolean or                                                    |
+| `|>`         | Reverse function application (`x |> f` is the same as `f x`)  |
 | `@@`         | Function application (`f @@ x` is the same as `f x`)          |
 | `**`         | Float exponentiation                                          |
 | `^`          | String concatenation                                          |
