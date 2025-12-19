@@ -4,7 +4,7 @@ date: today
 author: "VectorPikachu"
 ---
 
-[OCaml Programming: Correct + Efficient + Beautiful — OCaml Programming: Correct + Efficient + Beautiful](https://cs3110.github.io/textbook/cover.html)
+[OCaml Programming: Correct + Efficient + Beautiful](https://cs3110.github.io/textbook/cover.html)
 
 This book is the textbook for CS 3110 *Data Structures and Functional Programming* at **Cornell University**. 
 
@@ -172,6 +172,7 @@ let count_tr n = count_aux n 0
 - 而 `count_aux` 返回后不必进行计算了.
 
 **The Recipe for Tail Recursion.** In a nutshell, here’s how we made a function be tail recursive:
+
 1. Change the function into a helper function. Add an extra argument: the accumulator, often named `acc`.
 2. Write a new “main” version of the function that calls the helper. It passes the original base case’s return value as the initial value of the accumulator.
 3. Change the helper function to return the accumulator in the base case.

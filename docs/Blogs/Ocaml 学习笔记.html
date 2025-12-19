@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="VectorPikachu">
-<meta name="dcterms.date" content="2025-12-18">
+<meta name="dcterms.date" content="2025-12-19">
 
 <title>Ocaml 学习笔记 – VectorPikachu</title>
 <style>
@@ -279,7 +279,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 18, 2025</p>
+      <p class="date">December 19, 2025</p>
     </div>
   </div>
   
@@ -291,7 +291,7 @@ window.Quarto = {
 </header>
 
 
-<p><a href="https://cs3110.github.io/textbook/cover.html">OCaml Programming: Correct + Efficient + Beautiful — OCaml Programming: Correct + Efficient + Beautiful</a></p>
+<p><a href="https://cs3110.github.io/textbook/cover.html">OCaml Programming: Correct + Efficient + Beautiful</a></p>
 <p>This book is the textbook for CS 3110 <em>Data Structures and Functional Programming</em> at <strong>Cornell University</strong>.</p>
 <p>现在我的 WSL2 里的环境如下:</p>
 <ul>
@@ -471,7 +471,13 @@ window.Quarto = {
 <li><code>count</code> 在计算完 <code>count (n - 1)</code> 之后还需要计算一次 <code>1 + ...</code>;</li>
 <li>而 <code>count_aux</code> 返回后不必进行计算了.</li>
 </ul>
-<p><strong>The Recipe for Tail Recursion.</strong>&nbsp;In a nutshell, here’s how we made a function be tail recursive: 1. Change the function into a helper function. Add an extra argument: the accumulator, often named&nbsp;<code>acc</code>. 2. Write a new “main” version of the function that calls the helper. It passes the original base case’s return value as the initial value of the accumulator. 3. Change the helper function to return the accumulator in the base case. 4. Change the helper function’s recursive case. It now needs to do the extra work on the accumulator argument, before the recursive call. This is the only step that requires much ingenuity.</p>
+<p><strong>The Recipe for Tail Recursion.</strong>&nbsp;In a nutshell, here’s how we made a function be tail recursive:</p>
+<ol type="1">
+<li>Change the function into a helper function. Add an extra argument: the accumulator, often named&nbsp;<code>acc</code>.</li>
+<li>Write a new “main” version of the function that calls the helper. It passes the original base case’s return value as the initial value of the accumulator.</li>
+<li>Change the helper function to return the accumulator in the base case.</li>
+<li>Change the helper function’s recursive case. It now needs to do the extra work on the accumulator argument, before the recursive call. This is the only step that requires much ingenuity.</li>
+</ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">(** </span><span class="ot">[</span>fact n<span class="ot">]</span><span class="co"> is </span><span class="ot">[</span>n<span class="ot">]</span><span class="co"> factorial. *)</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">rec</span> fact n =</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> n = <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n * fact (n - <span class="dv">1</span>)</span>
