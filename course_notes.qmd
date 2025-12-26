@@ -10,9 +10,22 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
 
 - Mathmatical Logic | [Click here to view the notes.](./Course_Notes/数理逻辑/数理逻辑.qmd) <br>
   数理逻辑 | [点击此处查看笔记.](./Course_Notes/数理逻辑/数理逻辑.qmd)
-- Set Theory and Graph Theory
+- Set Theory and Graph Theory <br>
   集合论与图论
-- ...
+- Taijiquan (Tai Chi Quan) <br>
+  太极拳
+- Frontiers of Economics Research and Practice <br>
+  经济学学术与实践前沿
+- Money and Banking <br>
+  货币银行学
+- International Finance <br>
+  国际金融
+- Behavioral Economics <br>
+  行为经济学
+- Investment <br>
+  投资学
+- The Economics of Artificial Intelligence <br>
+  人工智能经济学
 
 # 24-25-3
 
