@@ -10,6 +10,9 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
 
 - Mathmatical Logic | [Click here to view the notes.](./Course_Notes/数理逻辑/数理逻辑.qmd) <br>
   数理逻辑 | [点击此处查看笔记.](./Course_Notes/数理逻辑/数理逻辑.qmd)
+- Set Theory and Graph Theory
+  集合论与图论
+- ...
 
 # 24-25-3
 
