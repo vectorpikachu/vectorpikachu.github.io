@@ -18,8 +18,8 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
   经济学学术与实践前沿
 - Money and Banking <br>
   货币银行学
-- International Finance <br>
-  国际金融
+- International Finance | [Click here to view the notes.](./Course_Notes/国际金融/国际金融.md) <br>
+  国际金融 | [点击此处查看笔记.](./Course_Notes/国际金融/国际金融.md)
 - Behavioral Economics <br>
   行为经济学
 - Investment <br>
