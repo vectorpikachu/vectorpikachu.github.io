@@ -2,11 +2,11 @@
 title: "Course Notes"
 ---
 
-Here are the course notes written by myself. I've taken 58 courses (147 points) in PKU.
+Here are the course notes written by myself. I've taken 67 courses (170 points) in PKU.
 
 # 25-26-1
 
-...
+9 courses, 23 points in total.
 
 - Mathmatical Logic | [Click here to view the notes.](./Course_Notes/数理逻辑/数理逻辑.qmd) <br>
   数理逻辑 | [点击此处查看笔记.](./Course_Notes/数理逻辑/数理逻辑.qmd)
@@ -20,8 +20,8 @@ Here are the course notes written by myself. I've taken 58 courses (147 points) 
   货币银行学
 - International Finance | [Click here to view the notes.](./Course_Notes/国际金融/国际金融.md) <br>
   国际金融 | [点击此处查看笔记.](./Course_Notes/国际金融/国际金融.md)
-- Behavioral Economics <br>
-  行为经济学
+- Behavioral Economics | [Click here to view the notes.](./PDF/行为经济学期末复习.pdf) <br>
+  行为经济学 | [点击此处查看笔记.](./PDF/行为经济学期末复习.pdf)
 - Investment <br>
   投资学
 - The Economics of Artificial Intelligence <br>
