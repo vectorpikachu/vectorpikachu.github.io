@@ -12,7 +12,7 @@ Here are the course notes written by myself. I've taken 67 courses (170 points) 
   数理逻辑 | [点击此处查看笔记.](./Course_Notes/数理逻辑/数理逻辑.qmd)
 - Set Theory and Graph Theory | [Click here to view the notes.](./PDF/图论期末复习.pdf) <br>
   集合论与图论 | [点击此处查看笔记.](./PDF/图论期末复习.pdf)
-- Taijiquan (Tai Chi Quan) <br>
+- Shadowboxing <br>
   太极拳
 - Frontiers of Economics Research and Practice <br>
   经济学学术与实践前沿
@@ -77,12 +77,13 @@ Here are the course notes written by myself. I've taken 67 courses (170 points) 
     - [Homework 2](./PDF/SE-HW/SE-HW2.pdf)
     - [Homework 3](./PDF/SE-HW/SE-HW3.pdf)
 - A Survey of Mao Tsetung Thoughts and Theory of Socialism with Chinese Charateristics <br>
-  毛概
+  毛泽东思想和中国特色社会主义理论体系概论
 - Software Analysis | [Check Prof. Xiong's Course Website](https://xiongyingfei.github.io/SA_new/2025/) <br>
   软件分析技术 | [查看课程网站](https://xiongyingfei.github.io/SA_new/2025/)
 - Compiler Principles <br>
   编译原理
-- ...
+- Labor Practice for Electronics Engineering and Computer Science <br>
+  信息科学技术劳动实践
 
 # 23-24-3
 
@@ -127,14 +128,15 @@ Here are the course notes written by myself. I've taken 67 courses (170 points) 
 - Data Structure and Algorithm (A) <br>
   数据结构与算法 (A)
 - An Introduction to Marxist Basic Theory <br>
-  马原
+  马克思主义基本原理概论
 - Introduction to Discrete Mathmatics <br>
   离散数学基础
 - Principles of Economics <br>
   经济学原理
 - Introduction to Computer Systems <br>
   计算机系统导论
-- ...
+- Labor Theory <br>
+  新时代劳动理论
 
 # 22-23-2
 
@@ -148,12 +150,14 @@ Here are the course notes written by myself. I've taken 67 courses (170 points) 
   程序设计实习
 - Outline of Chinese Modern History <br>
   中国近现代史纲要
-- 习概
+- Introduction to Xi Jinping Thought on Socialism with Chinese Characteristics for a New Era <br>
+  习近平新时代中国特色社会主义思想概论
 - Linear Algebra A (II) <br>
   线性代数A (II)
 - Advanced Mathematics A (no.2) <br>
   高等数学A (二)
-- ...
+- Social practice and service learning, Part II <br>
+  思想政治实践（下）
 
 # 22-23-1
 
@@ -173,8 +177,13 @@ Here are the course notes written by myself. I've taken 67 courses (170 points) 
   线性代数A (I)
 - Introduction to Information Science and Technique <br>
   信息科学技术概论
-- ...
-
-
+- An Introduction to Ideological & Moral Culture and Laws <br>
+  思想道德修养与法律基础
+- Events and Policies <br>
+  形势与政策
+- Military Theory <br>
+  军事理论
+- Social practice and service learning, Part I <br>
+  思想政治实践（上）
 
 TO BE CONTINUED ...
