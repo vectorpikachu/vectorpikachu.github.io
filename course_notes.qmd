@@ -121,8 +121,8 @@ Here are the course notes written by myself. I've taken 67 courses (170 points) 
 
 8 courses, 24 points in total.
 
-- Human Sex, Reproduction and Health <br>
-  人类的性、生育与健康
+- Human Sex, Reproduction and Health | [【三宝课X47小组期中作业】](https://www.bilibili.com/video/BV1nG411Y7qo/?share_source=copy_web&vd_source=47fec559f7b56937e0423d7b99b10fdd) <br>
+  人类的性、生育与健康 | [【三宝课X47小组期中作业】](https://www.bilibili.com/video/BV1nG411Y7qo/?share_source=copy_web&vd_source=47fec559f7b56937e0423d7b99b10fdd)
 - Music and Mathematics | [Click here to view the PDF.](./PDF/Music-And-Math.pdf) <br>
   音乐与数学 | [点击此处查看PDF.](./PDF/Music-And-Math.pdf)
 - Data Structure and Algorithm (A) <br>
