@@ -1,7 +1,7 @@
 ---
 title: "数理逻辑"
 author: "VectorPikachu"
-date: today
+date: 2025-12-15
 keywords: 
   - 命题逻辑
   - 一阶谓词演算

@@ -1,6 +1,6 @@
 ---
 title: "Ocaml 学习笔记"
-date: today
+date: 2025-12-26
 author: "VectorPikachu"
 ---
 
