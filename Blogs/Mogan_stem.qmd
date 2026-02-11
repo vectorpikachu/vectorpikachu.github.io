@@ -1,0 +1,22 @@
+---
+title: 如何在 Mogan STEM 中修改字体
+---
+
+使用[宏命令](https://liiistem.cn/docs/guide-macro.html)来完成字体修改.
+
+1. 打开导言区. 可以如下图所示, 也可以直接按 `Ctrl + Shift + P`.
+
+![打开导言区](./Mogan_figs/1.png)
+
+2. 先点击 `Assign`, 出现下面的 `<assign||>`.
+
+![点击 Assign](./Mogan_figs/2.png)
+
+3. 最后输入成下面这样:
+
+![输入内容](./Mogan_figs/3.png)
+
+
+总体流程如下, 请注意: Macro 增加参数一定是 `Alt+->`.
+
+![总体流程](./Mogan_figs/4.png)
