@@ -62,3 +62,4 @@ SOTA tools:
 - A brief note about [Dataflow Analysis](./Blogs/DataflowAnalysis.qmd)
 - The first Theorem Proving Competition: [第一届定理证明竞赛](Blogs/TPC-1.qmd)
 - OCaml 学习笔记: [OCaml 学习笔记](Blogs/Ocaml%20学习笔记.md)
+- 如何在 Mogan STEM 中修改字体: [如何在 Mogan STEM 中修改字体](Blogs/Mogan_stem.qmd)
