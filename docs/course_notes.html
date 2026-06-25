@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Course Notes – VectorPikachu</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -33,15 +36,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="./profile.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ebbede3f255f00f2ca408d38e0ffdffb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c74742ad88b647c4a7031b578b5b075d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-13088808e5007bdc91306a6c5cb370c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-043b6b2da2c9782759876555e6204bc1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -121,8 +123,6 @@ MathJax = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">VectorPikachu</span>
     </a>
@@ -165,15 +165,16 @@ MathJax = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">25-26-1</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">24-25-3</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">24-25-2</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">24-25-1</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">23-24-3</a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">23-24-2</a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">23-24-1</a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">22-23-2</a></li>
-  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">22-23-1</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">25-26-2</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">25-26-1</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">24-25-3</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">24-25-2</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">24-25-1</a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">23-24-3</a></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">23-24-2</a></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">23-24-1</a></li>
+  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">22-23-2</a></li>
+  <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">22-23-1</a></li>
   </ul>
 </nav>
     </div>
@@ -199,8 +200,24 @@ MathJax = {
 </header>
 
 
-<p>Here are the course notes written by myself. I’ve taken 67 courses (170 points) in PKU.</p>
+<p>Here are the course notes written by myself. I’ve taken 72 courses (184 points) in PKU.</p>
 <section id="section" class="level1">
+<h1>25-26-2</h1>
+<p>5 courses, 14 points in total.</p>
+<ul>
+<li>Introduction to Logic <br> 逻辑导论</li>
+<li>Principle of Programming Languages <br> 程序设计语言概论</li>
+<li>Game Theory <br> 博弈论</li>
+<li>Mathematical Economics <br> 数理经济学</li>
+<li>AI in Management <br> 人工智能管理学</li>
+</ul>
+<p>PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入成绩。但是，Ես սիրում եմ հայերեն։</p>
+<p>我的本科四年结束了，但是：</p>
+<blockquote class="blockquote">
+<p>越过去，知晓那山并非世界的尽头。</p>
+</blockquote>
+</section>
+<section id="section-1" class="level1">
 <h1>25-26-1</h1>
 <p>9 courses, 23 points in total.</p>
 <ul>
@@ -215,7 +232,7 @@ MathJax = {
 <li>The Economics of Artificial Intelligence <br> 人工智能经济学</li>
 </ul>
 </section>
-<section id="section-1" class="level1">
+<section id="section-2" class="level1">
 <h1>24-25-3</h1>
 <p>2 courses, 4 points in total.</p>
 <ul>
@@ -223,7 +240,7 @@ MathJax = {
 <li>Inter-cultural Communication <br> 跨文化交流学</li>
 </ul>
 </section>
-<section id="section-2" class="level1">
+<section id="section-3" class="level1">
 <h1>24-25-2</h1>
 <p>8 courses, 20 points in total.</p>
 <ul>
@@ -243,7 +260,7 @@ MathJax = {
 <li>Modern Astronomy <br> 现代天文学</li>
 </ul>
 </section>
-<section id="section-3" class="level1">
+<section id="section-4" class="level1">
 <h1>24-25-1</h1>
 <p>7 courses, 21 points in total.</p>
 <ul>
@@ -265,7 +282,7 @@ MathJax = {
 <li>Labor Practice for Electronics Engineering and Computer Science <br> 信息科学技术劳动实践</li>
 </ul>
 </section>
-<section id="section-4" class="level1">
+<section id="section-5" class="level1">
 <h1>23-24-3</h1>
 <p>2 courses, 3 points in total.</p>
 <ul>
@@ -273,7 +290,7 @@ MathJax = {
 <li>Aural Culture and World Civilization <br> 听觉文化与世界文明</li>
 </ul>
 </section>
-<section id="section-5" class="level1">
+<section id="section-6" class="level1">
 <h1>23-24-2</h1>
 <p>9 courses, 24 points in total.</p>
 <ul>
@@ -288,7 +305,7 @@ MathJax = {
 <li>Intermediate Macroeconomics <br> 中级宏观经济学</li>
 </ul>
 </section>
-<section id="section-6" class="level1">
+<section id="section-7" class="level1">
 <h1>23-24-1</h1>
 <p>8 courses, 24 points in total.</p>
 <ul>
@@ -302,7 +319,7 @@ MathJax = {
 <li>Labor Theory <br> 新时代劳动理论</li>
 </ul>
 </section>
-<section id="section-7" class="level1">
+<section id="section-8" class="level1">
 <h1>22-23-2</h1>
 <p>8 courses, 24 points in total.</p>
 <ul>
@@ -316,7 +333,7 @@ MathJax = {
 <li>Social practice and service learning, Part II <br> 思想政治实践（下）</li>
 </ul>
 </section>
-<section id="section-8" class="level1">
+<section id="section-9" class="level1">
 <h1>22-23-1</h1>
 <p>11 courses, 27 points in total.</p>
 <ul>
@@ -332,7 +349,6 @@ MathJax = {
 <li>Military Theory <br> 军事理论</li>
 <li>Social practice and service learning, Part I <br> 思想政治实践（上）</li>
 </ul>
-<p>TO BE CONTINUED …</p>
 
 
 </section>

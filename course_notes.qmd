@@ -2,7 +2,28 @@
 title: "Course Notes"
 ---
 
-Here are the course notes written by myself. I've taken 67 courses (170 points) in PKU.
+Here are the course notes written by myself. I've taken 72 courses (184 points) in PKU.
+
+# 25-26-2
+
+5 courses, 14 points in total.
+
+- Introduction to Logic <br>
+  逻辑导论
+- Principle of Programming Languages <br>
+  程序设计语言概论
+- Game Theory <br>
+  博弈论
+- Mathematical Economics <br>
+  数理经济学
+- AI in Management <br>
+  人工智能管理学
+
+PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入成绩。但是，Ես սիրում եմ հայերեն։
+
+我的本科四年结束了，但是：
+
+> 越过去，知晓那山并非世界的尽头。
 
 # 25-26-1
 
@@ -185,5 +206,3 @@ Here are the course notes written by myself. I've taken 67 courses (170 points) 
   军事理论
 - Social practice and service learning, Part I <br>
   思想政治实践（上）
-
-TO BE CONTINUED ...
