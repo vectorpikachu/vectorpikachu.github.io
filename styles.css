@@ -17,4 +17,42 @@ pre code {
   font-family: "Fira Code", monospace !important;
 }
 
+.about-praise-source {
+  display: none;
+}
+
+.quarto-about-marquee .about-image-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.quarto-about-marquee .about-image-container .about-image {
+  border-radius: 0.375rem;
+  margin-bottom: 0;
+}
+
+.quarto-about-marquee .about-image-container::after {
+  display: block;
+  width: 10em;
+  aspect-ratio: 1;
+  border-radius: 0.375rem;
+  background-image: url("Praise.jpg");
+  background-position: center;
+  background-size: cover;
+  content: "";
+}
+
+@media (max-width: 575.98px) {
+  .quarto-about-marquee .about-image-container {
+    justify-content: flex-start;
+  }
+
+  .quarto-about-marquee .about-image-container .about-image,
+  .quarto-about-marquee .about-image-container::after {
+    width: min(10em, 42vw) !important;
+  }
+}
+
 /* End of css styles */

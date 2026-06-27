@@ -10,6 +10,10 @@ about:
     image-width: 10em
 ---
 
+```{=html}
+<img class="about-praise-source" src="Praise.jpg" alt="" aria-hidden="true">
+```
+
 Hello, this is VectorPikachu, or Hangzhou Lyu (吕杭州, lǚ háng zhōu). Currently I'm a student majored in Software Engineering.
 And my research interest lies on *Program Verification*, including Dafny, Coq, Verus, et.al.
 
