@@ -17,6 +17,18 @@ pre code {
   font-family: "Fira Code", monospace !important;
 }
 
+.codetime-usage {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.codetime-usage img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .about-praise-source,
 .about-smile-source {
   display: none;

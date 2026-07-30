@@ -20,6 +20,12 @@ And my research interest lies on *Program Verification*, including Dafny, Coq, V
 
 
 
+```{=html}
+<div class="codetime-usage">
+  <a href="https://codetime.dev"><img alt="CodeTime Usage" src="https://codetime.dev/api/widgets/usage.svg?uid=21236&theme=light&style=minimal&range=30d"></a>
+</div>
+```
+
 ## Education
 
 - **Peking University** | *Beijing, China* <br>
