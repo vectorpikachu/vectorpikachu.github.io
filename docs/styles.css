@@ -17,31 +17,44 @@ pre code {
   font-family: "Fira Code", monospace !important;
 }
 
-.about-praise-source {
+.about-praise-source,
+.about-smile-source {
   display: none;
 }
 
 .quarto-about-marquee .about-image-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
   align-items: flex-start;
   justify-content: flex-start;
 }
 
 .quarto-about-marquee .about-image-container .about-image {
+  order: 1;
   border-radius: 0.375rem;
   margin-bottom: 0;
 }
 
+.quarto-about-marquee .about-image-container::before,
 .quarto-about-marquee .about-image-container::after {
   display: block;
   width: 10em;
   aspect-ratio: 1;
   border-radius: 0.375rem;
-  background-image: url("Praise.jpg");
   background-position: center;
   background-size: cover;
   content: "";
+}
+
+.quarto-about-marquee .about-image-container::after {
+  order: 2;
+  background-image: url("Praise.jpg");
+}
+
+.quarto-about-marquee .about-image-container::before {
+  order: 3;
+  background-image: url("Smile.jpg");
 }
 
 @media (max-width: 575.98px) {
@@ -50,6 +63,7 @@ pre code {
   }
 
   .quarto-about-marquee .about-image-container .about-image,
+  .quarto-about-marquee .about-image-container::before,
   .quarto-about-marquee .about-image-container::after {
     width: min(10em, 42vw) !important;
   }

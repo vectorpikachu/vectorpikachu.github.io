@@ -12,6 +12,7 @@ about:
 
 ```{=html}
 <img class="about-praise-source" src="Praise.jpg" alt="" aria-hidden="true">
+<img class="about-smile-source" src="Smile.jpg" alt="" aria-hidden="true">
 ```
 
 Hello, this is VectorPikachu, or Hangzhou Lyu (吕杭州, lǚ háng zhōu). Currently I'm a student majored in Software Engineering.
