@@ -2,19 +2,19 @@
 title: "Course Notes"
 ---
 
-# PhD Course Notes
+## PhD Course Notes
 
 Here are the course notes written by myself. I've taken [TBD] courses ([TBD] points) in PKU during my PhD study. You can click the links to view the notes.
 
-## 26-27-1
+### 26-27-1
 
 ...to be continued...
 
-# Undergraduate Course Notes
+## Undergraduate Course Notes
 
 Here are the course notes written by myself. I've taken 72 courses (184 points) in PKU during my undergraduate study. You can click the links to view the notes.
 
-## 25-26-2
+### 25-26-2
 
 5 courses, 14 points in total.
 
@@ -35,7 +35,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 
 > 越过去，知晓那山并非世界的尽头。
 
-## 25-26-1
+### 25-26-1
 
 9 courses, 23 points in total.
 
@@ -58,7 +58,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - The Economics of Artificial Intelligence <br>
   人工智能经济学
 
-## 24-25-3
+### 24-25-3
 
 2 courses, 4 points in total.
 
@@ -67,7 +67,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - Inter-cultural Communication <br>
   跨文化交流学
 
-## 24-25-2
+### 24-25-2
 
 8 courses, 20 points in total.
 
@@ -92,7 +92,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - Modern Astronomy <br>
   现代天文学
 
-## 24-25-1
+### 24-25-1
 
 7 courses, 21 points in total.
 
@@ -116,7 +116,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - Labor Practice for Electronics Engineering and Computer Science <br>
   信息科学技术劳动实践
 
-## 23-24-3
+### 23-24-3
 
 2 courses, 3 points in total.
 
@@ -125,7 +125,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - Aural Culture and World Civilization <br>
   听觉文化与世界文明
 
-## 23-24-2
+### 23-24-2
 
 9 courses, 24 points in total.
 
@@ -148,7 +148,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - Intermediate Macroeconomics <br>
   中级宏观经济学
 
-## 23-24-1
+### 23-24-1
 
 8 courses, 24 points in total.
 
@@ -169,7 +169,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - Labor Theory <br>
   新时代劳动理论
 
-## 22-23-2
+### 22-23-2
 
 8 courses, 24 points in total.
 
@@ -190,7 +190,7 @@ PS: 北外互选课《亚美尼亚语（1）》由于毕业的关系无法计入
 - Social practice and service learning, Part II <br>
   思想政治实践（下）
 
-## 22-23-1
+### 22-23-1
 
 11 courses, 27 points in total.
 
