@@ -18,9 +18,17 @@ local function ensure_html_deps()
   ]])
   quarto.doc.include_text("after-body", [[
     <script type="text/javascript">
-    (function(d) {
-      d.querySelectorAll(".pseudocode-container").forEach(function(el) {
+    document.addEventListener("DOMContentLoaded", async function() {
+      const d = document;
+      const containers = d.querySelectorAll(".pseudocode-container");
+      if (containers.length === 0) return;
+
+      // Quarto loads MathJax with defer; wait for its initial typesetting.
+      await MathJax.startup.promise;
+      const {mathjax} = MathJax._.mathjax;
+      for (const el of containers) {
         let pseudocodeOptions = {
+          captionCount: 0,
           indentSize: el.dataset.indentSize,
           commentDelimiter: el.dataset.commentDelimiter,
           lineNumber: el.dataset.lineNumber.toLowerCase() === "true",
@@ -28,10 +36,11 @@ local function ensure_html_deps()
           noEnd: el.dataset.noEnd.toLowerCase() === "true",
           titlePrefix: el.dataset.captionPrefix
         };
-        pseudocode.renderElement(el.querySelector(".pseudocode"), pseudocodeOptions);
-      });
-    })(document);
-    (function(d) {
+        // The synchronous pseudocode renderer may request MathJax font data.
+        await mathjax.handleRetriesFor(() => {
+          pseudocode.renderElement(el.querySelector(".pseudocode"), pseudocodeOptions);
+        });
+      }
       d.querySelectorAll(".pseudocode-container").forEach(function(el) {
         let captionSpan = el.querySelector(".ps-root > .ps-algorithm > .ps-line > .ps-keyword")
         if (captionSpan !== null) {
@@ -46,7 +55,7 @@ local function ensure_html_deps()
           captionSpan.innerHTML = captionPrefix + captionNumber;
         }
       });
-    })(document);
+    });
     </script>
   ]])
 end
@@ -164,6 +173,8 @@ local function render_pseudocode_block_html(global_options)
       local outer_el = pandoc.Div(inner_el)
       outer_el.attr.classes = pandoc.List()
       outer_el.attr.classes:insert("pseudocode-container")
+      -- Let the extension parse algorithm environments before rendering their math.
+      outer_el.attr.classes:insert("mathjax_ignore")
       outer_el.attr.classes:insert("quarto-float")
       outer_el.attr.attributes = data_options
 
