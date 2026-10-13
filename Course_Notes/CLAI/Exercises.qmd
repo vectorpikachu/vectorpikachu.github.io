@@ -1,0 +1,168 @@
+---
+title: "Exercises on Computational Logic in the Era of AI"
+author: "VectorPikachu"
+date: today
+number-sections: false
+---
+
+## Untyped $\lambda$-calculus
+
+### Exercise 1.1
+
+Write $M[x:=N,y:=L]$ for the *simultaneous* substitution: every free $x$ and every free $y$ in $M$ is replaced at the same time, by $N$ and by $L$ respectively. On the right below stands the sequential substitution of the lecture, one variable after the other.
+$$
+    M[x:=N,y:=L] \equiv M[x:=N][y:=L]
+$$
+
+Show that this is not always true, and state a condition on $y$ and $N$ under which the two sides do agree.<br>
+<span style="font-size: 80%;">Nederpelt & Geuvers, <em>Type Theory and Formal Proof</em> (CUP, 2014), Exercise 1.6.</span>
+
+
+::: {.callout-note title="Definitions" icon="false"}
+
+**Substitution** (Def. 1.6.1). With $\equiv$ syntactic identity,
+$$
+\begin{aligned}
+x[x := N] &\equiv N,
+& y[x := N] &\equiv y \quad (y \neq x), \\[8pt]
+(PQ)[x := N] &\equiv (P[x := N])(Q[x := N]), & (\lambda y.P)[x := N] &\equiv
+\lambda z.P^{y \to z}[x := N].
+\end{aligned}
+$$
+where in the last clause $\lambda z.P^{y \to z}$ is an $\alpha$-variant of $\lambda y.P$ with $z \notin \operatorname{FV}(N)$, and $P^{y \to z}$ is $P$ with every free $y$ renamed to $z$.
+
+**Free variables** (Def. 1.4.1). $\operatorname{FV}(x) = \{x\}, \operatorname{FV}(PQ) = \operatorname{FV}(P) \cup \operatorname{FV}(Q), \operatorname{FV}(\lambda x.P) = \operatorname{FV}(P) \setminus \{x\}$.
+
+:::
+
+**Answer.** Let $M=x, N=y, L=z$. Then:
+
+- simultaneous substitution: $M[x:=N,y:=L] = x[x:=y,y:=z] = y$.
+- sequential substitution: $M[x:=N][y:=L] = x[x:=y][y:=z] = y[y:=z] = z$.
+
+The two sides agree if $y \notin \operatorname{FV}(N)$, i.e., if $y$ does not occur free in $N$.
+
+### Exercise 1.2
+
+The first three *Church numerals*, and two terms mimicking addition and multiplication on them, are
+
+$$
+\begin{aligned}
+\mathit{zero} &:= \lambda f x.\, x,
+& \mathit{one} &:= \lambda f x.\, f\, x,
+& \mathit{two} &:= \lambda f x.\, f\,(f\,x), \\
+\mathit{add} &:= \lambda m n f x.\, m\, f\, (n\, f\, x),
+& \mathit{mult} &:= \lambda m n f x.\, m\,(n\, f)\,x.
+\end{aligned}
+$$
+
+(a) Show that $\mathit{add}\ \mathit{one}\ \mathit{one} \twoheadrightarrow_\beta \mathit{two}$.
+(b) Prove that $\mathit{add}\ \mathit{one}\ \mathit{one} \neq_\beta \mathit{mult}\ \mathit{one}\ \mathit{zero}$.
+
+<span style="color: gray; font-size: 85%;">Nederpelt & Geuvers, *Type Theory and Formal Proof* (CUP, 2014), Exercise 1.10.</span>
+
+::: {.callout-note .definitions-box title="Definitions" icon="false"}
+
+**Reduction** (Defs. 1.8.1, 1.8.3, 1.8.5). One step is $(\lambda x.M)N \to_\beta M[x:=N]$, applied anywhere inside a term; $M \twoheadrightarrow_\beta N$ is a chain of zero or more such steps, and $M =_\beta N$ is a chain in which each step may go either way.
+
+**Normal form** (Def. 1.9.1). $M$ is in $\beta$-normal form if it contains no redex $(\lambda x.P)Q$.
+
+**Church–Rosser** (Thm. 1.9.8). If $M \twoheadrightarrow_\beta N$ and $M \twoheadrightarrow_\beta L$, then $N \twoheadrightarrow_\beta R$ and $L \twoheadrightarrow_\beta R$ for some $R$. Hence a term has at most one $\beta$-normal form (Lem. 1.9.10(2)).
+
+:::
+
+**Answer.**
+
+(a) We show that $\mathit{add}\ \mathit{one}\ \mathit{one} \twoheadrightarrow_\beta \mathit{two}$ by successive $\beta$-reductions.
+$$
+\begin{aligned}
+&\mathit{add}\,\mathit{one}\,\mathit{one} \\[6pt]
+&= (\lambda m n f x.\, m\,f\,(n\,f\,x))\,\mathit{one}\,\mathit{one} \\[6pt]
+&\to_\beta (\lambda n f x.\, \mathit{one}\,f\,(n\,f\,x))\,\mathit{one} \\[6pt]
+&\to_\beta \lambda f x.\, \mathit{one}\,f\,(\mathit{one}\,f\,x) \\[6pt]
+&= \lambda f x.\, (\lambda g y.\, g\,y)\,f\,(\mathit{one}\,f\,x) \\[6pt]
+&\to_\beta \lambda f x.\, (\lambda y.\, f\,y)\,(\mathit{one}\,f\,x) \\[6pt]
+&\to_\beta \lambda f x.\, f\,(\mathit{one}\,f\,x) \\[6pt]
+&= \lambda f x.\, f\,((\lambda g y.\,g\,y)\,f\,x) \\[6pt]
+&\to_\beta \lambda f x.\, f\,((\lambda y.\,f\,y)\,x) \\[6pt]
+&\to_\beta \lambda f x.\, f\,(f\,x) \\[6pt]
+&= \mathit{two}.
+\end{aligned}
+$$
+Hence,
+$$
+\boxed{
+\mathit{add}\ \mathit{one}\ \mathit{one}
+\twoheadrightarrow_\beta \mathit{two}.
+}
+$$
+
+
+(b) We prove that
+$$
+\mathit{add}\,\mathit{one}\,\mathit{one}
+\neq_\beta
+\mathit{mult}\,\mathit{one}\,\mathit{zero}.
+$$
+
+First, by part (a),
+$$
+\mathit{add}\,\mathit{one}\,\mathit{one}
+\twoheadrightarrow_\beta
+\mathit{two}
+=
+\lambda f x.\,f\,(f\,x).
+$$
+
+Observe that $\mathit{two}$ is in $\beta$-normal form, since it contains no $\beta$-redex of the form $(\lambda x.\,P)\,Q$.
+
+Next, consider $\mathit{mult}\,\mathit{one}\,\mathit{zero}$:
+$$
+\begin{aligned}
+&\mathit{mult}\,\mathit{one}\,\mathit{zero} \\[6pt]
+&= (\lambda m n f x.\,m\,(n\,f)\,x)\,\mathit{one}\,\mathit{zero} \\[6pt]
+&\to_\beta (\lambda n f x.\,\mathit{one}\,(n\,f)\,x)\,\mathit{zero} \\[6pt]
+&\to_\beta \lambda f x.\,\mathit{one}\,(\mathit{zero}\,f)\,x \\[6pt]
+&= \lambda f x.\,(\lambda g y.\,g\,y)\,((\lambda u v.\,v)\,f)\,x \\[6pt]
+&\to_\beta \lambda f x.\,(\lambda g y.\,g\,y)\,(\lambda v.\,v)\,x \\[6pt]
+&\to_\beta \lambda f x.\,(\lambda y.\,(\lambda v.\,v)\,y)\,x \\[6pt]
+&\to_\beta \lambda f x.\,(\lambda v.\,v)\,x \\[6pt]
+&\to_\beta \lambda f x.\,x \\[6pt]
+&= \mathit{zero}.
+\end{aligned}
+$$
+
+Thus,
+$$
+\mathit{mult}\,\mathit{one}\,\mathit{zero}
+\twoheadrightarrow_\beta \mathit{zero}.
+$$
+
+Moreover, $\mathit{zero}=\lambda f x.\,x$ is also in $\beta$-normal form.
+
+Suppose, for contradiction, that
+$$
+\mathit{add}\,\mathit{one}\,\mathit{one}
+=_\beta
+\mathit{mult}\,\mathit{one}\,\mathit{zero}.
+$$
+
+By the **Church–Rosser theorem**, $\beta$-equivalent terms must have the same $\beta$-normal form (up to $\alpha$-equivalence).
+
+However,
+$$
+\mathit{two}=\lambda f x.\,f\,(f\,x)
+\qquad\text{and}\qquad
+\mathit{zero}=\lambda f x.\,x
+$$
+are distinct $\beta$-normal forms and are not $\alpha$-equivalent.
+
+This is a contradiction. Therefore,
+$$
+\boxed{
+\mathit{add}\,\mathit{one}\,\mathit{one}
+\neq_\beta
+\mathit{mult}\,\mathit{one}\,\mathit{zero}.
+}
+$$
+
