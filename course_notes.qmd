@@ -8,8 +8,8 @@ Here are the course notes written by myself. I've taken 4 courses (10 points) in
 
 ### 26-27-1
 
-- Computational Logic in the Era of AI <br>
-  人工智能时代的计算逻辑
+- Computational Logic in the Era of AI | [Exercises](./Course_Notes/CLAI/Exercises.qmd) <br>
+  人工智能时代的计算逻辑 | [练习题](./Course_Notes/CLAI/Exercises.qmd)
 - Algorithm Analysis and Complexity Theory <br>
   算法分析与复杂性理论
 - Methods and Practice of Scientific Research <br>
